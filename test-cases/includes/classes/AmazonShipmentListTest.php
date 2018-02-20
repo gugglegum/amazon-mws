@@ -16,7 +16,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonShipmentList('testStore', true, null, __DIR__.'/../../test-config.php');
+        $this->object = new AmazonShipmentList('testStore', true, null, include(__DIR__.'/../../test-config.php'));
     }
 
     /**
@@ -174,6 +174,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetShipmentId($o){
         $this->assertEquals('FBA44JV8R',$o->getShipmentId(0));
@@ -185,6 +186,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetShipmentName($o){
         $this->assertEquals('FBA (11/8/10 5:34 PM)',$o->getShipmentName(0));
@@ -196,6 +198,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetAddress($o){
         $a = array();
@@ -216,6 +219,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetDestinationFulfillmentCenterId($o){
         $this->assertEquals('PHX3',$o->getDestinationFulfillmentCenterId(0));
@@ -227,6 +231,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetLabelPrepType($o){
         $this->assertEquals('AMAZON_LABEL',$o->getLabelPrepType(0));
@@ -238,6 +243,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetShipmentStatus($o){
         $this->assertEquals('CLOSED',$o->getShipmentStatus(0));
@@ -249,6 +255,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetIfCasesRequired($o){
         $this->assertEquals('false',$o->getIfCasesRequired(0));
@@ -273,6 +280,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testGetShipment($o){
         $shipment = $o->getShipment(0);
@@ -286,8 +294,6 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
         
         $default = $o->getShipment();
         $this->assertEquals($list,$default);
-        
-        
         
         $x = array();
         $x1 = array();
@@ -329,6 +335,7 @@ class AmazonShipmentListTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @depends testFetchShipments
+     * @param AmazonShipmentList $o
      */
     public function testFetchItems($o){
         $o->setMock(true,array('fetchShipmentItems.xml'));

@@ -43,9 +43,9 @@ class AmazonServiceStatus extends AmazonCore{
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
-     * @param string $config [optional] <p>An alternate config file to set. Used for testing.</p>
+     * @param array $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    public function __construct($s = null, $service = null, $mock = false, $m = null, $config = null){
+    public function __construct($s = null, $service = null, $mock = false, $m = null, array $config = null){
         parent::__construct($s, $mock, $m, $config);
         include($this->env);
         

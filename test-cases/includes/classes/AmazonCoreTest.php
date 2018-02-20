@@ -16,7 +16,7 @@ class AmazonCoreTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonServiceStatus('testStore', 'Inbound', true, null, __DIR__.'/../../test-config.php');
+        $this->object = new AmazonServiceStatus('testStore', 'Inbound', true, null, include(__DIR__.'/../../test-config.php'));
     }
 
     /**
@@ -61,15 +61,15 @@ class AmazonCoreTest extends PHPUnit_Framework_TestCase {
             $this->assertEquals($d,$check[1]);
         }
     }
-
-    /**
-     * @covers AmazonCore::setConfig
-     * @expectedException Exception
-     * @expectedExceptionMessage Config file does not exist or cannot be read! (no)
-     */
-    public function testSetConfig() {
-        $this->object->setConfig('no');
-    }
+// This test is not needed because we passing config as an array, not as a path to file
+//    /**
+//     * @covers AmazonCore::setConfig
+//     * @expectedException Exception
+//     * @expectedExceptionMessage Config file does not exist or cannot be read! (no)
+//     */
+//    public function testSetConfig() {
+//        $this->object->setConfig('no');
+//    }
 
     /**
      * @covers AmazonCore::setLogPath

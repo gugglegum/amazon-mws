@@ -38,25 +38,20 @@ abstract class AmazonProductsCore extends AmazonCore{
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
-     * @param string $config [optional] <p>An alternate config file to set. Used for testing.</p>
+     * @param array $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    public function __construct($s = null, $mock = false, $m = null, $config = null){
+    public function __construct($s = null, $mock = false, $m = null, array $config = null){
         parent::__construct($s, $mock, $m, $config);
         include($this->env);
-        if (file_exists($this->config)){
-            include($this->config);
-        } else {
-            throw new Exception('Config file does not exist!');
-        }
-        
+
         if(isset($AMAZON_VERSION_PRODUCTS)){
             $this->urlbranch = 'Products/'.$AMAZON_VERSION_PRODUCTS;
             $this->options['Version'] = $AMAZON_VERSION_PRODUCTS;
         }
         
         //set the store's marketplace as the default
-        if(isset($store[$this->storeName]) && array_key_exists('marketplaceId', $store[$this->storeName])){
-            $this->setMarketplace($store[$this->storeName]['marketplaceId']);
+        if(isset($this->config['store'][$this->storeName]) && array_key_exists('marketplaceId', $this->config['store'][$this->storeName])){
+            $this->setMarketplace($this->config['store'][$this->storeName]['marketplaceId']);
         } else {
             $this->log("Marketplace ID is missing",'Urgent');
         }
