@@ -18,13 +18,11 @@
 
 return [
     'store' => [
-        'YourAmazonStore' => [
-            'merchantId' => '',         // Merchant ID for this store
-            'marketplaceId' => '',      // Marketplace ID for this store
-            'keyId' => '',              // Access Key ID
-            'secretKey' => '',          // Secret Accress Key for this store
-            'MWSAuthToken' => '',       // Token needed for web apps and third-party developers
-        ],
+        'merchantId' => '',         // Merchant ID for this store
+        'marketplaceId' => '',      // Marketplace ID for this store
+        'keyId' => '',              // Access Key ID
+        'secretKey' => '',          // Secret Accress Key for this store
+        'MWSAuthToken' => '',       // Token needed for web apps and third-party developers
     ],
 
     //Service URL Base

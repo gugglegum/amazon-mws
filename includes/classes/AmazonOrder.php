@@ -34,8 +34,6 @@ class AmazonOrder extends AmazonOrderCore{
      * on these parameters and common methods.
      * Please note that two extra parameters come before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param string $s [optional] <p>Name for the store you want to use.
-     * This parameter is optional if only one store is defined in the config file.</p>
      * @param string $id [optional] <p>The Order ID to set for the object.</p>
      * @param SimpleXMLElement $data [optional] <p>XML data from Amazon to be parsed.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
@@ -43,8 +41,8 @@ class AmazonOrder extends AmazonOrderCore{
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
      * @param array $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    public function __construct($s = null, $id = null, $data = null, $mock = false, $m = null, array $config = null){
-        parent::__construct($s, $mock, $m, $config);
+    public function __construct($id = null, $data = null, $mock = false, $m = null, array $config = null){
+        parent::__construct($mock, $m, $config);
         include($this->env);
         
         if($id){
@@ -131,7 +129,7 @@ class AmazonOrder extends AmazonOrderCore{
         if (!is_bool($token)){
             $token = false;
         }
-        $items = new AmazonOrderItemList($this->storeName,$this->data['AmazonOrderId'],$this->mockMode,$this->mockFiles,$this->config);
+        $items = new AmazonOrderItemList($this->data['AmazonOrderId'],$this->mockMode,$this->mockFiles,$this->config);
         $items->setLogPath($this->logpath);
         $items->mockIndex = $this->mockIndex;
         $items->setUseToken($token);

@@ -97,7 +97,6 @@ abstract class AmazonCore{
     protected $throttleSafe;
     protected $throttleGroup;
     protected $throttleStop = false;
-    protected $storeName;
     protected $options;
     protected $config;
     protected $mockMode = false;
@@ -113,9 +112,6 @@ abstract class AmazonCore{
      * 
      * This constructor is called when initializing all objects in this library.
      * The parameters are passed by the child objects' constructors.
-     * @param string $s [optional] <p>Name for the store you want to use as seen in the config file.
-     * If there is only one store defined in the config file, this parameter is not necessary.
-     * If there is more than one store and this is not set to a valid name, none of these objects will work.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * When this is set to <b>TRUE</b>, the object will fetch responses from
      * files you specify instead of sending the requests to Amazon.
@@ -126,14 +122,23 @@ abstract class AmazonCore{
      * from the list to use as a response. See <i>setMock</i> for more information.</p>
      * @param array $config [optional] <p>A config array to set.</p>
      */
-    protected function __construct($s = null, $mock = false, $m = null, array $config = null){
+    protected function __construct($mock = false, $m = null, array $config = null){
         $this->setConfig($config);
-        $this->setStore($s);
         $this->setMock($mock,$m);
         
         $this->env=__DIR__.'/../../environment.php';
         $this->options['SignatureVersion'] = 2;
         $this->options['SignatureMethod'] = 'HmacSHA256';
+        $this->options['SellerId'] = $this->config['store']['merchantId'];
+
+        $this->options['SellerId'] = $this->config['store']['merchantId'];
+        $this->options['AWSAccessKeyId'] = $this->config['store']['keyId'];
+        if (!empty($this->config['store']['serviceUrl'])) {
+            $this->urlbase = $this->config['store']['serviceUrl'];
+        }
+        if (!empty($this->config['store']['MWSAuthToken'])) {
+            $this->options['MWSAuthToken'] = $this->config['store']['MWSAuthToken'];
+        }
     }
     
     /**
@@ -386,45 +391,45 @@ abstract class AmazonCore{
         
     }
     
-    /**
-     * Sets the store values.
-     * 
-     * This method sets a number of key values from the config file. These values
-     * include your Merchant ID, Access Key ID, and Secret Key, and are critical
-     * for making requests with Amazon. If the store cannot be found in the
-     * config file, or if any of the key values are missing,
-     * the incident will be logged.
-     * @param string $s [optional] <p>The store name to look for.
-     * This parameter is not required if there is only one store defined in the config file.</p>
-     * @throws Exception If the file can't be found.
-     */
-    public function setStore($s = null)
-    {
-        if (array_key_exists($s, $this->config['store'])){
-            $this->storeName = $s;
-            if(array_key_exists('merchantId', $this->config['store'][$s])){
-                $this->options['SellerId'] = $this->config['store'][$s]['merchantId'];
-            } else {
-                $this->log("Merchant ID is missing!",'Warning');
-            }
-            if(array_key_exists('keyId', $this->config['store'][$s])){
-                $this->options['AWSAccessKeyId'] = $this->config['store'][$s]['keyId'];
-            } else {
-                $this->log("Access Key ID is missing!",'Warning');
-            }
-            if(!array_key_exists('secretKey', $this->config['store'][$s])){
-                $this->log("Secret Key is missing!",'Warning');
-            }
-            if (!empty($this->config['store'][$s]['serviceUrl'])) {
-                $this->urlbase = $this->config['store'][$s]['serviceUrl'];
-            }
-            if (!empty($this->config['store'][$s]['MWSAuthToken'])) {
-                $this->options['MWSAuthToken'] = $this->config['store'][$s]['MWSAuthToken'];
-            }
-        } else {
-            $this->log("Store $s does not exist!",'Warning');
-        }
-    }
+//    /**
+//     * Sets the store values.
+//     *
+//     * This method sets a number of key values from the config file. These values
+//     * include your Merchant ID, Access Key ID, and Secret Key, and are critical
+//     * for making requests with Amazon. If the store cannot be found in the
+//     * config file, or if any of the key values are missing,
+//     * the incident will be logged.
+//     * @param string $s [optional] <p>The store name to look for.
+//     * This parameter is not required if there is only one store defined in the config file.</p>
+//     * @throws Exception If the file can't be found.
+//     */
+//    public function setStore($s = null)
+//    {
+//        if (array_key_exists($s, $this->config['store'])){
+//            $this->storeName = $s;
+//            if(array_key_exists('merchantId', $this->config['store'][$s])){
+//                $this->options['SellerId'] = $this->config['store'][$s]['merchantId'];
+//            } else {
+//                $this->log("Merchant ID is missing!",'Warning');
+//            }
+//            if(array_key_exists('keyId', $this->config['store'][$s])){
+//                $this->options['AWSAccessKeyId'] = $this->config['store'][$s]['keyId'];
+//            } else {
+//                $this->log("Access Key ID is missing!",'Warning');
+//            }
+//            if(!array_key_exists('secretKey', $this->config['store'][$s])){
+//                $this->log("Secret Key is missing!",'Warning');
+//            }
+//            if (!empty($this->config['store'][$s]['serviceUrl'])) {
+//                $this->urlbase = $this->config['store'][$s]['serviceUrl'];
+//            }
+//            if (!empty($this->config['store'][$s]['MWSAuthToken'])) {
+//                $this->options['MWSAuthToken'] = $this->config['store'][$s]['MWSAuthToken'];
+//            }
+//        } else {
+//            $this->log("Store $s does not exist!",'Warning');
+//        }
+//    }
     
     /**
      * Enables or disables the throttle stop.
@@ -559,8 +564,8 @@ abstract class AmazonCore{
      */
     protected function genQuery()
     {
-        if (array_key_exists($this->storeName, $this->config['store']) && array_key_exists('secretKey', $this->config['store'][$this->storeName])){
-            $secretKey = $this->config['store'][$this->storeName]['secretKey'];
+        if (array_key_exists('secretKey', $this->config['store'])){
+            $secretKey = $this->config['store']['secretKey'];
         } else {
             throw new Exception("Secret Key is missing!");
         }

@@ -16,7 +16,7 @@ class AmazonCoreTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonServiceStatus('testStore', 'Inbound', true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonServiceStatus('Inbound', true, null, include(__DIR__.'/../../test-config.php'));
     }
 
     /**
@@ -91,22 +91,22 @@ class AmazonCoreTest extends PHPUnit_Framework_TestCase {
         $this->object->setLogPath(false);
     }
 
-    /**
-     * @covers AmazonCore::setStore
-     * @todo   Implement testSetStore().
-     */
-    public function testSetStore() {
-        $this->object->setStore('no');
-        $check = parseLog();
-        $this->assertEquals('Mock Mode set to ON',$check[0]);
-        $this->assertEquals('Store no does not exist!',$check[1]);
-        resetLog();
-        $this->object->setStore('bad');
-        $bad = parseLog();
-        $this->assertEquals('Merchant ID is missing!',$bad[0]);
-        $this->assertEquals('Access Key ID is missing!',$bad[1]);
-        $this->assertEquals('Secret Key is missing!',$bad[2]);
-    }
+//    /**
+//     * @covers AmazonCore::setStore
+//     * @todo   Implement testSetStore().
+//     */
+//    public function testSetStore() {
+//        $this->object->setStore('no');
+//        $check = parseLog();
+//        $this->assertEquals('Mock Mode set to ON',$check[0]);
+//        $this->assertEquals('Store no does not exist!',$check[1]);
+//        resetLog();
+//        $this->object->setStore('bad');
+//        $bad = parseLog();
+//        $this->assertEquals('Merchant ID is missing!',$bad[0]);
+//        $this->assertEquals('Access Key ID is missing!',$bad[1]);
+//        $this->assertEquals('Secret Key is missing!',$bad[2]);
+//    }
 
     public function testGetOptions(){
         $o = $this->object->getOptions();

@@ -2,22 +2,16 @@
 
 return [
     'store' => [
-        'testStore' => [
-            //Merchant ID for this store
-            'merchantId' => 'T_M_GOOD_83835495',
-            //Marketplace ID for this store
-            'marketplaceId' => 'ATVPDKIKX0DER',
-            //Access Key ID
-            'keyId' => 'key',
-            //Secret Accress Key for this store
-            'secretKey' => 'secret',
-            //token needed for web apps and third-party developers
-            'MWSAuthToken' => 'secret',
-        ],
-        //Fake store
-        'bad' => [
-            'no' => 'no',
-        ],
+        //Merchant ID for this store
+        'merchantId' => 'T_M_GOOD_83835495',
+        //Marketplace ID for this store
+        'marketplaceId' => 'ATVPDKIKX0DER',
+        //Access Key ID
+        'keyId' => 'key',
+        //Secret Accress Key for this store
+        'secretKey' => 'secret',
+        //token needed for web apps and third-party developers
+        'MWSAuthToken' => 'secret',
     ],
 
     //Service URL Base

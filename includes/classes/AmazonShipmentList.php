@@ -36,15 +36,13 @@ class AmazonShipmentList extends AmazonInboundCore implements Iterator{
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param string $s [optional] <p>Name for the store you want to use.
-     * This parameter is optional if only one store is defined in the config file.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
      * @param array $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    public function __construct($s = null, $mock = false, $m = null, array $config = null) {
-        parent::__construct($s, $mock, $m, $config);
+    public function __construct($mock = false, $m = null, array $config = null) {
+        parent::__construct($mock, $m, $config);
     }
     
     /**
@@ -358,7 +356,7 @@ class AmazonShipmentList extends AmazonInboundCore implements Iterator{
             $a = array();
             $n = 0;
             foreach($this->shipmentList as $x){
-                $a[$n] = new AmazonShipmentItemList($this->storeName,$x['ShipmentId'],$this->mockMode,$this->mockFiles,$this->config);
+                $a[$n] = new AmazonShipmentItemList($x['ShipmentId'],$this->mockMode,$this->mockFiles,$this->config);
                 $a[$n]->setUseToken($token);
                 $a[$n]->mockIndex = $this->mockIndex;
                 $a[$n]->fetchItems();
@@ -366,7 +364,7 @@ class AmazonShipmentList extends AmazonInboundCore implements Iterator{
             }
             return $a;
         } else if (is_int($i)) {
-            $temp = new AmazonShipmentItemList($this->storeName,$this->shipmentList[$i]['ShipmentId'],$this->mockMode,$this->mockFiles,$this->config);
+            $temp = new AmazonShipmentItemList($this->shipmentList[$i]['ShipmentId'],$this->mockMode,$this->mockFiles,$this->config);
             $temp->setUseToken($token);
             $temp->mockIndex = $this->mockIndex;
             $temp->fetchItems();

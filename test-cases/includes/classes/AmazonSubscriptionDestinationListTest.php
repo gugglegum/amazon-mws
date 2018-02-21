@@ -13,7 +13,7 @@ class AmazonSubscriptionDestinationListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonSubscriptionDestinationList('testStore', true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonSubscriptionDestinationList(true, null, include(__DIR__.'/../../test-config.php'));
     }
 
     public function testFetchDestinations() {
