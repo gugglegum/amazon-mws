@@ -1,6 +1,10 @@
 <?php
 
-class AmazonProductFeeEstimateTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonProductFeeEstimate;
+
+class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonProductFeeEstimate

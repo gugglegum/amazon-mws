@@ -17,6 +17,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Pulls a list of registered subscription destinations from Amazon.
  *
@@ -25,7 +27,7 @@
  * In order to do this, a marketplace ID is needed. The current store's
  * configured marketplace is used by default.
  */
-class AmazonSubscriptionDestinationList extends AmazonSubscriptionCore implements Iterator{
+class AmazonSubscriptionDestinationList extends AmazonSubscriptionCore implements \Iterator{
     protected $destinationList;
     protected $i = 0;
 

@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches a fulfillment order from Amazon.
  * 

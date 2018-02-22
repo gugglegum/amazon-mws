@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Contains Amazon product data.
  * 

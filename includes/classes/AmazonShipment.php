@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Submits a shipment to Amazon or updates it.
  * 

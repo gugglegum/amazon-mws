@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches documents for a fulfillment shipment.
  *
@@ -335,12 +337,10 @@ class AmazonTransportDocument extends AmazonInboundCore {
             if ($raw) {
                 return $this->doc;
             }
-            try {
-                return base64_decode($this->doc);
-            } catch (Exception $ex) {
-                $this->log('Failed to convert transport document file, file might be corrupt: '.
-                        $ex->getMessage(), 'Urgent');
+            if (($decodedDoc = base64_decode($this->doc)) === false) {
+                $this->log('Failed to convert transport document file, file might be corrupt', 'Urgent');
             }
+            return $decodedDoc;
         }
         return false;
     }
@@ -357,12 +357,10 @@ class AmazonTransportDocument extends AmazonInboundCore {
             if ($raw) {
                 return $this->checksum;
             }
-            try {
-                return base64_decode($this->checksum);
-            } catch (Exception $ex) {
-                $this->log('Failed to convert transport document checksum, file might be corrupt: '.
-                        $ex->getMessage(), 'Urgent');
+            if (($decodedChecksum = base64_decode($this->checksum)) === false) {
+                $this->log('Failed to convert transport document checksum, file might be corrupt', 'Urgent');
             }
+            return $decodedChecksum;
         }
         return false;
     }

@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches preorder info for an inbound fulfillment shipment or confirms it.
  *
@@ -80,7 +82,7 @@ class AmazonPreorder extends AmazonInboundCore {
     public function setNeedByDate($d) {
         try{
             $this->options['NeedByDate'] = strstr($this->genTime($d), 'T', true);
-        } catch (Exception $e){
+        } catch (\InvalidArgumentException $e){
             unset($this->options['NeedByDate']);
             $this->log('Error: '.$e->getMessage(), 'Warning');
             return false;

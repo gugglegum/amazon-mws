@@ -9,7 +9,7 @@
     stopOnFailure="false"
     syntaxCheck="true"
     backupGlobals="false"
-    bootstrap="bootstrap.php"
+    bootstrap="../vendor/autoload.php"
     verbose="true">
     <testsuites>
         <testsuite name='all'>

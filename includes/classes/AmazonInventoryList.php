@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches list of inventory supplies from Amazon.
  * 
@@ -23,7 +25,7 @@
  * from Amazon. This is the only object in the Amazon Inventory Core. This
  * object can use tokens when retrieving the list.
  */
-class AmazonInventoryList extends AmazonInventoryCore implements Iterator{
+class AmazonInventoryList extends AmazonInventoryCore implements \Iterator{
     protected $tokenFlag = false;
     protected $tokenUseFlag = false;
     protected $supplyList;

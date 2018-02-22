@@ -1,6 +1,11 @@
 <?php
 
-class AmazonMerchantShipmentTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonMerchantShipment;
+use gugglegum\phpAmazonMWS\AmazonMerchantShipmentCreator;
+
+class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonMerchantShipmentCreator
@@ -688,7 +693,7 @@ class AmazonMerchantShipmentTest extends PHPUnit_Framework_TestCase {
 
     /**
      * Creates a new AmazonMerchantShipment object
-     * @return \AmazonMerchantShipment
+     * @return AmazonMerchantShipment
      */
     private function genEmptyShipment() {
         return new AmazonMerchantShipment(include(__DIR__.'/../../test-config.php'), null, null, true, null);

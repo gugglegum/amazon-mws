@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches a list of shipment items from Amazon.
  * 
@@ -23,7 +25,7 @@
  * shipment from Amazon. In order to get the list, a shipment ID is required.
  * An optional parameter is available to narrow the returned items.
  */
-class AmazonShipmentItemList extends AmazonInboundCore implements Iterator{
+class AmazonShipmentItemList extends AmazonInboundCore implements \Iterator{
     protected $tokenFlag = false;
     protected $tokenUseFlag = false;
     protected $itemList;
@@ -99,9 +101,9 @@ class AmazonShipmentItemList extends AmazonInboundCore implements Iterator{
      * Sets the time frame filter for the shipment items fetched. (Optional)
      * 
      * If no times are specified, times default to the current time.
-     * @param dateTime $lower <p>Date the order was created after, is passed through strtotime</p>
-     * @param dateTime $upper <p>Date the order was created before, is passed through strtotime</p>
-     * @throws InvalidArgumentException
+     * @param string|int $lower <p>Date the order was created after, is passed through strtotime</p>
+     * @param string|int $upper <p>Date the order was created before, is passed through strtotime</p>
+     * @throws \InvalidArgumentException
      */
     public function setTimeLimits($lower = null, $upper = null){
         try{
@@ -125,8 +127,8 @@ class AmazonShipmentItemList extends AmazonInboundCore implements Iterator{
                 $this->setTimeLimits($this->options['LastUpdatedBefore'].' - 1 second',$this->options['LastUpdatedBefore']);
             }
             
-        } catch (Exception $e){
-            throw new InvalidArgumentException('Parameters should be timestamps.');
+        } catch (\InvalidArgumentException $e){
+            throw new \InvalidArgumentException('Parameters should be timestamps.');
         }
         
     }

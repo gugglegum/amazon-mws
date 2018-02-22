@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Gets the details for a set of orders from Amazon.
  * 
@@ -24,7 +26,7 @@
  * wish to retrieve information for only one order, please use the <i>AmazonOrder</i>
  * class instead.
  */
-class AmazonOrderSet extends AmazonOrderCore implements Iterator{
+class AmazonOrderSet extends AmazonOrderCore implements \Iterator{
     protected $i = 0;
     protected $index = 0;
     protected $orderList;

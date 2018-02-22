@@ -17,6 +17,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Core class for Amazon Recommendations API.
  *

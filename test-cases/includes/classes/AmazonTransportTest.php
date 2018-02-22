@@ -1,6 +1,10 @@
 <?php
 
-class AmazonTransportTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonTransport;
+
+class AmazonTransportTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonTransport

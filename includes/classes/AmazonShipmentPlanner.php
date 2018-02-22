@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  *  Fetches an inbound shipment plan from Amazon.
  * 
@@ -23,7 +25,7 @@
  * plan from Amazon using the provided information. In order to generate a
  * shipment plan, an address and a list of items are required.
  */
-class AmazonShipmentPlanner extends AmazonInboundCore implements Iterator{
+class AmazonShipmentPlanner extends AmazonInboundCore implements \Iterator{
     protected $planList;
     protected $i = 0;
     

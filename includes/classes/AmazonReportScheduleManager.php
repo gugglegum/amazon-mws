@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Manages report schedules with Amazon.
  * 
@@ -25,7 +27,7 @@
  * Amazon will return a count of the number of report schedules affected,
  * which will usually be 1.
  */
-class AmazonReportScheduleManager extends AmazonReportsCore implements Iterator{
+class AmazonReportScheduleManager extends AmazonReportsCore implements \Iterator{
     protected $scheduleList;
     protected $count;
     protected $i = 0;
@@ -136,7 +138,7 @@ class AmazonReportScheduleManager extends AmazonReportsCore implements Iterator{
             }
             $this->options['ScheduledDate'] = $after;
             
-        } catch (Exception $e){
+        } catch (\InvalidArgumentException $e){
             $this->log("Error: ".$e->getMessage(),'Warning');
         }
         

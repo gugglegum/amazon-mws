@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches list of report schedules from Amazon.
  * 
@@ -25,7 +27,7 @@
  * count of the scheudles in the same manner. This object can use tokens when
  * retrieving the list.
  */
-class AmazonReportScheduleList extends AmazonReportsCore implements Iterator{
+class AmazonReportScheduleList extends AmazonReportsCore implements \Iterator{
     protected $tokenFlag = false;
     protected $tokenUseFlag = false;
     protected $index = 0;

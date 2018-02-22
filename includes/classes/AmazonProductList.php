@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches list of products from Amazon
  * 
@@ -23,7 +25,7 @@
  * that match the given product IDs. In order to do this, both the ID type
  * and product ID(s) must be given.
  */
-class AmazonProductList extends AmazonProductsCore implements Iterator{
+class AmazonProductList extends AmazonProductsCore implements \Iterator{
     protected $i = 0;
     
     /**

@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Fetches a merchant-fulfilled shipment from Amazon.
  *
@@ -593,7 +595,7 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
             }
             try {
                 return gzdecode(base64_decode($this->data['Label']['FileContents']['Contents']));
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 $this->log('Failed to convert label file, file might be corrupt: '.$ex->getMessage(), 'Urgent');
             }
             return false;

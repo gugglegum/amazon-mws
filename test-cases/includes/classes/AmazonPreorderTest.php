@@ -1,6 +1,10 @@
 <?php
 
-class AmazonPreorderTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonPreorder;
+
+class AmazonPreorderTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonPreorder

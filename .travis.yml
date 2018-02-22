@@ -21,4 +21,4 @@ before_script:
   - vendor/bin/phpunit --version
 
 # run the test suite
-script: cd test-cases && php ../vendor/bin/phpunit --bootstrap bootstrap.php
+script: cd test-cases && php ../vendor/bin/phpunit

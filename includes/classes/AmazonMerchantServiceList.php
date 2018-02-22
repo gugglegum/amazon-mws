@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Receives a list of eligible shipping services from Amazon.
  *
@@ -25,7 +27,7 @@
  * Any carriers that are temporarily unavailable will be stored in separate lists
  * based on the reason for why the carrier is unavailable.
  */
-class AmazonMerchantServiceList extends AmazonMerchantCore implements Iterator{
+class AmazonMerchantServiceList extends AmazonMerchantCore implements \Iterator{
     protected $serviceList;
     protected $downList;
     protected $termsList;
@@ -335,7 +337,7 @@ class AmazonMerchantServiceList extends AmazonMerchantCore implements Iterator{
     public function setMaxArrivalDate($d) {
         try{
             $this->options['ShipmentRequestDetails.MustArriveByDate'] = $this->genTime($d);
-        } catch (Exception $e){
+        } catch (\InvalidArgumentException $e){
             unset($this->options['ShipmentRequestDetails.MustArriveByDate']);
             $this->log('Error: '.$e->getMessage(), 'Warning');
             return false;
@@ -352,7 +354,7 @@ class AmazonMerchantServiceList extends AmazonMerchantCore implements Iterator{
     public function setShipDate($d) {
         try{
             $this->options['ShipmentRequestDetails.ShipDate'] = $this->genTime($d);
-        } catch (Exception $e){
+        } catch (\InvalidArgumentException $e){
             unset($this->options['ShipmentRequestDetails.ShipDate']);
             $this->log('Error: '.$e->getMessage(), 'Warning');
             return false;

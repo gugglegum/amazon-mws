@@ -1,6 +1,11 @@
 <?php
 
-class AmazonMerchantServiceListTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonMerchantServiceList;
+use gugglegum\phpAmazonMWS\AmazonMerchantShipmentCreator;
+
+class AmazonMerchantServiceListTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonMerchantServiceList

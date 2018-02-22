@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * Pulls a list of Orders and turn them into an array of AmazonOrder objects.
  * 
@@ -24,7 +26,7 @@
  * are available to narrow the number of orders returned, but none of them
  * are required. This object can use tokens when retrieving the list.
  */
-class AmazonOrderList extends AmazonOrderCore implements Iterator{
+class AmazonOrderList extends AmazonOrderCore implements \Iterator{
     protected $orderList;
     protected $i = 0;
     protected $tokenFlag = false;
@@ -124,8 +126,10 @@ class AmazonOrderList extends AmazonOrderCore implements Iterator{
                 $this->log('First parameter should be either "Created" or "Modified".','Warning');
                 return false;
             }
-            
         } catch (Exception $e){
+            $this->log('Error: '.$e->getMessage(),'Warning');
+            return false;
+        } catch (\InvalidArgumentException $e){
             $this->log('Error: '.$e->getMessage(),'Warning');
             return false;
         }

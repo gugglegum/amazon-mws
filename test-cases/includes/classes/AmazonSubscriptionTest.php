@@ -1,6 +1,10 @@
 <?php
 
-class AmazonSubscriptionTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonSubscription;
+
+class AmazonSubscriptionTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonSubscription

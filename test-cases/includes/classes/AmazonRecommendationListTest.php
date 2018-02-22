@@ -1,6 +1,10 @@
 <?php
 
-class AmazonRecommendationListTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonRecommendationList;
+
+class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonRecommendationList

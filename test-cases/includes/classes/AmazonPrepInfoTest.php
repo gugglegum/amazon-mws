@@ -1,6 +1,10 @@
 <?php
 
-class AmazonPrepInfoTest extends PHPUnit_Framework_TestCase {
+namespace gugglegum\phpAmazonMWS\tests;
+
+use gugglegum\phpAmazonMWS\AmazonPrepInfo;
+
+class AmazonPrepInfoTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @var AmazonPrepInfo

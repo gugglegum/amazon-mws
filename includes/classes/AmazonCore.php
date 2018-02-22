@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+namespace gugglegum\phpAmazonMWS;
+
 /**
  * The main core of the Amazon class.
  * 
@@ -537,7 +539,7 @@ abstract class AmazonCore{
      * Unix timestamps are also allowed. Purely numeric values are treated as unix timestamps.
      * Defaults to the current time.</p>
      * @return string Unix timestamp of the time, minus 2 minutes.
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function genTime($time=false){
         if (!$time){
@@ -547,7 +549,7 @@ abstract class AmazonCore{
         } else if (is_string($time)) {
             $time = strtotime($time);
         } else {
-            throw new InvalidArgumentException('Invalid time input given');
+            throw new \InvalidArgumentException('Invalid time input given');
         }
         return date('Y-m-d\TH:i:sO',$time-120);
             
