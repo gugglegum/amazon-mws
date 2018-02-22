@@ -13,7 +13,7 @@ class AmazonSubscriptionTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonSubscription(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonSubscription(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     public function testSetMarketplace() {

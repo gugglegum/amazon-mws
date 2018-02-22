@@ -13,7 +13,7 @@ class AmazonMerchantServiceListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonMerchantServiceList(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonMerchantServiceList(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     public function testSetOrderId(){
@@ -330,7 +330,7 @@ class AmazonMerchantServiceListTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testSetDetailsByCreator() {
-        $creator = new AmazonMerchantShipmentCreator(true, null, include(__DIR__.'/../../test-config.php'));
+        $creator = new AmazonMerchantShipmentCreator(include(__DIR__.'/../../test-config.php'), true, null);
 
         //no settings transferred yet
         $o1 = $this->object->getOptions();
@@ -348,7 +348,7 @@ class AmazonMerchantServiceListTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testListFetchServicesByCreator() {
-        $creator = new AmazonMerchantShipmentCreator(true, null, include(__DIR__.'/../../test-config.php'));
+        $creator = new AmazonMerchantShipmentCreator(include(__DIR__.'/../../test-config.php'), true, null);
         $creator->setMock(true,'fetchMerchantServiceList.xml');
 
         $creator->setOrderId('903-1713775-3598252');

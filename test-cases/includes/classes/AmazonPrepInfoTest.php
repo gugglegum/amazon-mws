@@ -13,7 +13,7 @@ class AmazonPrepInfoTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonPrepInfo(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonPrepInfo(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     public function testSetSKUs() {

@@ -16,7 +16,7 @@ class AmazonShipmentItemListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonShipmentItemList(null, true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonShipmentItemList(include(__DIR__.'/../../test-config.php'), null, true, null);
     }
 
     /**
@@ -28,7 +28,7 @@ class AmazonShipmentItemListTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testSetUp(){
-        $obj = new AmazonShipmentItemList('77', true, null, include(__DIR__.'/../../test-config.php'));
+        $obj = new AmazonShipmentItemList(include(__DIR__.'/../../test-config.php'), '77', true, null);
         
         $o = $obj->getOptions();
         $this->assertArrayHasKey('ShipmentId',$o);

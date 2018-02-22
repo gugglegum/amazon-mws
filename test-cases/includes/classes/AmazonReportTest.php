@@ -16,7 +16,7 @@ class AmazonReportTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonReport(null, true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonReport(include(__DIR__.'/../../test-config.php'), null, true, null);
     }
 
     /**
@@ -28,7 +28,7 @@ class AmazonReportTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testSetUp(){
-        $obj = new AmazonReport('77', true, null, include(__DIR__.'/../../test-config.php'));
+        $obj = new AmazonReport(include(__DIR__.'/../../test-config.php'), '77', true, null);
         
         $o = $obj->getOptions();
         $this->assertArrayHasKey('ReportId',$o);

@@ -16,7 +16,7 @@ class AmazonFeedListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonFeedList(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonFeedList(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     /**

@@ -16,7 +16,7 @@ class AmazonOrderSetTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonOrderSet(null, true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonOrderSet(include(__DIR__.'/../../test-config.php'), null, true, null);
     }
 
     /**
@@ -28,7 +28,7 @@ class AmazonOrderSetTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testSetUp(){
-        $obj = new AmazonOrderSet('77', true, null, include(__DIR__.'/../../test-config.php'));
+        $obj = new AmazonOrderSet(include(__DIR__.'/../../test-config.php'), '77', true, null);
         
         $o = $obj->getOptions();
         $this->assertArrayHasKey('AmazonOrderId.Id.1',$o);
@@ -101,7 +101,7 @@ class AmazonOrderSetTest extends PHPUnit_Framework_TestCase {
         $getOne = $this->object->fetchItems('string', 0); //$token will be set to false
         $this->assertInternalType('object',$getOne);
         
-        $o = new AmazonOrderList(true, null, include(__DIR__.'/../../test-config.php'));
+        $o = new AmazonOrderList(include(__DIR__.'/../../test-config.php'), true, null);
         $this->assertFalse($o->fetchItems()); //not fetched yet for this object
     }
     

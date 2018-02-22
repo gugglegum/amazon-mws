@@ -13,7 +13,7 @@ class AmazonFinancialGroupListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonFinancialGroupList(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonFinancialGroupList(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     public function testSetUseToken(){

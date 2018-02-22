@@ -32,13 +32,13 @@ class AmazonReportRequest extends AmazonReportsCore{
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
+     * @param array $config <p>A config array to set.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
-     * @param array $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    public function __construct($mock = false, $m = null, array $config = null) {
-        parent::__construct($mock, $m, $config);
+    public function __construct(array $config = null, $mock = false, $m = null) {
+        parent::__construct($config, $mock, $m);
         include($this->env);
         
         $this->options['Action'] = 'RequestReport';

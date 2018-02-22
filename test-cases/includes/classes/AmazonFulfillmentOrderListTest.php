@@ -16,7 +16,7 @@ class AmazonFulfillmentOrderListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonFulfillmentOrderList(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonFulfillmentOrderList(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     /**

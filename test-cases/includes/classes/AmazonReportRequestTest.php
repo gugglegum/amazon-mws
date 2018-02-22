@@ -16,7 +16,7 @@ class AmazonReportRequestTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonReportRequest(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonReportRequest(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     /**

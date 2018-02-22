@@ -112,6 +112,7 @@ abstract class AmazonCore{
      * 
      * This constructor is called when initializing all objects in this library.
      * The parameters are passed by the child objects' constructors.
+     * @param array $config <p>A config array to set.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * When this is set to <b>TRUE</b>, the object will fetch responses from
      * files you specify instead of sending the requests to Amazon.
@@ -120,9 +121,8 @@ abstract class AmazonCore{
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.
      * When Mock Mode is enabled, the object will retrieve one of these files
      * from the list to use as a response. See <i>setMock</i> for more information.</p>
-     * @param array $config [optional] <p>A config array to set.</p>
      */
-    protected function __construct($mock = false, $m = null, array $config = null){
+    protected function __construct(array $config = null, $mock = false, $m = null){
         $this->setConfig($config);
         $this->setMock($mock,$m);
         

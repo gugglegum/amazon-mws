@@ -13,11 +13,11 @@ class AmazonPreorderTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonPreorder(null, true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonPreorder(include(__DIR__.'/../../test-config.php'), null, true, null);
     }
 
     public function testSetUp() {
-        $obj = new AmazonPreorder('77', true, null, include(__DIR__.'/../../test-config.php'));
+        $obj = new AmazonPreorder(include(__DIR__.'/../../test-config.php'), '77', true, null);
 
         $o = $obj->getOptions();
         $this->assertArrayHasKey('ShipmentId',$o);

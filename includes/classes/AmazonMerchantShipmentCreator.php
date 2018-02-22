@@ -32,13 +32,13 @@ class AmazonMerchantShipmentCreator extends AmazonMerchantCore {
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
+     * @param array $config <p>A config array to set.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
-     * @param array $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    public function __construct($mock = false, $m = null, array $config = null){
-        parent::__construct($mock, $m, $config);
+    public function __construct(array $config, $mock = false, $m = null){
+        parent::__construct($config, $mock, $m);
 
         $this->options['Action'] = 'CreateShipment';
     }
@@ -528,7 +528,7 @@ class AmazonMerchantShipmentCreator extends AmazonMerchantCore {
      * @return AmazonMerchantServiceList container for services
      */
     public function fetchServices() {
-        $services = new AmazonMerchantServiceList($this->mockMode, $this->mockFiles, $this->config);
+        $services = new AmazonMerchantServiceList($this->config, $this->mockMode, $this->mockFiles);
         $services->mockIndex = $this->mockIndex;
         $services->setLogPath($this->logpath);
         $services->setDetailsByCreator($this);
@@ -614,7 +614,7 @@ class AmazonMerchantShipmentCreator extends AmazonMerchantCore {
             return false;
         }
 
-        $this->shipment = new AmazonMerchantShipment(NULL, $xml, $this->mockMode, $this->mockFiles, $this->config);
+        $this->shipment = new AmazonMerchantShipment($this->config, NULL, $xml, $this->mockMode, $this->mockFiles);
         $this->shipment->setLogPath($this->logpath);
         $this->shipment->mockIndex = $this->mockIndex;
     }

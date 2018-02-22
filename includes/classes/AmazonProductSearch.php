@@ -35,14 +35,14 @@ class AmazonProductSearch extends AmazonProductsCore{
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
+     * @param array $config <p>A config array to set.</p>
      * @param string $q [optional] <p>The query string to set for the object.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
-     * @param array $config [optional] <p>An alternate config file to set. Used for testing.</p>
      */
-    public function __construct($q = null, $mock = false, $m = null, array $config = null){
-        parent::__construct($mock, $m, $config);
+    public function __construct(array $config, $q = null, $mock = false, $m = null){
+        parent::__construct($config, $mock, $m);
         include($this->env);
         
         if($q){

@@ -13,7 +13,7 @@ class AmazonRecommendationListTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonRecommendationList(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonRecommendationList(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     public function testSetUseToken(){

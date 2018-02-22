@@ -16,7 +16,7 @@ class AmazonShipmentTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         resetLog();
-        $this->object = new AmazonShipment(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonShipment(include(__DIR__.'/../../test-config.php'), true, null);
     }
 
     /**
@@ -197,7 +197,7 @@ class AmazonShipmentTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testUsePlan(){
-        $planner = new AmazonShipmentPlanner(true, 'fetchPlan.xml', include(__DIR__.'/../../test-config.php'));
+        $planner = new AmazonShipmentPlanner(include(__DIR__.'/../../test-config.php'), true, 'fetchPlan.xml');
         $a = array();
         $a['Name'] = 'Name';
         $a['AddressLine1'] = 'AddressLine1';
@@ -240,7 +240,7 @@ class AmazonShipmentTest extends PHPUnit_Framework_TestCase {
         $o = clone $this->object;
         $o->usePlan($plan);
         resetLog();
-        $this->object = new AmazonShipment(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonShipment(include(__DIR__.'/../../test-config.php'), true, null);
         $this->assertFalse($this->object->createShipment()); //no ID set
         
         $this->object->setShipmentId('55');
@@ -298,7 +298,7 @@ class AmazonShipmentTest extends PHPUnit_Framework_TestCase {
         $o = clone $this->object;
         $o->usePlan($plan);
         resetLog();
-        $this->object = new AmazonShipment(true, null, include(__DIR__.'/../../test-config.php'));
+        $this->object = new AmazonShipment(include(__DIR__.'/../../test-config.php'), true, null);
         $this->assertFalse($this->object->updateShipment()); //no ID set
         
         $this->object->setShipmentId('55');
