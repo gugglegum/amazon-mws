@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "gugglegum\\phpAmazonMWS\\": "includes/classes/"
+            "gugglegum\\phpAmazonMWS\\": "src/"
         }
     },
     "require-dev": {
@@ -22,7 +22,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "gugglegum\\phpAmazonMWS\\tests\\": "test-cases/includes/classes"
+            "gugglegum\\phpAmazonMWS\\tests\\": "tests/src/"
         }
     }
 }
