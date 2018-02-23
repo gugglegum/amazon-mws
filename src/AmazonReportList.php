@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-namespace gugglegum\phpAmazonMWS;
+namespace gugglegum\AmazonMWS;
 
 /**
  * Fetches list of reports available from Amazon.

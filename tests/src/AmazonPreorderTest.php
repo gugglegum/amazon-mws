@@ -1,8 +1,8 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS\tests;
+namespace gugglegum\AmazonMWS\tests;
 
-use gugglegum\phpAmazonMWS\AmazonPreorder;
+use gugglegum\AmazonMWS\AmazonPreorder;
 
 class AmazonPreorderTest extends \PHPUnit_Framework_TestCase {
 

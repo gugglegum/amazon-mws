@@ -1,8 +1,8 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS\tests;
+namespace gugglegum\AmazonMWS\tests;
 
-use gugglegum\phpAmazonMWS\AmazonFinancialEventList;
+use gugglegum\AmazonMWS\AmazonFinancialEventList;
 
 class AmazonFinancialEventListTest extends \PHPUnit_Framework_TestCase {
 

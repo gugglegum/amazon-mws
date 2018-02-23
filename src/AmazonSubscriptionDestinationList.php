@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-namespace gugglegum\phpAmazonMWS;
+namespace gugglegum\AmazonMWS;
 
 /**
  * Pulls a list of registered subscription destinations from Amazon.

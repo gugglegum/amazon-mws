@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-namespace gugglegum\phpAmazonMWS;
+namespace gugglegum\AmazonMWS;
 
 /**
  * Creates a subscription on Amazon or updates it, or registers subscription destinations.

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-namespace gugglegum\phpAmazonMWS;
+namespace gugglegum\AmazonMWS;
 
 /**
  * Pulls a list of financial event groups from Amazon.

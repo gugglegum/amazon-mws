@@ -1,8 +1,8 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS\tests;
+namespace gugglegum\AmazonMWS\tests;
 
-use gugglegum\phpAmazonMWS\AmazonRecommendationList;
+use gugglegum\AmazonMWS\AmazonRecommendationList;
 
 class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
 

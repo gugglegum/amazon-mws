@@ -1,9 +1,9 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS\tests;
+namespace gugglegum\AmazonMWS\tests;
 
-use gugglegum\phpAmazonMWS\AmazonMerchantShipment;
-use gugglegum\phpAmazonMWS\AmazonMerchantShipmentCreator;
+use gugglegum\AmazonMWS\AmazonMerchantShipment;
+use gugglegum\AmazonMWS\AmazonMerchantShipmentCreator;
 
 class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
 

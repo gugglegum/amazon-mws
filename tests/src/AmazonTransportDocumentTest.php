@@ -1,8 +1,8 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS\tests;
+namespace gugglegum\AmazonMWS\tests;
 
-use gugglegum\phpAmazonMWS\AmazonTransportDocument;
+use gugglegum\AmazonMWS\AmazonTransportDocument;
 
 class AmazonTransportDocumentTest extends \PHPUnit_Framework_TestCase {
 

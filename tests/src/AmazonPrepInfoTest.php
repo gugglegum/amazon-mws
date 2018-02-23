@@ -1,8 +1,8 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS\tests;
+namespace gugglegum\AmazonMWS\tests;
 
-use gugglegum\phpAmazonMWS\AmazonPrepInfo;
+use gugglegum\AmazonMWS\AmazonPrepInfo;
 
 class AmazonPrepInfoTest extends \PHPUnit_Framework_TestCase {
 

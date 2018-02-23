@@ -1,6 +1,6 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS;
+namespace gugglegum\AmazonMWS;
 
 class Exception extends \Exception
 {

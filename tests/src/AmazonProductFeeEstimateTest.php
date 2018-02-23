@@ -1,8 +1,8 @@
 <?php
 
-namespace gugglegum\phpAmazonMWS\tests;
+namespace gugglegum\AmazonMWS\tests;
 
-use gugglegum\phpAmazonMWS\AmazonProductFeeEstimate;
+use gugglegum\AmazonMWS\AmazonProductFeeEstimate;
 
 class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase {
 
