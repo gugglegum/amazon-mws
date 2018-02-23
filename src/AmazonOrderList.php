@@ -27,6 +27,9 @@ namespace gugglegum\AmazonMWS;
  * are required. This object can use tokens when retrieving the list.
  */
 class AmazonOrderList extends AmazonOrderCore implements \Iterator{
+    /**
+     * @var AmazonOrder[]
+     */
     protected $orderList;
     protected $i = 0;
     protected $tokenFlag = false;
@@ -474,7 +477,7 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator{
             $this->orderList = array();
         }
     }
-    
+
     /**
      * Parses XML response into array.
      * 
@@ -498,7 +501,19 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator{
         }
         
     }
-    
+
+    /**
+     * Clears previously fetched orders list. May be used with NextToken feature without autoload all pages.
+     * This allow to fetch large amount of orders with small memory usage. After each page loaded and parsed,
+     * previously loaded orders should be removed from memory by this method.
+     */
+    public function clearOrderList()
+    {
+        $this->orderList = [];
+        $this->index = 0;
+        $this->i = 0;
+    }
+
     /**
      * Returns array of item lists or a single item list.
      * 
@@ -507,7 +522,7 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator{
      * this operation could take a while due to throttling. (Two seconds per order when throttled.)
      * @param boolean $token [optional] <p>whether or not to automatically use tokens when fetching items.</p>
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to null.</p>
-     * @return array|AmazonOrderItemList <i>AmazonOrderItemList</i> object or array of objects, or <b>FALSE</b> if non-numeric index
+     * @return AmazonOrderItemList|AmazonOrderItemList[]|bool <i>AmazonOrderItemList</i> object or array of objects, or <b>FALSE</b> if non-numeric index
      */
     public function fetchItems($token = false, $i = null){
         if (!isset($this->orderList)){
@@ -529,7 +544,7 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator{
     
     /**
      * Returns the list of orders.
-     * @return array|boolean array of <i>AmazonOrder</i> objects, or <b>FALSE</b> if list not filled yet
+     * @return AmazonOrder[]|boolean array of <i>AmazonOrder</i> objects, or <b>FALSE</b> if list not filled yet
      */
     public function getList(){
         if (isset($this->orderList)){
@@ -542,7 +557,7 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator{
     
     /**
      * Iterator function
-     * @return type
+     * @return AmazonOrder
      */
     public function current(){
        return $this->orderList[$this->i]; 
@@ -557,7 +572,7 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator{
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key() {
         return $this->i;
