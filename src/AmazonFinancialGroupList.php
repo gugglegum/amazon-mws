@@ -25,7 +25,8 @@ namespace gugglegum\AmazonMWS;
  * from Amazon. In order to do this, a start date is required. This
  * object can use tokens when retrieving the list.
  */
-class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
+class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator
+{
     protected $tokenFlag = false;
     protected $tokenUseFlag = false;
     protected $list;
@@ -36,7 +37,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * Returns whether or not a token is available.
      * @return boolean
      */
-    public function hasToken() {
+    public function hasToken()
+    {
         return $this->tokenFlag;
     }
 
@@ -50,7 +52,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setUseToken($b = true) {
+    public function setUseToken($b = true)
+    {
         if (is_bool($b)) {
             $this->tokenUseFlag = $b;
         } else {
@@ -66,8 +69,9 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $num <p>Positive integer from 1 to 100.</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setMaxResultsPerPage($num){
-        if (is_numeric($num) && $num <= 100 && $num >= 1){
+    public function setMaxResultsPerPage($num)
+    {
+        if (is_numeric($num) && $num <= 100 && $num >= 1) {
             $this->options['MaxResultsPerPage'] = $num;
         } else {
             return false;
@@ -85,7 +89,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param string $e [optional] <p>A time string for the latest time.</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setTimeLimits($s, $e = null) {
+    public function setTimeLimits($s, $e = null)
+    {
         if (empty($s)) {
             return FALSE;
         }
@@ -110,7 +115,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param boolean $r [optional] <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function fetchGroupList($r = true) {
+    public function fetchGroupList($r = true)
+    {
         if (!array_key_exists('FinancialEventGroupStartedAfter', $this->options)) {
             $this->log("Start date must be set in order to fetch financial event groups", 'Warning');
             return false;
@@ -118,11 +124,11 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
 
         $this->prepareToken();
 
-        $url = $this->urlbase.$this->urlbranch;
+        $url = $this->urlbase . $this->urlbranch;
 
         $query = $this->genQuery();
 
-        $path = $this->options['Action'].'Result';
+        $path = $this->options['Action'] . 'Result';
 
         if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
@@ -156,7 +162,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * operation for using tokens does not use any other parameters, all other
      * parameters will be removed.
      */
-    protected function prepareToken() {
+    protected function prepareToken()
+    {
         if ($this->tokenFlag && $this->tokenUseFlag) {
             $this->options['Action'] = 'ListFinancialEventGroupsByNextToken';
             unset($this->options['MaxResultsPerPage']);
@@ -177,11 +184,12 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
-    protected function parseXml($xml) {
+    protected function parseXml($xml)
+    {
         if (!$xml || !$xml->FinancialEventGroupList) {
             return false;
         }
-        foreach($xml->FinancialEventGroupList->children() as $x) {
+        foreach ($xml->FinancialEventGroupList->children() as $x) {
             $temp = array();
             $temp['FinancialEventGroupId'] = (string)$x->FinancialEventGroupId;
             $temp['ProcessingStatus'] = (string)$x->ProcessingStatus;
@@ -237,8 +245,9 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getGroups(){
-        if (isset($this->list)){
+    public function getGroups()
+    {
+        if (isset($this->list)) {
             return $this->list;
         } else {
             return false;
@@ -252,7 +261,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
      */
-    public function getGroupId($i = 0) {
+    public function getGroupId($i = 0)
+    {
         if (isset($this->list[$i]['FinancialEventGroupId'])) {
             return $this->list[$i]['FinancialEventGroupId'];
         } else {
@@ -267,7 +277,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean "Open" or "Closed", or <b>FALSE</b> if Non-numeric index
      */
-    public function getProcessingStatus($i = 0) {
+    public function getProcessingStatus($i = 0)
+    {
         if (isset($this->list[$i]['ProcessingStatus'])) {
             return $this->list[$i]['ProcessingStatus'];
         } else {
@@ -282,7 +293,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
      */
-    public function getTransferStatus($i = 0) {
+    public function getTransferStatus($i = 0)
+    {
         if (isset($this->list[$i]['FundTransferStatus'])) {
             return $this->list[$i]['FundTransferStatus'];
         } else {
@@ -299,7 +311,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the amount</p>
      * @return array|string|boolean array, single value, or <b>FALSE</b> if Non-numeric index
      */
-    public function getOriginalTotal($i = 0, $only = false) {
+    public function getOriginalTotal($i = 0, $only = false)
+    {
         if (isset($this->list[$i]['OriginalTotal'])) {
             if ($only) {
                 return $this->list[$i]['OriginalTotal']['Amount'];
@@ -320,7 +333,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the amount</p>
      * @return array|string|boolean array, single value, or <b>FALSE</b> if Non-numeric index
      */
-    public function getConvertedTotal($i = 0, $only = false) {
+    public function getConvertedTotal($i = 0, $only = false)
+    {
         if (isset($this->list[$i]['ConvertedTotal'])) {
             if ($only) {
                 return $this->list[$i]['ConvertedTotal']['Amount'];
@@ -339,7 +353,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean date in ISO 8601 format, or <b>FALSE</b> if Non-numeric index
      */
-    public function getTransferDate($i = 0) {
+    public function getTransferDate($i = 0)
+    {
         if (isset($this->list[$i]['FundTransferDate'])) {
             return $this->list[$i]['FundTransferDate'];
         } else {
@@ -354,7 +369,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
      */
-    public function getTraceId($i = 0) {
+    public function getTraceId($i = 0)
+    {
         if (isset($this->list[$i]['TraceId'])) {
             return $this->list[$i]['TraceId'];
         } else {
@@ -369,7 +385,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
      */
-    public function getAccountTail($i = 0) {
+    public function getAccountTail($i = 0)
+    {
         if (isset($this->list[$i]['AccountTail'])) {
             return $this->list[$i]['AccountTail'];
         } else {
@@ -386,7 +403,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the amount</p>
      * @return array|string|boolean array, single value, or <b>FALSE</b> if Non-numeric index
      */
-    public function getBeginningBalance($i = 0, $only = false) {
+    public function getBeginningBalance($i = 0, $only = false)
+    {
         if (isset($this->list[$i]['BeginningBalance'])) {
             if ($only) {
                 return $this->list[$i]['BeginningBalance']['Amount'];
@@ -405,7 +423,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean date in ISO 8601 format, or <b>FALSE</b> if Non-numeric index
      */
-    public function getStartDate($i = 0) {
+    public function getStartDate($i = 0)
+    {
         if (isset($this->list[$i]['FinancialEventGroupStart'])) {
             return $this->list[$i]['FinancialEventGroupStart'];
         } else {
@@ -420,7 +439,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
      * @return string|boolean date in ISO 8601 format, or <b>FALSE</b> if Non-numeric index
      */
-    public function getEndDate($i = 0) {
+    public function getEndDate($i = 0)
+    {
         if (isset($this->list[$i]['FinancialEventGroupEnd'])) {
             return $this->list[$i]['FinancialEventGroupEnd'];
         } else {
@@ -432,14 +452,16 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * Iterator function
      * @return type
      */
-    public function current() {
-       return $this->list[$this->i];
+    public function current()
+    {
+        return $this->list[$this->i];
     }
 
     /**
      * Iterator function
      */
-    public function rewind() {
+    public function rewind()
+    {
         $this->i = 0;
     }
 
@@ -447,14 +469,16 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * Iterator function
      * @return type
      */
-    public function key() {
+    public function key()
+    {
         return $this->i;
     }
 
     /**
      * Iterator function
      */
-    public function next() {
+    public function next()
+    {
         $this->i++;
     }
 
@@ -462,7 +486,8 @@ class AmazonFinancialGroupList extends AmazonFinanceCore implements \Iterator {
      * Iterator function
      * @return type
      */
-    public function valid() {
+    public function valid()
+    {
         return isset($this->list[$this->i]);
     }
 

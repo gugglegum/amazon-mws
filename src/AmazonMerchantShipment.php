@@ -26,7 +26,8 @@ namespace gugglegum\AmazonMWS;
  * In order to fetch or cancel a shipment, a Shipment ID is needed.
  * Shipment IDs are given by Amazon by using the <i>AmazonMerchantShipmentCreator</i> object.
  */
-class AmazonMerchantShipment extends AmazonMerchantCore {
+class AmazonMerchantShipment extends AmazonMerchantCore
+{
     protected $data;
 
     /**
@@ -44,10 +45,11 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
      */
-    public function __construct(array $config, $id = null, $data = null, $mock = false, $m = null){
+    public function __construct(array $config, $id = null, $data = null, $mock = false, $m = null)
+    {
         parent::__construct($config, $mock, $m);
 
-        if($id){
+        if ($id) {
             $this->setShipmentId($id);
         }
         if ($data) {
@@ -63,11 +65,12 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @param string $id <p>either string or number</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setShipmentId($id){
-        if (is_string($id) || is_numeric($id)){
+    public function setShipmentId($id)
+    {
+        if (is_string($id) || is_numeric($id)) {
             $this->options['ShipmentId'] = $id;
         } else {
-            $this->log("Tried to set ShipmentId to invalid value",'Warning');
+            $this->log("Tried to set ShipmentId to invalid value", 'Warning');
             return false;
         }
     }
@@ -81,25 +84,26 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * Other methods are available for fetching specific values from the shipment.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function fetchShipment(){
-        if (!array_key_exists('ShipmentId',$this->options)){
-            $this->log("Shipment ID must be set in order to fetch it!",'Warning');
+    public function fetchShipment()
+    {
+        if (!array_key_exists('ShipmentId', $this->options)) {
+            $this->log("Shipment ID must be set in order to fetch it!", 'Warning');
             return false;
         }
 
         $this->options['Action'] = 'GetShipment';
 
-        $url = $this->urlbase.$this->urlbranch;
+        $url = $this->urlbase . $this->urlbranch;
 
         $query = $this->genQuery();
 
-        $path = $this->options['Action'].'Result';
-        if ($this->mockMode){
+        $path = $this->options['Action'] . 'Result';
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile();
         } else {
-            $response = $this->sendRequest($url, array('Post'=>$query));
+            $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -116,8 +120,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
-    protected function parseXML($xml) {
-        if (!$xml || !$xml->Shipment){
+    protected function parseXML($xml)
+    {
+        if (!$xml || !$xml->Shipment) {
             return false;
         }
         $d = $xml->Shipment;
@@ -246,25 +251,26 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * Other methods are available for fetching specific values from the shipment.
      * @return boolean <b>TRUE</b> if the cancellation was successful, <b>FALSE</b> if something goes wrong
      */
-    public function cancelShipment(){
-        if (!array_key_exists('ShipmentId',$this->options)){
-            $this->log("Shipment ID must be set in order to cancel it!",'Warning');
+    public function cancelShipment()
+    {
+        if (!array_key_exists('ShipmentId', $this->options)) {
+            $this->log("Shipment ID must be set in order to cancel it!", 'Warning');
             return false;
         }
 
         $this->options['Action'] = 'CancelShipment';
 
-        $url = $this->urlbase.$this->urlbranch;
+        $url = $this->urlbase . $this->urlbranch;
 
         $query = $this->genQuery();
 
-        $path = $this->options['Action'].'Result';
-        if ($this->mockMode){
+        $path = $this->options['Action'] . 'Result';
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile();
         } else {
-            $response = $this->sendRequest($url, array('Post'=>$query));
+            $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -280,8 +286,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the shipment data has not been retrieved yet.
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if shipment not set yet
      */
-    public function getData(){
-        if (isset($this->data)){
+    public function getData()
+    {
+        if (isset($this->data)) {
             return $this->data;
         } else {
             return false;
@@ -294,8 +301,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the shipment ID has not been set yet.
      * @return string|boolean single value, or <b>FALSE</b> if shipment ID not set yet
      */
-    public function getShipmentId(){
-        if (isset($this->data['ShipmentId'])){
+    public function getShipmentId()
+    {
+        if (isset($this->data['ShipmentId'])) {
             return $this->data['ShipmentId'];
         } else {
             return false;
@@ -308,8 +316,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the order ID has not been set yet.
      * @return string|boolean single value, or <b>FALSE</b> if order ID not set yet
      */
-    public function getAmazonOrderId(){
-        if (isset($this->data['AmazonOrderId'])){
+    public function getAmazonOrderId()
+    {
+        if (isset($this->data['AmazonOrderId'])) {
             return $this->data['AmazonOrderId'];
         } else {
             return false;
@@ -322,8 +331,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the order ID has not been set yet.
      * @return string|boolean single value, or <b>FALSE</b> if order ID not set yet
      */
-    public function getSellerOrderId(){
-        if (isset($this->data['SellerOrderId'])){
+    public function getSellerOrderId()
+    {
+        if (isset($this->data['SellerOrderId'])) {
             return $this->data['SellerOrderId'];
         } else {
             return false;
@@ -341,8 +351,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if items not set yet
      */
-    public function getItems(){
-        if (isset($this->data['ItemList'])){
+    public function getItems()
+    {
+        if (isset($this->data['ItemList'])) {
             return $this->data['ItemList'];
         } else {
             return false;
@@ -369,8 +380,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * </ul>
      * @return array|boolean associative array, or <b>FALSE</b> if label not set yet
      */
-    public function getShipFromAddress(){
-        if (isset($this->data['ShipFromAddress'])){
+    public function getShipFromAddress()
+    {
+        if (isset($this->data['ShipFromAddress'])) {
             return $this->data['ShipFromAddress'];
         } else {
             return false;
@@ -397,8 +409,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * </ul>
      * @return array|boolean associative array, or <b>FALSE</b> if label not set yet
      */
-    public function getShipToAddress(){
-        if (isset($this->data['ShipToAddress'])){
+    public function getShipToAddress()
+    {
+        if (isset($this->data['ShipToAddress'])) {
             return $this->data['ShipToAddress'];
         } else {
             return false;
@@ -419,8 +432,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * </ul>
      * @return array|boolean associative array, or <b>FALSE</b> if package dimensions not set yet
      */
-    public function getPackageDimensions(){
-        if (isset($this->data['PackageDimensions'])){
+    public function getPackageDimensions()
+    {
+        if (isset($this->data['PackageDimensions'])) {
             return $this->data['PackageDimensions'];
         } else {
             return false;
@@ -435,9 +449,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the value</p>
      * @return array|string|boolean array, single value, or <b>FALSE</b> if weight not set yet
      */
-    public function getWeight($only = false){
-        if (isset($this->data['Weight'])){
-            if ($only){
+    public function getWeight($only = false)
+    {
+        if (isset($this->data['Weight'])) {
+            if ($only) {
                 return $this->data['Weight']['Value'];
             } else {
                 return $this->data['Weight'];
@@ -455,9 +470,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the value</p>
      * @return array|string|boolean array, single value, or <b>FALSE</b> if insurance amount not set yet
      */
-    public function getInsurance($only = false){
-        if (isset($this->data['Insurance'])){
-            if ($only){
+    public function getInsurance($only = false)
+    {
+        if (isset($this->data['Insurance'])) {
+            if ($only) {
                 return $this->data['Insurance']['Amount'];
             } else {
                 return $this->data['Insurance'];
@@ -487,8 +503,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * </ul>
      * @return array|boolean associative array, or <b>FALSE</b> if package dimensions not set yet
      */
-    public function getService(){
-        if (isset($this->data['ShippingService'])){
+    public function getService()
+    {
+        if (isset($this->data['ShippingService'])) {
             return $this->data['ShippingService'];
         } else {
             return false;
@@ -504,9 +521,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @return array|string|boolean array, single value, or <b>FALSE</b> if service not set yet
      * @see getService
      */
-    public function getServiceRate($only = false){
-        if (isset($this->data['ShippingService'])){
-            if ($only){
+    public function getServiceRate($only = false)
+    {
+        if (isset($this->data['ShippingService'])) {
+            if ($only) {
                 return $this->data['ShippingService']['Rate']['Amount'];
             } else {
                 return $this->data['ShippingService']['Rate'];
@@ -525,9 +543,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @return array|string|boolean array, single value, or <b>FALSE</b> if declared value not set yet
      * @see getService
      */
-    public function getDeclaredValue($only = false){
-        if (isset($this->data['ShippingService']['DeclaredValue'])){
-            if ($only){
+    public function getDeclaredValue($only = false)
+    {
+        if (isset($this->data['ShippingService']['DeclaredValue'])) {
+            if ($only) {
                 return $this->data['ShippingService']['DeclaredValue']['Amount'];
             } else {
                 return $this->data['ShippingService']['DeclaredValue'];
@@ -564,8 +583,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @param boolean $raw [optional] <p>Set to TRUE to get the raw, double-encoded file contents.</p>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if label not set yet
      */
-    public function getLabelData($raw = FALSE){
-        if (isset($this->data['Label'])){
+    public function getLabelData($raw = FALSE)
+    {
+        if (isset($this->data['Label'])) {
             if ($raw) {
                 return $this->data['Label'];
             }
@@ -588,15 +608,16 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * @param boolean $raw [optional] <p>Set to TRUE to get the raw, double-encoded file contents.</p>
      * @return string|boolean single value, or <b>FALSE</b> if status not set yet
      */
-    public function getLabelFileContents($raw = FALSE){
-        if (isset($this->data['Label']['FileContents']['Contents'])){
+    public function getLabelFileContents($raw = FALSE)
+    {
+        if (isset($this->data['Label']['FileContents']['Contents'])) {
             if ($raw) {
                 return $this->data['Label']['FileContents']['Contents'];
             }
             try {
                 return gzdecode(base64_decode($this->data['Label']['FileContents']['Contents']));
             } catch (\Exception $ex) {
-                $this->log('Failed to convert label file, file might be corrupt: '.$ex->getMessage(), 'Urgent');
+                $this->log('Failed to convert label file, file might be corrupt: ' . $ex->getMessage(), 'Urgent');
             }
             return false;
         } else {
@@ -610,8 +631,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the status has not been set yet.
      * @return string|boolean single value, or <b>FALSE</b> if status not set yet
      */
-    public function getStatus(){
-        if (isset($this->data['Status'])){
+    public function getStatus()
+    {
+        if (isset($this->data['Status'])) {
             return $this->data['Status'];
         } else {
             return false;
@@ -624,8 +646,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the tracking ID has not been set yet.
      * @return string|boolean single value, or <b>FALSE</b> if tracking ID not set yet
      */
-    public function getTrackingId(){
-        if (isset($this->data['TrackingId'])){
+    public function getTrackingId()
+    {
+        if (isset($this->data['TrackingId'])) {
             return $this->data['TrackingId'];
         } else {
             return false;
@@ -638,8 +661,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the tracking ID has not been set yet.
      * @return string|boolean timestamp, or <b>FALSE</b> if tracking ID not set yet
      */
-    public function getDateCreated(){
-        if (isset($this->data['CreatedDate'])){
+    public function getDateCreated()
+    {
+        if (isset($this->data['CreatedDate'])) {
             return $this->data['CreatedDate'];
         } else {
             return false;
@@ -652,8 +676,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore {
      * This method will return <b>FALSE</b> if the tracking ID has not been set yet.
      * @return string|boolean timestamp, or <b>FALSE</b> if tracking ID not set yet
      */
-    public function getDateLastUpdated(){
-        if (isset($this->data['LastUpdatedDate'])){
+    public function getDateLastUpdated()
+    {
+        if (isset($this->data['LastUpdatedDate'])) {
             return $this->data['LastUpdatedDate'];
         } else {
             return false;

@@ -4,7 +4,8 @@ namespace gugglegum\AmazonMWS\tests;
 
 use gugglegum\AmazonMWS\AmazonProductFeeEstimate;
 
-class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase {
+class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * @var AmazonProductFeeEstimate
@@ -15,12 +16,14 @@ class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         resetLog();
         $this->object = new AmazonProductFeeEstimate(include(__DIR__ . '/../test-config.php'), true, null);
     }
 
-    public function testSetRequest() {
+    public function testSetRequest()
+    {
         //bad input
         $this->assertFalse($this->object->setRequests(null));
         $this->assertFalse($this->object->setRequests(123));
@@ -60,35 +63,35 @@ class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase {
         //verify options were set correctly
         $o = $this->object->getOptions();
         $pre = 'FeesEstimateRequestList.FeesEstimateRequest.';
-        $this->assertArrayHasKey($pre.'1.MarketplaceId', $o);
-        $this->assertEquals('Marketplace', $o[$pre.'1.MarketplaceId']);
-        $this->assertArrayHasKey($pre.'1.IdType', $o);
-        $this->assertEquals('ASIN', $o[$pre.'1.IdType']);
-        $this->assertArrayHasKey($pre.'1.IdValue', $o);
-        $this->assertEquals('B00123ASIN', $o[$pre.'1.IdValue']);
-        $this->assertArrayHasKey($pre.'1.PriceToEstimateFees.ListingPrice.CurrencyCode', $o);
-        $this->assertEquals('USD', $o[$pre.'1.PriceToEstimateFees.ListingPrice.CurrencyCode']);
-        $this->assertArrayHasKey($pre.'1.PriceToEstimateFees.ListingPrice.Amount', $o);
-        $this->assertEquals('123', $o[$pre.'1.PriceToEstimateFees.ListingPrice.Amount']);
-        $this->assertArrayHasKey($pre.'1.Identifier', $o);
-        $this->assertEquals('TEST123', $o[$pre.'1.Identifier']);
-        $this->assertArrayHasKey($pre.'1.IsAmazonFulfilled', $o);
-        $this->assertEquals('false', $o[$pre.'1.IsAmazonFulfilled']);
-        $this->assertArrayHasKey($pre.'2.MarketplaceId', $o);
-        $this->assertEquals('Mark II', $o[$pre.'2.MarketplaceId']);
-        $this->assertArrayHasKey($pre.'2.PriceToEstimateFees.Shipping.CurrencyCode', $o);
-        $this->assertEquals('USD', $o[$pre.'2.PriceToEstimateFees.Shipping.CurrencyCode']);
-        $this->assertArrayHasKey($pre.'2.PriceToEstimateFees.Shipping.Amount', $o);
-        $this->assertEquals('1.23', $o[$pre.'2.PriceToEstimateFees.Shipping.Amount']);
-        $this->assertArrayHasKey($pre.'2.PriceToEstimateFees.Points.PointsNumber', $o);
-        $this->assertEquals('3', $o[$pre.'2.PriceToEstimateFees.Points.PointsNumber']);
+        $this->assertArrayHasKey($pre . '1.MarketplaceId', $o);
+        $this->assertEquals('Marketplace', $o[$pre . '1.MarketplaceId']);
+        $this->assertArrayHasKey($pre . '1.IdType', $o);
+        $this->assertEquals('ASIN', $o[$pre . '1.IdType']);
+        $this->assertArrayHasKey($pre . '1.IdValue', $o);
+        $this->assertEquals('B00123ASIN', $o[$pre . '1.IdValue']);
+        $this->assertArrayHasKey($pre . '1.PriceToEstimateFees.ListingPrice.CurrencyCode', $o);
+        $this->assertEquals('USD', $o[$pre . '1.PriceToEstimateFees.ListingPrice.CurrencyCode']);
+        $this->assertArrayHasKey($pre . '1.PriceToEstimateFees.ListingPrice.Amount', $o);
+        $this->assertEquals('123', $o[$pre . '1.PriceToEstimateFees.ListingPrice.Amount']);
+        $this->assertArrayHasKey($pre . '1.Identifier', $o);
+        $this->assertEquals('TEST123', $o[$pre . '1.Identifier']);
+        $this->assertArrayHasKey($pre . '1.IsAmazonFulfilled', $o);
+        $this->assertEquals('false', $o[$pre . '1.IsAmazonFulfilled']);
+        $this->assertArrayHasKey($pre . '2.MarketplaceId', $o);
+        $this->assertEquals('Mark II', $o[$pre . '2.MarketplaceId']);
+        $this->assertArrayHasKey($pre . '2.PriceToEstimateFees.Shipping.CurrencyCode', $o);
+        $this->assertEquals('USD', $o[$pre . '2.PriceToEstimateFees.Shipping.CurrencyCode']);
+        $this->assertArrayHasKey($pre . '2.PriceToEstimateFees.Shipping.Amount', $o);
+        $this->assertEquals('1.23', $o[$pre . '2.PriceToEstimateFees.Shipping.Amount']);
+        $this->assertArrayHasKey($pre . '2.PriceToEstimateFees.Points.PointsNumber', $o);
+        $this->assertEquals('3', $o[$pre . '2.PriceToEstimateFees.Points.PointsNumber']);
 
         //setting again should reset
         $this->assertNull($this->object->setRequests(array($op)));
         $o2 = $this->object->getOptions();
-        $this->assertArrayHasKey($pre.'1.MarketplaceId', $o2);
-        $this->assertArrayNotHasKey($pre.'2.MarketplaceId', $o2);
-        $this->assertArrayNotHasKey($pre.'3.MarketplaceId', $o2);
+        $this->assertArrayHasKey($pre . '1.MarketplaceId', $o2);
+        $this->assertArrayNotHasKey($pre . '2.MarketplaceId', $o2);
+        $this->assertArrayNotHasKey($pre . '3.MarketplaceId', $o2);
 
         //check logs
         $check = parseLog();
@@ -116,7 +119,8 @@ class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase {
      * @depends testSetRequest
      * @param AmazonProductFeeEstimate $o
      */
-    public function testFetchEstimates($o) {
+    public function testFetchEstimates($o)
+    {
         resetLog();
         $this->object->setMock(true, 'fetchEstimates.xml');
         $this->assertFalse($this->object->getEstimates()); //no data yet
@@ -135,7 +139,8 @@ class AmazonProductFeeEstimateTest extends \PHPUnit_Framework_TestCase {
      * @depends testFetchEstimates
      * @param AmazonProductFeeEstimate $o
      */
-    public function testGetEstimates($o) {
+    public function testGetEstimates($o)
+    {
         $get = $o->getEstimates();
         $this->assertInternalType('array', $get);
         $x = array();

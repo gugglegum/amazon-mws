@@ -28,7 +28,8 @@ namespace gugglegum\AmazonMWS;
  * configured marketplace is used by default.
  * This class can be iterated over, but only when the category parameter is set.
  */
-class AmazonRecommendationList extends AmazonRecommendationCore implements \Iterator {
+class AmazonRecommendationList extends AmazonRecommendationCore implements \Iterator
+{
     protected $updated;
     protected $list;
     protected $listkey;
@@ -40,7 +41,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns whether or not a token is available.
      * @return boolean
      */
-    public function hasToken() {
+    public function hasToken()
+    {
         return $this->tokenFlag;
     }
 
@@ -54,7 +56,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setUseToken($b = true) {
+    public function setUseToken($b = true)
+    {
         if (is_bool($b)) {
             $this->tokenUseFlag = $b;
         } else {
@@ -73,7 +76,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * @param string $s <p>Category name</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setCategory($s) {
+    public function setCategory($s)
+    {
         if (is_string($s)) {
             $this->options['RecommendationCategory'] = $s;
         } else {
@@ -96,7 +100,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * @return boolean <b>FALSE</b> if improper input
      * @see setCategory
      */
-    public function setFilter($a) {
+    public function setFilter($a)
+    {
         $this->resetFilters();
         if (is_array($a)) {
             $i = 1;
@@ -105,11 +110,11 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
                     $this->resetFilters();
                     return false;
                 }
-                $prefix = 'CategoryQueryList.CategoryQuery.'.$i;
-                $this->options[$prefix.'.RecommendationCategory'] = $c;
+                $prefix = 'CategoryQueryList.CategoryQuery.' . $i;
+                $this->options[$prefix . '.RecommendationCategory'] = $c;
                 $j = 1;
                 foreach ($r as $k => $x) {
-                    $this->options[$prefix.'.FilterOptions.FilterOption.'.$j] = $k.'='.$x;
+                    $this->options[$prefix . '.FilterOptions.FilterOption.' . $j] = $k . '=' . $x;
                     $j++;
                 }
                 $i++;
@@ -135,9 +140,10 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Use this in case you change your mind and want to remove the filter
      * parameters you previously set.
      */
-    public function resetFilters() {
-        foreach($this->options as $op=>$junk) {
-            if(preg_match("#CategoryQueryList#",$op)) {
+    public function resetFilters()
+    {
+        foreach ($this->options as $op => $junk) {
+            if (preg_match("#CategoryQueryList#", $op)) {
                 unset($this->options[$op]);
             }
         }
@@ -152,7 +158,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Other methods are available for fetching individual times.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function fetchLastUpdateTimes() {
+    public function fetchLastUpdateTimes()
+    {
         if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to fetch recommendation times!", 'Warning');
             return false;
@@ -164,12 +171,12 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
 
         $query = $this->genQuery();
 
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile();
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -187,7 +194,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * the following parameters are removed:
      * category, filters, and token.
      */
-    protected function prepareTimes() {
+    protected function prepareTimes()
+    {
         $this->options['Action'] = 'GetLastUpdatedTimeForRecommendations';
         $this->throttleGroup = 'GetLastUpdatedTimeForRecommendations';
         unset($this->options['NextToken']);
@@ -206,7 +214,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * @param boolean $r [optional] <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function fetchRecommendations($r = true) {
+    public function fetchRecommendations($r = true)
+    {
         if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to fetch recommendations!", 'Warning');
             return false;
@@ -224,7 +233,7 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -251,7 +260,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * operation for using tokens does not use any other parameters, all other
      * parameters will be removed.
      */
-    protected function prepareToken() {
+    protected function prepareToken()
+    {
         $this->throttleGroup = 'ListRecommendations';
         if ($this->tokenFlag && $this->tokenUseFlag) {
             $this->options['Action'] = 'ListRecommendationsByNextToken';
@@ -277,7 +287,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
-    protected function parseXML($xml){
+    protected function parseXML($xml)
+    {
         if (!$xml) {
             return false;
         }
@@ -343,7 +354,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * @param \SimpleXMLElement $xml
      * @return array parsed structure from XML
      */
-    protected function parseRecommendation($xml) {
+    protected function parseRecommendation($xml)
+    {
         $r = array();
         foreach ($xml->children() as $x) {
             if (isset($x->Asin)) {
@@ -376,8 +388,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * This method will return <b>FALSE</b> if the list has not yet been filled.
      * @return array|boolean array of timestamps, or <b>FALSE</b> if list not set yet
      */
-    public function getLastUpdateTimes(){
-        if (isset($this->updated)){
+    public function getLastUpdateTimes()
+    {
+        if (isset($this->updated)) {
             return $this->updated;
         } else {
             return false;
@@ -390,8 +403,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * This method will return <b>FALSE</b> if the list has not yet been filled.
      * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
      */
-    public function getInventoryLastUpdateTime(){
-        if (isset($this->updated['Inventory'])){
+    public function getInventoryLastUpdateTime()
+    {
+        if (isset($this->updated['Inventory'])) {
             return $this->updated['Inventory'];
         } else {
             return false;
@@ -404,8 +418,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * This method will return <b>FALSE</b> if the list has not yet been filled.
      * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
      */
-    public function getSelectionLastUpdateTime(){
-        if (isset($this->updated['Selection'])){
+    public function getSelectionLastUpdateTime()
+    {
+        if (isset($this->updated['Selection'])) {
             return $this->updated['Selection'];
         } else {
             return false;
@@ -418,8 +433,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * This method will return <b>FALSE</b> if the list has not yet been filled.
      * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
      */
-    public function getPricingLastUpdateTime(){
-        if (isset($this->updated['Pricing'])){
+    public function getPricingLastUpdateTime()
+    {
+        if (isset($this->updated['Pricing'])) {
             return $this->updated['Pricing'];
         } else {
             return false;
@@ -432,8 +448,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * This method will return <b>FALSE</b> if the list has not yet been filled.
      * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
      */
-    public function getFulfillmentLastUpdateTime(){
-        if (isset($this->updated['Fulfillment'])){
+    public function getFulfillmentLastUpdateTime()
+    {
+        if (isset($this->updated['Fulfillment'])) {
             return $this->updated['Fulfillment'];
         } else {
             return false;
@@ -446,8 +463,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * This method will return <b>FALSE</b> if the list has not yet been filled.
      * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
      */
-    public function getGlobalSellingLastUpdateTime(){
-        if (isset($this->updated['GlobalSelling'])){
+    public function getGlobalSellingLastUpdateTime()
+    {
+        if (isset($this->updated['GlobalSelling'])) {
             return $this->updated['GlobalSelling'];
         } else {
             return false;
@@ -460,8 +478,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * This method will return <b>FALSE</b> if the list has not yet been filled.
      * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
      */
-    public function getAdvertisingLastUpdateTime(){
-        if (isset($this->updated['Advertising'])){
+    public function getAdvertisingLastUpdateTime()
+    {
+        if (isset($this->updated['Advertising'])) {
             return $this->updated['Advertising'];
         } else {
             return false;
@@ -476,8 +495,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      * @see setCategory
      */
-    public function getLists(){
-        if (isset($this->list)){
+    public function getLists()
+    {
+        if (isset($this->list)) {
             return $this->list;
         } else {
             return false;
@@ -511,8 +531,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getInventoryList(){
-        if (isset($this->list['Inventory'])){
+    public function getInventoryList()
+    {
+        if (isset($this->list['Inventory'])) {
             return $this->list['Inventory'];
         } else {
             return false;
@@ -548,8 +569,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getSelectionList(){
-        if (isset($this->list['Selection'])){
+    public function getSelectionList()
+    {
+        if (isset($this->list['Selection'])) {
             return $this->list['Selection'];
         } else {
             return false;
@@ -590,8 +612,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getPricingList(){
-        if (isset($this->list['Pricing'])){
+    public function getPricingList()
+    {
+        if (isset($this->list['Pricing'])) {
             return $this->list['Pricing'];
         } else {
             return false;
@@ -639,8 +662,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getFulfillmentList(){
-        if (isset($this->list['Fulfillment'])){
+    public function getFulfillmentList()
+    {
+        if (isset($this->list['Fulfillment'])) {
             return $this->list['Fulfillment'];
         } else {
             return false;
@@ -667,8 +691,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getListingList(){
-        if (isset($this->list['ListingQuality'])){
+    public function getListingList()
+    {
+        if (isset($this->list['ListingQuality'])) {
             return $this->list['ListingQuality'];
         } else {
             return false;
@@ -716,8 +741,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getGlobalSellingList(){
-        if (isset($this->list['GlobalSelling'])){
+    public function getGlobalSellingList()
+    {
+        if (isset($this->list['GlobalSelling'])) {
             return $this->list['GlobalSelling'];
         } else {
             return false;
@@ -753,8 +779,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * </ul>
      * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
      */
-    public function getAdvertisingList(){
-        if (isset($this->list['Advertising'])){
+    public function getAdvertisingList()
+    {
+        if (isset($this->list['Advertising'])) {
             return $this->list['Advertising'];
         } else {
             return false;
@@ -765,14 +792,16 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Iterator function
      * @return array
      */
-    public function current(){
+    public function current()
+    {
         return $this->list[$this->listkey][$this->i];
     }
 
     /**
      * Iterator function
      */
-    public function rewind(){
+    public function rewind()
+    {
         $this->i = 0;
     }
 
@@ -780,14 +809,16 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Iterator function
      * @return int
      */
-    public function key(){
+    public function key()
+    {
         return $this->i;
     }
 
     /**
      * Iterator function
      */
-    public function next(){
+    public function next()
+    {
         $this->i++;
     }
 
@@ -795,7 +826,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Iterator function
      * @return boolean
      */
-    public function valid(){
+    public function valid()
+    {
         return isset($this->list[$this->listkey][$this->i]);
     }
 

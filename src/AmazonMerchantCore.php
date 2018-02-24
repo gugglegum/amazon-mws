@@ -24,7 +24,8 @@ namespace gugglegum\AmazonMWS;
  * This is the core class for all objects in the Amazon Merchant Fulfillment section.
  * It contains no methods in itself other than the constructor.
  */
-abstract class AmazonMerchantCore extends AmazonCore{
+abstract class AmazonMerchantCore extends AmazonCore
+{
     /**
      * AmazonMerchantCore constructor sets up key information used in all Amazon Merchant Core requests
      *
@@ -37,19 +38,20 @@ abstract class AmazonMerchantCore extends AmazonCore{
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
      */
-    public function __construct(array $config, $mock = false, $m = null){
+    public function __construct(array $config, $mock = false, $m = null)
+    {
         parent::__construct($config, $mock, $m);
         include($this->env);
 
-        if(isset($AMAZON_VERSION_MERCHANT)){
-            $this->urlbranch = 'MerchantFulfillment/'.$AMAZON_VERSION_MERCHANT;
+        if (isset($AMAZON_VERSION_MERCHANT)) {
+            $this->urlbranch = 'MerchantFulfillment/' . $AMAZON_VERSION_MERCHANT;
             $this->options['Version'] = $AMAZON_VERSION_MERCHANT;
         }
 
-        if(isset($THROTTLE_LIMIT_MERCHANT)) {
+        if (isset($THROTTLE_LIMIT_MERCHANT)) {
             $this->throttleLimit = $THROTTLE_LIMIT_MERCHANT;
         }
-        if(isset($THROTTLE_TIME_MERCHANT)) {
+        if (isset($THROTTLE_TIME_MERCHANT)) {
             $this->throttleTime = $THROTTLE_TIME_MERCHANT;
         }
         $this->throttleGroup = 'MerchantFulfillment';

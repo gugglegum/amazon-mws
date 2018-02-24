@@ -25,7 +25,8 @@ namespace gugglegum\AmazonMWS;
  * This is the core class for all objects in the Amazon Recommendations section.
  * It contains a method that all Amazon Recommendations Core objects use.
  */
-abstract class AmazonRecommendationCore extends AmazonCore{
+abstract class AmazonRecommendationCore extends AmazonCore
+{
 
     /**
      * AmazonRecommendationCore constructor sets up key information used in all Amazon Recommendations Core requests
@@ -39,23 +40,24 @@ abstract class AmazonRecommendationCore extends AmazonCore{
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
      */
-    public function __construct(array $config, $mock = false, $m = null){
+    public function __construct(array $config, $mock = false, $m = null)
+    {
         parent::__construct($config, $mock, $m);
         include($this->env);
 
-        if (isset($AMAZON_VERSION_RECOMMEND)){
+        if (isset($AMAZON_VERSION_RECOMMEND)) {
             $this->urlbranch = 'Recommendations/' . $AMAZON_VERSION_RECOMMEND;
             $this->options['Version'] = $AMAZON_VERSION_RECOMMEND;
         }
 
-        if(isset($THROTTLE_LIMIT_RECOMMEND)) {
+        if (isset($THROTTLE_LIMIT_RECOMMEND)) {
             $this->throttleLimit = $THROTTLE_LIMIT_RECOMMEND;
         }
-        if(isset($THROTTLE_TIME_RECOMMEND)) {
+        if (isset($THROTTLE_TIME_RECOMMEND)) {
             $this->throttleTime = $THROTTLE_TIME_RECOMMEND;
         }
 
-        if (isset($this->config['store']['marketplaceId'])){
+        if (isset($this->config['store']['marketplaceId'])) {
             $this->setMarketplace($this->config['store']['marketplaceId']);
         } else {
             $this->log("Marketplace ID is missing", 'Urgent');
@@ -69,8 +71,9 @@ abstract class AmazonRecommendationCore extends AmazonCore{
      * @param string $m <p>Marketplace ID</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setMarketplace($m){
-        if (is_string($m)){
+    public function setMarketplace($m)
+    {
+        if (is_string($m)) {
             $this->options['MarketplaceId'] = $m;
         } else {
             return false;
@@ -78,4 +81,3 @@ abstract class AmazonRecommendationCore extends AmazonCore{
     }
 
 }
-

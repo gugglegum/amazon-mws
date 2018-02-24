@@ -4,7 +4,8 @@ namespace gugglegum\AmazonMWS\tests;
 
 use gugglegum\AmazonMWS\AmazonSubscriptionList;
 
-class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
+class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * @var AmazonSubscriptionList
@@ -15,12 +16,14 @@ class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         resetLog();
         $this->object = new AmazonSubscriptionList(include(__DIR__ . '/../test-config.php'), true, null);
     }
 
-    public function testFetchSubscriptions() {
+    public function testFetchSubscriptions()
+    {
         resetLog();
         $this->object->setMock(true, 'fetchSubscriptionList.xml');
         $this->assertNull($this->object->fetchSubscriptions());
@@ -28,8 +31,8 @@ class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('ListSubscriptions', $o['Action']);
 
         $check = parseLog();
-        $this->assertEquals('Single Mock File set: fetchSubscriptionList.xml',$check[1]);
-        $this->assertEquals('Fetched Mock File: mock/fetchSubscriptionList.xml',$check[2]);
+        $this->assertEquals('Single Mock File set: fetchSubscriptionList.xml', $check[1]);
+        $this->assertEquals('Fetched Mock File: mock/fetchSubscriptionList.xml', $check[2]);
 
         return $this->object;
     }
@@ -38,7 +41,8 @@ class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonSubscriptionList $o
      * @depends testFetchSubscriptions
      */
-    public function testGetList($o) {
+    public function testGetList($o)
+    {
         $list = $o->getList();
         $this->assertInternalType('array', $list);
         $this->assertCount(2, $list);
@@ -52,7 +56,8 @@ class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonSubscriptionList $o
      * @depends testFetchSubscriptions
      */
-    public function testGetNotificationType($o) {
+    public function testGetNotificationType($o)
+    {
         $this->assertEquals('AnyOfferChanged', $o->getNotificationType(0));
         $this->assertEquals('FulfillmentOrderStatus', $o->getNotificationType(1));
         $this->assertEquals($o->getNotificationType(0), $o->getNotificationType());
@@ -67,7 +72,8 @@ class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonSubscriptionList $o
      * @depends testFetchSubscriptions
      */
-    public function testGetIsEnabled($o) {
+    public function testGetIsEnabled($o)
+    {
         $this->assertEquals('true', $o->getIsEnabled(0));
         $this->assertEquals('false', $o->getIsEnabled(1));
         $this->assertEquals($o->getIsEnabled(0), $o->getIsEnabled());
@@ -82,7 +88,8 @@ class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonSubscriptionList $o
      * @depends testFetchSubscriptions
      */
-    public function testGetDeliveryChannel($o) {
+    public function testGetDeliveryChannel($o)
+    {
         $this->assertEquals('SQS', $o->getDeliveryChannel(0));
         $this->assertEquals('SQS2', $o->getDeliveryChannel(1));
         $this->assertEquals($o->getDeliveryChannel(0), $o->getDeliveryChannel());
@@ -97,7 +104,8 @@ class AmazonSubscriptionListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonSubscriptionList $o
      * @depends testFetchSubscriptions
      */
-    public function testGetAttributes($o) {
+    public function testGetAttributes($o)
+    {
         $data1 = array(
             'sqsQueueUrl' => 'https://sqs.us-east-1.amazonaws.com/51471EXAMPLE/mws_notifications',
         );

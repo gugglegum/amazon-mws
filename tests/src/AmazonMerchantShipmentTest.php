@@ -5,7 +5,8 @@ namespace gugglegum\AmazonMWS\tests;
 use gugglegum\AmazonMWS\AmazonMerchantShipment;
 use gugglegum\AmazonMWS\AmazonMerchantShipmentCreator;
 
-class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
+class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * @var AmazonMerchantShipmentCreator
@@ -16,12 +17,14 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         resetLog();
         $this->object = new AmazonMerchantShipmentCreator(include(__DIR__ . '/../test-config.php'), true, null);
     }
 
-    public function testSetOrderId(){
+    public function testSetOrderId()
+    {
         $key = 'ShipmentRequestDetails.AmazonOrderId';
         $this->assertNull($this->object->setOrderId('777'));
         $o = $this->object->getOptions();
@@ -33,12 +36,13 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setOrderId(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set AmazonOrderId to invalid value',$check[1]);
-        $this->assertEquals('Tried to set AmazonOrderId to invalid value',$check[2]);
-        $this->assertEquals('Tried to set AmazonOrderId to invalid value',$check[3]);
+        $this->assertEquals('Tried to set AmazonOrderId to invalid value', $check[1]);
+        $this->assertEquals('Tried to set AmazonOrderId to invalid value', $check[2]);
+        $this->assertEquals('Tried to set AmazonOrderId to invalid value', $check[3]);
     }
 
-    public function testSetSellerOrderId(){
+    public function testSetSellerOrderId()
+    {
         $key = 'ShipmentRequestDetails.SellerOrderId';
         $this->assertNull($this->object->setSellerOrderId('777'));
         $o = $this->object->getOptions();
@@ -53,11 +57,12 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setSellerOrderId(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set SellerOrderId to invalid value',$check[1]);
-        $this->assertEquals('Tried to set SellerOrderId to invalid value',$check[2]);
+        $this->assertEquals('Tried to set SellerOrderId to invalid value', $check[1]);
+        $this->assertEquals('Tried to set SellerOrderId to invalid value', $check[2]);
     }
 
-    public function testSetItems(){
+    public function testSetItems()
+    {
         $key = 'ShipmentRequestDetails.ItemList.Item.';
         $items = array(
             array('OrderItemId' => '123987', 'Quantity' => 2),
@@ -65,37 +70,38 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         );
         $this->assertNull($this->object->setItems($items));
         $o = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'1.OrderItemId', $o);
-        $this->assertArrayHasKey($key.'1.Quantity', $o);
-        $this->assertArrayHasKey($key.'2.OrderItemId', $o);
-        $this->assertArrayHasKey($key.'2.Quantity', $o);
-        $this->assertEquals($items[0]['OrderItemId'], $o[$key.'1.OrderItemId']);
-        $this->assertEquals($items[0]['Quantity'], $o[$key.'1.Quantity']);
-        $this->assertEquals($items[1]['OrderItemId'], $o[$key.'2.OrderItemId']);
-        $this->assertEquals($items[1]['Quantity'], $o[$key.'2.Quantity']);
+        $this->assertArrayHasKey($key . '1.OrderItemId', $o);
+        $this->assertArrayHasKey($key . '1.Quantity', $o);
+        $this->assertArrayHasKey($key . '2.OrderItemId', $o);
+        $this->assertArrayHasKey($key . '2.Quantity', $o);
+        $this->assertEquals($items[0]['OrderItemId'], $o[$key . '1.OrderItemId']);
+        $this->assertEquals($items[0]['Quantity'], $o[$key . '1.Quantity']);
+        $this->assertEquals($items[1]['OrderItemId'], $o[$key . '2.OrderItemId']);
+        $this->assertEquals($items[1]['Quantity'], $o[$key . '2.Quantity']);
 
         //remove one item and do it again
         unset($items[0]);
         $this->assertNull($this->object->setItems($items));
         $o2 = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'1.OrderItemId', $o2);
-        $this->assertArrayHasKey($key.'1.Quantity', $o2);
-        $this->assertArrayNotHasKey($key.'2.OrderItemId', $o2);
-        $this->assertArrayNotHasKey($key.'2.Quantity', $o2);
-        $this->assertEquals($items[1]['OrderItemId'], $o2[$key.'1.OrderItemId']);
-        $this->assertEquals($items[1]['Quantity'], $o2[$key.'1.Quantity']);
+        $this->assertArrayHasKey($key . '1.OrderItemId', $o2);
+        $this->assertArrayHasKey($key . '1.Quantity', $o2);
+        $this->assertArrayNotHasKey($key . '2.OrderItemId', $o2);
+        $this->assertArrayNotHasKey($key . '2.Quantity', $o2);
+        $this->assertEquals($items[1]['OrderItemId'], $o2[$key . '1.OrderItemId']);
+        $this->assertEquals($items[1]['Quantity'], $o2[$key . '1.Quantity']);
 
         $this->assertFalse($this->object->setItems(array())); //won't work for this
         $this->assertFalse($this->object->setItems('something')); //won't work for other things
         $this->assertFalse($this->object->setItems(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set Items to invalid values',$check[1]);
-        $this->assertEquals('Tried to set Items to invalid values',$check[2]);
-        $this->assertEquals('Tried to set Items to invalid values',$check[3]);
+        $this->assertEquals('Tried to set Items to invalid values', $check[1]);
+        $this->assertEquals('Tried to set Items to invalid values', $check[2]);
+        $this->assertEquals('Tried to set Items to invalid values', $check[3]);
     }
 
-    public function testSetAddress(){
+    public function testSetAddress()
+    {
         $key = 'ShipmentRequestDetails.ShipFromAddress.';
         $address = $this->genAddress();
         $address['AddressLine2'] = 'line 2';
@@ -103,104 +109,108 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $address['DistrictOrCounty'] = 'North';
         $this->assertNull($this->object->setAddress($address));
         $o = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'Name', $o);
-        $this->assertArrayHasKey($key.'AddressLine1', $o);
-        $this->assertArrayHasKey($key.'AddressLine2', $o);
-        $this->assertArrayHasKey($key.'AddressLine3', $o);
-        $this->assertArrayHasKey($key.'DistrictOrCounty', $o);
-        $this->assertArrayHasKey($key.'Email', $o);
-        $this->assertArrayHasKey($key.'City', $o);
-        $this->assertArrayHasKey($key.'StateOrProvinceCode', $o);
-        $this->assertArrayHasKey($key.'PostalCode', $o);
-        $this->assertArrayHasKey($key.'CountryCode', $o);
-        $this->assertArrayHasKey($key.'Phone', $o);
-        $this->assertEquals($address['Name'], $o[$key.'Name']);
-        $this->assertEquals($address['AddressLine1'], $o[$key.'AddressLine1']);
-        $this->assertEquals($address['AddressLine2'], $o[$key.'AddressLine2']);
-        $this->assertEquals($address['AddressLine3'], $o[$key.'AddressLine3']);
-        $this->assertEquals($address['DistrictOrCounty'], $o[$key.'DistrictOrCounty']);
-        $this->assertEquals($address['Email'], $o[$key.'Email']);
-        $this->assertEquals($address['City'], $o[$key.'City']);
-        $this->assertEquals($address['StateOrProvinceCode'], $o[$key.'StateOrProvinceCode']);
-        $this->assertEquals($address['PostalCode'], $o[$key.'PostalCode']);
-        $this->assertEquals($address['CountryCode'], $o[$key.'CountryCode']);
-        $this->assertEquals($address['Phone'], $o[$key.'Phone']);
+        $this->assertArrayHasKey($key . 'Name', $o);
+        $this->assertArrayHasKey($key . 'AddressLine1', $o);
+        $this->assertArrayHasKey($key . 'AddressLine2', $o);
+        $this->assertArrayHasKey($key . 'AddressLine3', $o);
+        $this->assertArrayHasKey($key . 'DistrictOrCounty', $o);
+        $this->assertArrayHasKey($key . 'Email', $o);
+        $this->assertArrayHasKey($key . 'City', $o);
+        $this->assertArrayHasKey($key . 'StateOrProvinceCode', $o);
+        $this->assertArrayHasKey($key . 'PostalCode', $o);
+        $this->assertArrayHasKey($key . 'CountryCode', $o);
+        $this->assertArrayHasKey($key . 'Phone', $o);
+        $this->assertEquals($address['Name'], $o[$key . 'Name']);
+        $this->assertEquals($address['AddressLine1'], $o[$key . 'AddressLine1']);
+        $this->assertEquals($address['AddressLine2'], $o[$key . 'AddressLine2']);
+        $this->assertEquals($address['AddressLine3'], $o[$key . 'AddressLine3']);
+        $this->assertEquals($address['DistrictOrCounty'], $o[$key . 'DistrictOrCounty']);
+        $this->assertEquals($address['Email'], $o[$key . 'Email']);
+        $this->assertEquals($address['City'], $o[$key . 'City']);
+        $this->assertEquals($address['StateOrProvinceCode'], $o[$key . 'StateOrProvinceCode']);
+        $this->assertEquals($address['PostalCode'], $o[$key . 'PostalCode']);
+        $this->assertEquals($address['CountryCode'], $o[$key . 'CountryCode']);
+        $this->assertEquals($address['Phone'], $o[$key . 'Phone']);
 
         $this->assertFalse($this->object->setAddress(array())); //won't work for this
         $this->assertFalse($this->object->setAddress('something')); //won't work for other things
         $this->assertFalse($this->object->setAddress(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set ShipFromAddress to invalid values',$check[1]);
-        $this->assertEquals('Tried to set ShipFromAddress to invalid values',$check[2]);
-        $this->assertEquals('Tried to set ShipFromAddress to invalid values',$check[3]);
+        $this->assertEquals('Tried to set ShipFromAddress to invalid values', $check[1]);
+        $this->assertEquals('Tried to set ShipFromAddress to invalid values', $check[2]);
+        $this->assertEquals('Tried to set ShipFromAddress to invalid values', $check[3]);
     }
 
-    public function testSetPackageDimensions(){
+    public function testSetPackageDimensions()
+    {
         $key = 'ShipmentRequestDetails.PackageDimensions.';
         $dims = array('Length' => 5, 'Width' => 5, 'Height' => 5, 'Unit' => 'inches');
         $this->assertNull($this->object->setPredefinedPackage('something'));
         $this->assertNull($this->object->setPackageDimensions($dims));
         $o = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'Length', $o);
-        $this->assertArrayHasKey($key.'Width', $o);
-        $this->assertArrayHasKey($key.'Height', $o);
-        $this->assertArrayHasKey($key.'Unit', $o);
-        $this->assertArrayNotHasKey($key.'PredefinedPackageDimensions', $o);
-        $this->assertEquals($dims['Length'], $o[$key.'Length']);
-        $this->assertEquals($dims['Width'], $o[$key.'Width']);
-        $this->assertEquals($dims['Height'], $o[$key.'Height']);
-        $this->assertEquals($dims['Unit'], $o[$key.'Unit']);
+        $this->assertArrayHasKey($key . 'Length', $o);
+        $this->assertArrayHasKey($key . 'Width', $o);
+        $this->assertArrayHasKey($key . 'Height', $o);
+        $this->assertArrayHasKey($key . 'Unit', $o);
+        $this->assertArrayNotHasKey($key . 'PredefinedPackageDimensions', $o);
+        $this->assertEquals($dims['Length'], $o[$key . 'Length']);
+        $this->assertEquals($dims['Width'], $o[$key . 'Width']);
+        $this->assertEquals($dims['Height'], $o[$key . 'Height']);
+        $this->assertEquals($dims['Unit'], $o[$key . 'Unit']);
 
         $this->assertFalse($this->object->setPackageDimensions(array())); //won't work for this
         $this->assertFalse($this->object->setPackageDimensions('something')); //won't work for other things
         $this->assertFalse($this->object->setPackageDimensions(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set PackageDimensions to invalid values',$check[1]);
-        $this->assertEquals('Tried to set PackageDimensions to invalid values',$check[2]);
-        $this->assertEquals('Tried to set PackageDimensions to invalid values',$check[3]);
+        $this->assertEquals('Tried to set PackageDimensions to invalid values', $check[1]);
+        $this->assertEquals('Tried to set PackageDimensions to invalid values', $check[2]);
+        $this->assertEquals('Tried to set PackageDimensions to invalid values', $check[3]);
     }
 
-    public function testSetPredefinedPackage(){
+    public function testSetPredefinedPackage()
+    {
         $key = 'ShipmentRequestDetails.PackageDimensions.';
         $dims = array('Length' => 5, 'Width' => 5, 'Height' => 5, 'Unit' => 'inches');
         $this->assertNull($this->object->setPackageDimensions($dims));
         $this->assertNull($this->object->setPredefinedPackage('something'));
         $o = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'PredefinedPackageDimensions', $o);
-        $this->assertArrayNotHasKey($key.'Length', $o);
-        $this->assertArrayNotHasKey($key.'Width', $o);
-        $this->assertArrayNotHasKey($key.'Height', $o);
-        $this->assertArrayNotHasKey($key.'Unit', $o);
-        $this->assertEquals('something', $o[$key.'PredefinedPackageDimensions']);
+        $this->assertArrayHasKey($key . 'PredefinedPackageDimensions', $o);
+        $this->assertArrayNotHasKey($key . 'Length', $o);
+        $this->assertArrayNotHasKey($key . 'Width', $o);
+        $this->assertArrayNotHasKey($key . 'Height', $o);
+        $this->assertArrayNotHasKey($key . 'Unit', $o);
+        $this->assertEquals('something', $o[$key . 'PredefinedPackageDimensions']);
 
         $this->assertFalse($this->object->setPredefinedPackage(77)); //won't work for this
         $this->assertFalse($this->object->setPredefinedPackage(array())); //won't work for other things
         $this->assertFalse($this->object->setPredefinedPackage(null)); //won't work for other things
     }
 
-    public function testSetWeight() {
+    public function testSetWeight()
+    {
         $key = 'ShipmentRequestDetails.Weight.';
         $this->assertNull($this->object->setWeight('777'));
         $o = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'Value', $o);
-        $this->assertArrayHasKey($key.'Unit', $o);
-        $this->assertEquals('777', $o[$key.'Value']);
-        $this->assertEquals('g', $o[$key.'Unit']);
+        $this->assertArrayHasKey($key . 'Value', $o);
+        $this->assertArrayHasKey($key . 'Unit', $o);
+        $this->assertEquals('777', $o[$key . 'Value']);
+        $this->assertEquals('g', $o[$key . 'Unit']);
         $this->assertNull($this->object->setWeight(77, 'oz'));
         $o2 = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'Value', $o2);
-        $this->assertArrayHasKey($key.'Unit', $o2);
-        $this->assertEquals(77, $o2[$key.'Value']);
-        $this->assertEquals('oz', $o2[$key.'Unit']);
+        $this->assertArrayHasKey($key . 'Value', $o2);
+        $this->assertArrayHasKey($key . 'Unit', $o2);
+        $this->assertEquals(77, $o2[$key . 'Value']);
+        $this->assertEquals('oz', $o2[$key . 'Unit']);
 
         $this->assertFalse($this->object->setWeight('word')); //won't work for this
         $this->assertFalse($this->object->setWeight(array())); //won't work for other things
         $this->assertFalse($this->object->setWeight(null)); //won't work for other things
     }
 
-    public function testSetMaxArrivalDate(){
+    public function testSetMaxArrivalDate()
+    {
         $key = 'ShipmentRequestDetails.MustArriveByDate';
         $this->assertNull($this->object->setMaxArrivalDate('+50 min'));
         $o = $this->object->getOptions();
@@ -210,10 +220,11 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setMaxArrivalDate(array(5))); //won't work for this
 
         $check = parseLog();
-        $this->assertEquals('Error: Invalid time input given',$check[1]);
+        $this->assertEquals('Error: Invalid time input given', $check[1]);
     }
 
-    public function testSetShipDate(){
+    public function testSetShipDate()
+    {
         $key = 'ShipmentRequestDetails.ShipDate';
         $this->assertNull($this->object->setShipDate('+50 min'));
         $o = $this->object->getOptions();
@@ -223,10 +234,11 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setShipDate(array(5))); //won't work for this
 
         $check = parseLog();
-        $this->assertEquals('Error: Invalid time input given',$check[1]);
+        $this->assertEquals('Error: Invalid time input given', $check[1]);
     }
 
-    public function testSetDeliveryOption(){
+    public function testSetDeliveryOption()
+    {
         $key = 'ShipmentRequestDetails.ShippingServiceOptions.DeliveryExperience';
         $this->assertNull($this->object->setDeliveryOption('NoTracking'));
         $o = $this->object->getOptions();
@@ -238,19 +250,20 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setDeliveryOption(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set DeliveryExperience to invalid value',$check[1]);
-        $this->assertEquals('Tried to set DeliveryExperience to invalid value',$check[2]);
-        $this->assertEquals('Tried to set DeliveryExperience to invalid value',$check[3]);
+        $this->assertEquals('Tried to set DeliveryExperience to invalid value', $check[1]);
+        $this->assertEquals('Tried to set DeliveryExperience to invalid value', $check[2]);
+        $this->assertEquals('Tried to set DeliveryExperience to invalid value', $check[3]);
     }
 
-    public function testSetDeclaredValue() {
+    public function testSetDeclaredValue()
+    {
         $key = 'ShipmentRequestDetails.ShippingServiceOptions.DeclaredValue.';
         $this->assertNull($this->object->setDeclaredValue('777', 'USD'));
         $o = $this->object->getOptions();
-        $this->assertArrayHasKey($key.'Amount', $o);
-        $this->assertArrayHasKey($key.'CurrencyCode', $o);
-        $this->assertEquals('777', $o[$key.'Amount']);
-        $this->assertEquals('USD', $o[$key.'CurrencyCode']);
+        $this->assertArrayHasKey($key . 'Amount', $o);
+        $this->assertArrayHasKey($key . 'CurrencyCode', $o);
+        $this->assertEquals('777', $o[$key . 'Amount']);
+        $this->assertEquals('USD', $o[$key . 'CurrencyCode']);
 
         $this->assertFalse($this->object->setDeclaredValue('word', 'USD')); //won't work for this
         $this->assertFalse($this->object->setDeclaredValue('777', '77')); //won't work for this
@@ -260,7 +273,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setDeclaredValue(NULL, 'USD')); //won't work for this
     }
 
-    public function testSetCarrierWillPickUp() {
+    public function testSetCarrierWillPickUp()
+    {
         $key = 'ShipmentRequestDetails.ShippingServiceOptions.CarrierWillPickUp';
         $this->assertNull($this->object->setCarrierWillPickUp());
         $o = $this->object->getOptions();
@@ -280,7 +294,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('false', $o4[$key]);
     }
 
-    public function testSetLabelFormat() {
+    public function testSetLabelFormat()
+    {
         $key = 'ShipmentRequestDetails.ShippingServiceOptions.LabelFormat';
         $this->assertNull($this->object->setLabelFormat('PNG'));
         $o = $this->object->getOptions();
@@ -292,12 +307,13 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setLabelFormat(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set LabelFormat to invalid value',$check[1]);
-        $this->assertEquals('Tried to set LabelFormat to invalid value',$check[2]);
-        $this->assertEquals('Tried to set LabelFormat to invalid value',$check[3]);
+        $this->assertEquals('Tried to set LabelFormat to invalid value', $check[1]);
+        $this->assertEquals('Tried to set LabelFormat to invalid value', $check[2]);
+        $this->assertEquals('Tried to set LabelFormat to invalid value', $check[3]);
     }
 
-    public function testSetCustomText() {
+    public function testSetCustomText()
+    {
         $key = 'ShipmentRequestDetails.LabelCustomization.CustomTextForLabel';
         $this->assertNull($this->object->setCustomText('Very Neat'));
         $o = $this->object->getOptions();
@@ -309,12 +325,13 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setCustomText(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set CustomTextForLabel to invalid value',$check[1]);
-        $this->assertEquals('Tried to set CustomTextForLabel to invalid value',$check[2]);
-        $this->assertEquals('Tried to set CustomTextForLabel to invalid value',$check[3]);
+        $this->assertEquals('Tried to set CustomTextForLabel to invalid value', $check[1]);
+        $this->assertEquals('Tried to set CustomTextForLabel to invalid value', $check[2]);
+        $this->assertEquals('Tried to set CustomTextForLabel to invalid value', $check[3]);
     }
 
-    public function testSetLabelId() {
+    public function testSetLabelId()
+    {
         $key = 'ShipmentRequestDetails.LabelCustomization.StandardIdForLabel';
         $this->assertNull($this->object->setLabelId('AmazonOrderId'));
         $o = $this->object->getOptions();
@@ -326,12 +343,13 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setLabelId(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set StandardIdForLabel to invalid value',$check[1]);
-        $this->assertEquals('Tried to set StandardIdForLabel to invalid value',$check[2]);
-        $this->assertEquals('Tried to set StandardIdForLabel to invalid value',$check[3]);
+        $this->assertEquals('Tried to set StandardIdForLabel to invalid value', $check[1]);
+        $this->assertEquals('Tried to set StandardIdForLabel to invalid value', $check[2]);
+        $this->assertEquals('Tried to set StandardIdForLabel to invalid value', $check[3]);
     }
 
-    public function testSetService() {
+    public function testSetService()
+    {
         $key = 'ShippingServiceId';
         $this->assertNull($this->object->setService('Ground'));
         $o = $this->object->getOptions();
@@ -343,12 +361,13 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setService(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set ShippingServiceId to invalid value',$check[1]);
-        $this->assertEquals('Tried to set ShippingServiceId to invalid value',$check[2]);
-        $this->assertEquals('Tried to set ShippingServiceId to invalid value',$check[3]);
+        $this->assertEquals('Tried to set ShippingServiceId to invalid value', $check[1]);
+        $this->assertEquals('Tried to set ShippingServiceId to invalid value', $check[2]);
+        $this->assertEquals('Tried to set ShippingServiceId to invalid value', $check[3]);
     }
 
-    public function testSetServiceOffer() {
+    public function testSetServiceOffer()
+    {
         $key = 'ShippingServiceOfferId';
         $this->assertNull($this->object->setServiceOffer('123ABC'));
         $o = $this->object->getOptions();
@@ -360,12 +379,13 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setServiceOffer(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set ShippingServiceOfferId to invalid value',$check[1]);
-        $this->assertEquals('Tried to set ShippingServiceOfferId to invalid value',$check[2]);
-        $this->assertEquals('Tried to set ShippingServiceOfferId to invalid value',$check[3]);
+        $this->assertEquals('Tried to set ShippingServiceOfferId to invalid value', $check[1]);
+        $this->assertEquals('Tried to set ShippingServiceOfferId to invalid value', $check[2]);
+        $this->assertEquals('Tried to set ShippingServiceOfferId to invalid value', $check[3]);
     }
 
-    public function testSetHazmat() {
+    public function testSetHazmat()
+    {
         $key = 'HazmatType';
         $this->assertNull($this->object->setHazmat('LQHazmat'));
         $o = $this->object->getOptions();
@@ -377,14 +397,15 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setHazmat(null)); //won't work for other things
 
         $check = parseLog();
-        $this->assertEquals('Tried to set HazmatType to invalid value',$check[1]);
-        $this->assertEquals('Tried to set HazmatType to invalid value',$check[2]);
-        $this->assertEquals('Tried to set HazmatType to invalid value',$check[3]);
+        $this->assertEquals('Tried to set HazmatType to invalid value', $check[1]);
+        $this->assertEquals('Tried to set HazmatType to invalid value', $check[2]);
+        $this->assertEquals('Tried to set HazmatType to invalid value', $check[3]);
     }
 
-    public function testCreateShipment(){
+    public function testCreateShipment()
+    {
         resetLog();
-        $this->object->setMock(true,'createMerchantShipment.xml');
+        $this->object->setMock(true, 'createMerchantShipment.xml');
         $this->assertFalse($this->object->getShipment()); //no data yet
         $this->assertFalse($this->object->createShipment()); //no order ID yet
         $this->object->setOrderId('903-1713775-3598252');
@@ -421,7 +442,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetShipmentId($o) {
+    public function testGetShipmentId($o)
+    {
         $this->assertEquals('903-1713775-3598252', $o->getAmazonOrderId());
 
         $new = $this->genEmptyShipment();
@@ -432,7 +454,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetItems($o) {
+    public function testGetItems($o)
+    {
         $get = $o->getItems();
         $this->assertInternalType('array', $get);
         $this->assertCount(1, $get);
@@ -450,7 +473,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetShipFromAddress($o) {
+    public function testGetShipFromAddress($o)
+    {
         $get = $o->getShipFromAddress();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -472,7 +496,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetShipToAddress($o) {
+    public function testGetShipToAddress($o)
+    {
         $get = $o->getShipToAddress();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -494,7 +519,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetPackageDimensions($o) {
+    public function testGetPackageDimensions($o)
+    {
         $get = $o->getPackageDimensions();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -512,7 +538,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetWeight($o) {
+    public function testGetWeight($o)
+    {
         $get = $o->getWeight();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -529,7 +556,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetInsurance($o) {
+    public function testGetInsurance($o)
+    {
         $get = $o->getInsurance();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -546,7 +574,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetService($o) {
+    public function testGetService($o)
+    {
         $get = $o->getService();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -575,7 +604,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetServiceRate($o) {
+    public function testGetServiceRate($o)
+    {
         $get = $o->getServiceRate();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -592,7 +622,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetDeclaredValue($o) {
+    public function testGetDeclaredValue($o)
+    {
         $get = $o->getDeclaredValue();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -609,7 +640,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetLabelData($o) {
+    public function testGetLabelData($o)
+    {
         $get = $o->getLabelData();
         $this->assertInternalType('array', $get);
         $x = array();
@@ -645,7 +677,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetStatus($o) {
+    public function testGetStatus($o)
+    {
         $this->assertEquals('Purchased', $o->getStatus());
 
         $new = $this->genEmptyShipment();
@@ -656,7 +689,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetTrackingId($o) {
+    public function testGetTrackingId($o)
+    {
         $this->assertEquals('794657111237', $o->getTrackingId());
 
         $new = $this->genEmptyShipment();
@@ -667,7 +701,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * @depends testCreateShipment
      * @param AmazonMerchantShipment $o
      */
-    public function testGetDateCreated($o) {
+    public function testGetDateCreated($o)
+    {
         $this->assertEquals('2015-09-23T20:11:12.908Z', $o->getDateCreated());
 
         $new = $this->genEmptyShipment();
@@ -678,7 +713,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * Creates a basic adress with the minimum amount of information.
      * @return array
      */
-    private function genAddress() {
+    private function genAddress()
+    {
         return array(
             'Name' => 'Jane Smith',
             'AddressLine1' => '321 Main St',
@@ -695,7 +731,8 @@ class AmazonMerchantShipmentTest extends \PHPUnit_Framework_TestCase {
      * Creates a new AmazonMerchantShipment object
      * @return AmazonMerchantShipment
      */
-    private function genEmptyShipment() {
+    private function genEmptyShipment()
+    {
         return new AmazonMerchantShipment(include(__DIR__ . '/../test-config.php'), null, null, true, null);
     }
 }

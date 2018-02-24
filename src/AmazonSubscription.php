@@ -31,7 +31,8 @@ namespace gugglegum\AmazonMWS;
  * In order to create a subscription, an indicator of whether or not the subscription
  * is enabled is required in addition to a notification type.
  */
-class AmazonSubscription extends AmazonSubscriptionCore {
+class AmazonSubscription extends AmazonSubscriptionCore
+{
     protected $data;
 
     /**
@@ -42,8 +43,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @param string $s <p>Delivery channel</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setDeliveryChannel($s) {
-        if (is_string($s)){
+    public function setDeliveryChannel($s)
+    {
+        if (is_string($s)) {
             $this->options['Destination.DeliveryChannel'] = $s;
             $this->options['Subscription.Destination.DeliveryChannel'] = $s;
         } else {
@@ -60,18 +62,19 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @param array $a <p>Array of key/value pairs</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setAttributes($a) {
-        if (empty($a) || !is_array($a)){
+    public function setAttributes($a)
+    {
+        if (empty($a) || !is_array($a)) {
             $this->log("Tried to set AttributeList to invalid values", 'Warning');
             return false;
         }
         $this->resetAttributes();
         $i = 1;
-        foreach ($a as $k => $v){
-            $this->options['Destination.AttributeList.member.'.$i.'.Key'] = $k;
-            $this->options['Destination.AttributeList.member.'.$i.'.Value'] = $v;
-            $this->options['Subscription.Destination.AttributeList.member.'.$i.'.Key'] = $k;
-            $this->options['Subscription.Destination.AttributeList.member.'.$i.'.Value'] = $v;
+        foreach ($a as $k => $v) {
+            $this->options['Destination.AttributeList.member.' . $i . '.Key'] = $k;
+            $this->options['Destination.AttributeList.member.' . $i . '.Value'] = $v;
+            $this->options['Subscription.Destination.AttributeList.member.' . $i . '.Key'] = $k;
+            $this->options['Subscription.Destination.AttributeList.member.' . $i . '.Value'] = $v;
             $i++;
         }
     }
@@ -82,9 +85,10 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * Since the list of attributes is a required parameter, these options should not be removed
      * without replacing them, so this method is not public.
      */
-    protected function resetAttributes() {
-        foreach($this->options as $op=>$junk){
-            if(preg_match("#Destination.AttributeList#",$op)){
+    protected function resetAttributes()
+    {
+        foreach ($this->options as $op => $junk) {
+            if (preg_match("#Destination.AttributeList#", $op)) {
                 unset($this->options[$op]);
             }
         }
@@ -97,8 +101,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @param string $s <p>See the comment inside for a list of valid values.</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setNotificationType($s) {
-        if (is_string($s)){
+    public function setNotificationType($s)
+    {
+        if (is_string($s)) {
             $this->options['Subscription.NotificationType'] = $s;
             $this->options['NotificationType'] = $s;
         } else {
@@ -117,7 +122,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * This parameter is required for performing any actions with subscriptions.
      * @param boolean $b <p>Defaults to <b>TRUE</b></p>
      */
-    public function setIsEnabled($b = TRUE) {
+    public function setIsEnabled($b = TRUE)
+    {
         if ($b) {
             $this->options['Subscription.IsEnabled'] = 'true';
         } else {
@@ -131,9 +137,10 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * Since these are required parameters, these options should not be removed
      * without replacing them, so this method is not public.
      */
-    protected function resetDestinationParams() {
-        foreach($this->options as $op=>$junk){
-            if(preg_match("#^Destination.#",$op)){
+    protected function resetDestinationParams()
+    {
+        foreach ($this->options as $op => $junk) {
+            if (preg_match("#^Destination.#", $op)) {
                 unset($this->options[$op]);
             }
         }
@@ -145,9 +152,10 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * Since these are required parameters, these options should not be removed
      * without replacing them, so this method is not public.
      */
-    protected function resetSubscriptionParams() {
-        foreach($this->options as $op=>$junk){
-            if(preg_match("#Subscription.#",$op)){
+    protected function resetSubscriptionParams()
+    {
+        foreach ($this->options as $op => $junk) {
+            if (preg_match("#Subscription.#", $op)) {
                 unset($this->options[$op]);
             }
         }
@@ -161,16 +169,17 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * marketplace ID, delivery channel, and attributes.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function registerDestination() {
-        if (!array_key_exists('MarketplaceId', $this->options)){
+    public function registerDestination()
+    {
+        if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to register a subscription destination!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.DeliveryChannel', $this->options)){
+        if (!array_key_exists('Destination.DeliveryChannel', $this->options)) {
             $this->log("Delivery channel must be set in order to register a subscription destination!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)){
+        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)) {
             $this->log("Attributes must be set in order to register a subscription destination!", 'Warning');
             return false;
         }
@@ -182,12 +191,12 @@ class AmazonSubscription extends AmazonSubscriptionCore {
         $query = $this->genQuery();
 
         $path = $this->options['Action'] . 'Result';
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -205,7 +214,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * some of the parameters will be removed. The following parameters are removed:
      * notification type and enabled status.
      */
-    protected function prepareRegister() {
+    protected function prepareRegister()
+    {
         $this->options['Action'] = 'RegisterDestination';
         $this->throttleGroup = 'RegisterDestination';
         $this->resetSubscriptionParams();
@@ -220,16 +230,17 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * marketplace ID, delivery channel, and attributes.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function deregisterDestination() {
-        if (!array_key_exists('MarketplaceId', $this->options)){
+    public function deregisterDestination()
+    {
+        if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to deregister a subscription destination!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.DeliveryChannel', $this->options)){
+        if (!array_key_exists('Destination.DeliveryChannel', $this->options)) {
             $this->log("Delivery channel must be set in order to deregister a subscription destination!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)){
+        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)) {
             $this->log("Attributes must be set in order to deregister a subscription destination!", 'Warning');
             return false;
         }
@@ -241,12 +252,12 @@ class AmazonSubscription extends AmazonSubscriptionCore {
         $query = $this->genQuery();
 
         $path = $this->options['Action'] . 'Result';
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -264,7 +275,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * some of the parameters will be removed. The following parameters are removed:
      * notification type and enabled status.
      */
-    protected function prepareDeregister() {
+    protected function prepareDeregister()
+    {
         $this->options['Action'] = 'DeregisterDestination';
         $this->throttleGroup = 'DeregisterDestination';
         $this->resetSubscriptionParams();
@@ -279,16 +291,17 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * marketplace ID, delivery channel, and attributes.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function testDestination() {
-        if (!array_key_exists('MarketplaceId', $this->options)){
+    public function testDestination()
+    {
+        if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to test a subscription destination!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.DeliveryChannel', $this->options)){
+        if (!array_key_exists('Destination.DeliveryChannel', $this->options)) {
             $this->log("Delivery channel must be set in order to test a subscription destination!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)){
+        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)) {
             $this->log("Attributes must be set in order to test a subscription destination!", 'Warning');
             return false;
         }
@@ -300,12 +313,12 @@ class AmazonSubscription extends AmazonSubscriptionCore {
         $query = $this->genQuery();
 
         $path = $this->options['Action'] . 'Result';
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -323,7 +336,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * some of the parameters will be removed. The following parameters are removed:
      * notification type and enabled status.
      */
-    protected function prepareTest() {
+    protected function prepareTest()
+    {
         $this->options['Action'] = 'SendTestNotificationToDestination';
         $this->throttleGroup = 'SendTestNotificationToDestination';
         $this->resetSubscriptionParams();
@@ -338,24 +352,25 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * marketplace ID, delivery channel, attributes, notification type, and enabled status.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function createSubscription() {
-        if (!array_key_exists('MarketplaceId', $this->options)){
+    public function createSubscription()
+    {
+        if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to create a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.Destination.DeliveryChannel', $this->options)){
+        if (!array_key_exists('Subscription.Destination.DeliveryChannel', $this->options)) {
             $this->log("Delivery channel must be set in order to create a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.Destination.AttributeList.member.1.Key', $this->options)){
+        if (!array_key_exists('Subscription.Destination.AttributeList.member.1.Key', $this->options)) {
             $this->log("Attributes must be set in order to create a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.NotificationType', $this->options)){
+        if (!array_key_exists('Subscription.NotificationType', $this->options)) {
             $this->log("Notification type must be set in order to create a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.IsEnabled', $this->options)){
+        if (!array_key_exists('Subscription.IsEnabled', $this->options)) {
             $this->log("Enabled status must be set in order to create a subscription!", 'Warning');
             return false;
         }
@@ -367,12 +382,12 @@ class AmazonSubscription extends AmazonSubscriptionCore {
         $query = $this->genQuery();
 
         $path = $this->options['Action'] . 'Result';
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -387,7 +402,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      *
      * This changes key options for using <i>createSubscription</i>.
      */
-    protected function prepareCreate() {
+    protected function prepareCreate()
+    {
         $this->options['Action'] = 'CreateSubscription';
         $this->throttleGroup = 'CreateSubscription';
         $this->resetDestinationParams();
@@ -403,20 +419,21 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * marketplace ID, delivery channel, attributes, notification type, and enabled status.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function fetchSubscription() {
-        if (!array_key_exists('MarketplaceId', $this->options)){
+    public function fetchSubscription()
+    {
+        if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to fetch a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.DeliveryChannel', $this->options)){
+        if (!array_key_exists('Destination.DeliveryChannel', $this->options)) {
             $this->log("Delivery channel must be set in order to fetch a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)){
+        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)) {
             $this->log("Attributes must be set in order to fetch a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('NotificationType', $this->options)){
+        if (!array_key_exists('NotificationType', $this->options)) {
             $this->log("Notification type must be set in order to fetch a subscription!", 'Warning');
             return false;
         }
@@ -428,12 +445,12 @@ class AmazonSubscription extends AmazonSubscriptionCore {
         $query = $this->genQuery();
 
         $path = $this->options['Action'] . 'Result';
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -450,7 +467,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * Please note: because this operation does not use all of the parameters,
      * the enabled status parameter is removed.
      */
-    protected function prepareGet() {
+    protected function prepareGet()
+    {
         $this->options['Action'] = 'GetSubscription';
         $this->throttleGroup = 'GetSubscription';
         $this->resetSubscriptionParams();
@@ -464,24 +482,25 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * marketplace ID, delivery channel, attributes, notification type, and enabled status.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function updateSubscription() {
-        if (!array_key_exists('MarketplaceId', $this->options)){
+    public function updateSubscription()
+    {
+        if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to update a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.Destination.DeliveryChannel', $this->options)){
+        if (!array_key_exists('Subscription.Destination.DeliveryChannel', $this->options)) {
             $this->log("Delivery channel must be set in order to update a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.Destination.AttributeList.member.1.Key', $this->options)){
+        if (!array_key_exists('Subscription.Destination.AttributeList.member.1.Key', $this->options)) {
             $this->log("Attributes must be set in order to update a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.NotificationType', $this->options)){
+        if (!array_key_exists('Subscription.NotificationType', $this->options)) {
             $this->log("Notification type must be set in order to update a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Subscription.IsEnabled', $this->options)){
+        if (!array_key_exists('Subscription.IsEnabled', $this->options)) {
             $this->log("Enabled status must be set in order to update a subscription!", 'Warning');
             return false;
         }
@@ -493,12 +512,12 @@ class AmazonSubscription extends AmazonSubscriptionCore {
         $query = $this->genQuery();
 
         $path = $this->options['Action'] . 'Result';
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -513,7 +532,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      *
      * This changes key options for using <i>updateSubscription</i>.
      */
-    protected function prepareUpdate() {
+    protected function prepareUpdate()
+    {
         $this->options['Action'] = 'UpdateSubscription';
         $this->throttleGroup = 'UpdateSubscription';
         $this->resetDestinationParams();
@@ -528,20 +548,21 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * marketplace ID, delivery channel, attributes, notification type, and enabled status.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function deleteSubscription() {
-        if (!array_key_exists('MarketplaceId', $this->options)){
+    public function deleteSubscription()
+    {
+        if (!array_key_exists('MarketplaceId', $this->options)) {
             $this->log("Marketplace ID must be set in order to delete a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.DeliveryChannel', $this->options)){
+        if (!array_key_exists('Destination.DeliveryChannel', $this->options)) {
             $this->log("Delivery channel must be set in order to delete a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)){
+        if (!array_key_exists('Destination.AttributeList.member.1.Key', $this->options)) {
             $this->log("Attributes must be set in order to delete a subscription!", 'Warning');
             return false;
         }
-        if (!array_key_exists('NotificationType', $this->options)){
+        if (!array_key_exists('NotificationType', $this->options)) {
             $this->log("Notification type must be set in order to delete a subscription!", 'Warning');
             return false;
         }
@@ -553,12 +574,12 @@ class AmazonSubscription extends AmazonSubscriptionCore {
         $query = $this->genQuery();
 
         $path = $this->options['Action'] . 'Result';
-        if ($this->mockMode){
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile()->$path;
         } else {
             $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -575,7 +596,8 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * Please note: because this operation does not use all of the parameters,
      * the enabled status parameter is removed.
      */
-    protected function prepareDelete() {
+    protected function prepareDelete()
+    {
         $this->options['Action'] = 'DeleteSubscription';
         $this->throttleGroup = 'DeleteSubscription';
         $this->resetSubscriptionParams();
@@ -588,8 +610,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
-    protected function parseXml($xml) {
-        if (!$xml){
+    protected function parseXml($xml)
+    {
+        if (!$xml) {
             return false;
         }
 
@@ -622,8 +645,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @see setNotificationType
      * @see setDeliveryChannel
      */
-    public function getSubscription(){
-        if (isset($this->data)){
+    public function getSubscription()
+    {
+        if (isset($this->data)) {
             return $this->data;
         } else {
             return false;
@@ -638,8 +662,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @return string|boolean single value, or <b>FALSE</b> if not set yet
      * @see setNotificationType
      */
-    public function getNotificationType(){
-        if (isset($this->data['NotificationType'])){
+    public function getNotificationType()
+    {
+        if (isset($this->data['NotificationType'])) {
             return $this->data['NotificationType'];
         } else {
             return false;
@@ -654,8 +679,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * This method will return boolean <b>FALSE</b> if the date has not been set yet.
      * @return string|boolean "true" or "false", or <b>FALSE</b> if not set yet
      */
-    public function getIsEnabled(){
-        if (isset($this->data['IsEnabled'])){
+    public function getIsEnabled()
+    {
+        if (isset($this->data['IsEnabled'])) {
             return $this->data['IsEnabled'];
         } else {
             return false;
@@ -670,8 +696,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @return string|boolean single value, or <b>FALSE</b> if not set yet
      * @see setDeliveryChannel
      */
-    public function getDeliveryChannel(){
-        if (isset($this->data['Destination']['DeliveryChannel'])){
+    public function getDeliveryChannel()
+    {
+        if (isset($this->data['Destination']['DeliveryChannel'])) {
             return $this->data['Destination']['DeliveryChannel'];
         } else {
             return false;
@@ -686,8 +713,9 @@ class AmazonSubscription extends AmazonSubscriptionCore {
      * @return array|boolean associative array, or <b>FALSE</b> if not set yet
      * @see setAttributes
      */
-    public function getAttributes(){
-        if (isset($this->data['Destination']['AttributeList'])){
+    public function getAttributes()
+    {
+        if (isset($this->data['Destination']['AttributeList'])) {
             return $this->data['Destination']['AttributeList'];
         } else {
             return false;

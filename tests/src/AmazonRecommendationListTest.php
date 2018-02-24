@@ -4,7 +4,8 @@ namespace gugglegum\AmazonMWS\tests;
 
 use gugglegum\AmazonMWS\AmazonRecommendationList;
 
-class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
+class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * @var AmazonRecommendationList
@@ -15,19 +16,22 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         resetLog();
         $this->object = new AmazonRecommendationList(include(__DIR__ . '/../test-config.php'), true, null);
     }
 
-    public function testSetUseToken(){
+    public function testSetUseToken()
+    {
         $this->assertNull($this->object->setUseToken());
         $this->assertNull($this->object->setUseToken(true));
         $this->assertNull($this->object->setUseToken(false));
         $this->assertFalse($this->object->setUseToken('wrong'));
     }
 
-    public function testSetCategory() {
+    public function testSetCategory()
+    {
         $this->assertNull($this->object->setCategory('Inventory'));
         $o = $this->object->getOptions();
         $this->assertArrayHasKey('RecommendationCategory', $o);
@@ -37,7 +41,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->setCategory(null)); //won't work for other things
     }
 
-    public function testSetFilters() {
+    public function testSetFilters()
+    {
         $this->assertFalse($this->object->setFilter(null)); //can't be nothing
         $this->assertFalse($this->object->setFilter(5)); //can't be an int
         $this->assertFalse($this->object->setFilter('banana')); //can't be an string
@@ -52,36 +57,37 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
         $fil = '.FilterOptions.FilterOption.';
 
         $o = $this->object->getOptions();
-        $this->assertArrayHasKey($pre.'1'.$cat, $o);
-        $this->assertEquals('Inventory', $o[$pre.'1'.$cat]);
-        $this->assertArrayHasKey($pre.'1'.$fil.'1', $o);
-        $this->assertEquals('first=worst', $o[$pre.'1'.$fil.'1']);
-        $this->assertArrayHasKey($pre.'2'.$cat, $o);
-        $this->assertEquals('Pricing', $o[$pre.'2'.$cat]);
-        $this->assertArrayHasKey($pre.'2'.$fil.'1', $o);
-        $this->assertEquals('second=best', $o[$pre.'2'.$fil.'1']);
-        $this->assertArrayHasKey($pre.'2'.$fil.'2', $o);
-        $this->assertEquals('third=other', $o[$pre.'2'.$fil.'2']);
+        $this->assertArrayHasKey($pre . '1' . $cat, $o);
+        $this->assertEquals('Inventory', $o[$pre . '1' . $cat]);
+        $this->assertArrayHasKey($pre . '1' . $fil . '1', $o);
+        $this->assertEquals('first=worst', $o[$pre . '1' . $fil . '1']);
+        $this->assertArrayHasKey($pre . '2' . $cat, $o);
+        $this->assertEquals('Pricing', $o[$pre . '2' . $cat]);
+        $this->assertArrayHasKey($pre . '2' . $fil . '1', $o);
+        $this->assertEquals('second=best', $o[$pre . '2' . $fil . '1']);
+        $this->assertArrayHasKey($pre . '2' . $fil . '2', $o);
+        $this->assertEquals('third=other', $o[$pre . '2' . $fil . '2']);
 
         $list2 = array();
         $list2['Advertising'] = array('different' => 'good');
         $this->assertNull($this->object->setFilter($list2)); //will cause reset
         $o2 = $this->object->getOptions();
-        $this->assertArrayHasKey($pre.'1'.$cat, $o2);
-        $this->assertEquals('Advertising', $o2[$pre.'1'.$cat]);
-        $this->assertArrayHasKey($pre.'1'.$fil.'1', $o2);
-        $this->assertEquals('different=good', $o2[$pre.'1'.$fil.'1']);
-        $this->assertArrayNotHasKey($pre.'2'.$cat, $o2);
-        $this->assertArrayNotHasKey($pre.'2'.$fil.'1', $o2);
-        $this->assertArrayNotHasKey($pre.'2'.$fil.'2', $o2);
+        $this->assertArrayHasKey($pre . '1' . $cat, $o2);
+        $this->assertEquals('Advertising', $o2[$pre . '1' . $cat]);
+        $this->assertArrayHasKey($pre . '1' . $fil . '1', $o2);
+        $this->assertEquals('different=good', $o2[$pre . '1' . $fil . '1']);
+        $this->assertArrayNotHasKey($pre . '2' . $cat, $o2);
+        $this->assertArrayNotHasKey($pre . '2' . $fil . '1', $o2);
+        $this->assertArrayNotHasKey($pre . '2' . $fil . '2', $o2);
 
         $this->object->resetFilters();
         $o3 = $this->object->getOptions();
-        $this->assertArrayNotHasKey($pre.'1'.$cat, $o3);
-        $this->assertArrayNotHasKey($pre.'1'.$fil.'1', $o3);
+        $this->assertArrayNotHasKey($pre . '1' . $cat, $o3);
+        $this->assertArrayNotHasKey($pre . '1' . $fil . '1', $o3);
     }
 
-    public function testFetchRecommendations() {
+    public function testFetchRecommendations()
+    {
         resetLog();
         $this->object->setMock(true, 'fetchRecommendations.xml'); //no token
         $this->assertNull($this->object->fetchRecommendations());
@@ -99,7 +105,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
         return $this->object;
     }
 
-    public function testFetchRecommendationsToken1() {
+    public function testFetchRecommendationsToken1()
+    {
         resetLog();
         $this->object->setMock(true, 'fetchRecommendationsToken.xml'); //no token
         //without using token
@@ -121,7 +128,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(2, count($r['ListingQuality']));
     }
 
-    public function testFetchRecommendationsToken2() {
+    public function testFetchRecommendationsToken2()
+    {
         resetLog();
         $this->object->setMock(true, array('fetchRecommendationsToken.xml', 'fetchRecommendationsToken2.xml'));
 
@@ -155,7 +163,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotEquals($r['ListingQuality'][1], $r['Selection'][1]);
     }
 
-    public function testFetchLastUpdateTimes() {
+    public function testFetchLastUpdateTimes()
+    {
         resetLog();
         $this->object->setMock(true, 'fetchRecommendationTimes.xml');
         $this->assertNull($this->object->fetchLastUpdateTimes());
@@ -163,8 +172,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('GetLastUpdatedTimeForRecommendations', $o['Action']);
 
         $check = parseLog();
-        $this->assertEquals('Single Mock File set: fetchRecommendationTimes.xml',$check[1]);
-        $this->assertEquals('Fetched Mock File: mock/fetchRecommendationTimes.xml',$check[2]);
+        $this->assertEquals('Single Mock File set: fetchRecommendationTimes.xml', $check[1]);
+        $this->assertEquals('Fetched Mock File: mock/fetchRecommendationTimes.xml', $check[2]);
 
         $this->assertFalse($this->object->getLists());
         return $this->object;
@@ -174,7 +183,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetLists($o) {
+    public function testGetLists($o)
+    {
         $list = $o->getLists();
         $this->assertInternalType('array', $list);
         $this->assertArrayHasKey('Inventory', $list);
@@ -199,7 +209,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetInventoryList($o) {
+    public function testGetInventoryList($o)
+    {
         $x = array();
         $x[0]['RecommendationReason'] = 'OutOfStock';
         $x[0]['SalesRank'] = '186020';
@@ -237,7 +248,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetSelectionList($o) {
+    public function testGetSelectionList($o)
+    {
         $x = array();
         $x[0]['RecommendationReason'] = 'PopularOutOfStock';
         $x[0]['SalesRank'] = '186020';
@@ -279,7 +291,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetPricingList($o) {
+    public function testGetPricingList($o)
+    {
         $x = array();
         $x[0]['RecommendationReason'] = 'TooExpensive';
         $x[0]['SalesRank'] = '186020';
@@ -320,7 +333,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetFulfillmentList($o) {
+    public function testGetFulfillmentList($o)
+    {
         $x = array();
         $x[0]['RecommendationReason'] = 'PopularOutOfStock';
         $x[0]['SalesRank'] = '186020';
@@ -367,7 +381,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetListingList($o) {
+    public function testGetListingList($o)
+    {
         $x = array();
         $x[0]['RecommendationReason'] = 'Description is important.';
         $x[0]['ItemName'] = 'Nike II';
@@ -399,7 +414,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetGlobalSellingList($o) {
+    public function testGetGlobalSellingList($o)
+    {
         $x = array();
         $x[0]['RecommendationReason'] = 'PopularOutOfStock';
         $x[0]['SalesRank'] = '186020';
@@ -444,7 +460,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testGetAdvertisingList($o) {
+    public function testGetAdvertisingList($o)
+    {
         $x = array();
         $x[0]['RecommendationReason'] = 'NotEnoughText';
         $x[0]['SalesRank'] = '186020';
@@ -483,7 +500,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchLastUpdateTimes
      */
-    public function testGetLastUpdateTimes($o) {
+    public function testGetLastUpdateTimes($o)
+    {
         $list = $o->getLastUpdateTimes();
         $this->assertInternalType('array', $list);
         $this->assertArrayHasKey('Inventory', $list);
@@ -507,7 +525,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchLastUpdateTimes
      */
-    public function testGetInventoryLastUpdateTime($o) {
+    public function testGetInventoryLastUpdateTime($o)
+    {
         $this->assertEquals('2013-03-04T02:10:32+00:00', $o->getInventoryLastUpdateTime());
         //not fetched yet for this object
         $this->assertFalse($this->object->getInventoryLastUpdateTime());
@@ -517,7 +536,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchLastUpdateTimes
      */
-    public function testGetSelectionLastUpdateTime($o) {
+    public function testGetSelectionLastUpdateTime($o)
+    {
         $this->assertEquals('2013-03-03T03:11:34+00:00', $o->getSelectionLastUpdateTime());
         //not fetched yet for this object
         $this->assertFalse($this->object->getSelectionLastUpdateTime());
@@ -527,7 +547,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchLastUpdateTimes
      */
-    public function testGetPricingLastUpdateTime($o) {
+    public function testGetPricingLastUpdateTime($o)
+    {
         $this->assertEquals('2013-03-05T03:11:33+00:00', $o->getPricingLastUpdateTime());
         //not fetched yet for this object
         $this->assertFalse($this->object->getPricingLastUpdateTime());
@@ -537,7 +558,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchLastUpdateTimes
      */
-    public function testGetFulfillmentLastUpdateTime($o) {
+    public function testGetFulfillmentLastUpdateTime($o)
+    {
         $this->assertEquals('2013-03-02T03:11:32+00:00', $o->getFulfillmentLastUpdateTime());
         //not fetched yet for this object
         $this->assertFalse($this->object->getFulfillmentLastUpdateTime());
@@ -547,7 +569,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchLastUpdateTimes
      */
-    public function testGetGlobalSellingLastUpdateTime($o) {
+    public function testGetGlobalSellingLastUpdateTime($o)
+    {
         $this->assertEquals('2013-03-02T04:31:32+00:00', $o->getGlobalSellingLastUpdateTime());
         //not fetched yet for this object
         $this->assertFalse($this->object->getGlobalSellingLastUpdateTime());
@@ -557,7 +580,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchLastUpdateTimes
      */
-    public function testGetAdvertisingLastUpdateTime($o) {
+    public function testGetAdvertisingLastUpdateTime($o)
+    {
         $this->assertEquals('2013-03-03T17:45:11+00:00', $o->getAdvertisingLastUpdateTime());
         //not fetched yet for this object
         $this->assertFalse($this->object->getAdvertisingLastUpdateTime());
@@ -567,7 +591,8 @@ class AmazonRecommendationListTest extends \PHPUnit_Framework_TestCase {
      * @param AmazonRecommendationList $o
      * @depends testFetchRecommendations
      */
-    public function testIterator($o) {
+    public function testIterator($o)
+    {
         //fetched, but not using the category param
         foreach ($o as $x) {
             $this->fail('Should not have iterated');

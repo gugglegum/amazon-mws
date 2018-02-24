@@ -29,7 +29,8 @@ namespace gugglegum\AmazonMWS;
  * the same date given when retrieving preorder info. Use the AmazonShipment
  * object to create an inbound shipment and acquire a shipment ID.
  */
-class AmazonPreorder extends AmazonInboundCore {
+class AmazonPreorder extends AmazonInboundCore
+{
     protected $hasPreorderItems = false;
     protected $needByDate;
     protected $fulfillableDate;
@@ -49,10 +50,11 @@ class AmazonPreorder extends AmazonInboundCore {
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
      */
-    public function __construct(array $config, $id = null, $mock = false, $m = null){
+    public function __construct(array $config, $id = null, $mock = false, $m = null)
+    {
         parent::__construct($config, $mock, $m);
 
-        if($id){
+        if ($id) {
             $this->setShipmentId($id);
         }
     }
@@ -62,8 +64,9 @@ class AmazonPreorder extends AmazonInboundCore {
      * @param string $s <p>Shipment ID</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setShipmentId($s){
-        if (is_string($s) && $s){
+    public function setShipmentId($s)
+    {
+        if (is_string($s) && $s) {
             $this->options['ShipmentId'] = $s;
         } else {
             return false;
@@ -79,12 +82,13 @@ class AmazonPreorder extends AmazonInboundCore {
      * @param string $d <p>A time string</p>
      * @return boolean <b>FALSE</b> if improper input
      */
-    public function setNeedByDate($d) {
-        try{
+    public function setNeedByDate($d)
+    {
+        try {
             $this->options['NeedByDate'] = strstr($this->genTime($d), 'T', true);
-        } catch (\InvalidArgumentException $e){
+        } catch (\InvalidArgumentException $e) {
             unset($this->options['NeedByDate']);
-            $this->log('Error: '.$e->getMessage(), 'Warning');
+            $this->log('Error: ' . $e->getMessage(), 'Warning');
             return false;
         }
     }
@@ -99,25 +103,26 @@ class AmazonPreorder extends AmazonInboundCore {
      * and <i>getIsConfirmed</i>.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function fetchPreorderInfo(){
-        if (!array_key_exists('ShipmentId',$this->options)) {
+    public function fetchPreorderInfo()
+    {
+        if (!array_key_exists('ShipmentId', $this->options)) {
             $this->log("Shipment ID must be set in order to get preorder info!", 'Warning');
             return false;
         }
 
         $this->prepareGet();
 
-        $url = $this->urlbase.$this->urlbranch;
+        $url = $this->urlbase . $this->urlbranch;
 
         $query = $this->genQuery();
 
-        $path = $this->options['Action'].'Result';
-        if ($this->mockMode){
+        $path = $this->options['Action'] . 'Result';
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile();
         } else {
-            $response = $this->sendRequest($url, array('Post'=>$query));
+            $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -135,7 +140,8 @@ class AmazonPreorder extends AmazonInboundCore {
      * some of the parameters will be removed. The following parameters are removed:
      * NeedByDate.
      */
-    protected function prepareGet() {
+    protected function prepareGet()
+    {
         $this->throttleGroup = 'GetPreorderInfo';
         $this->options['Action'] = 'GetPreorderInfo';
         unset($this->options['NeedByDate']);
@@ -150,29 +156,30 @@ class AmazonPreorder extends AmazonInboundCore {
      * using <i>getNeedByDate</i> and <i>getFulfillableDate</i>.
      * @return boolean <b>FALSE</b> if something goes wrong
      */
-    public function confirmPreorder(){
-        if (!array_key_exists('ShipmentId',$this->options)) {
+    public function confirmPreorder()
+    {
+        if (!array_key_exists('ShipmentId', $this->options)) {
             $this->log("Shipment ID must be set in order to confirm preorder info!", 'Warning');
             return false;
         }
-        if (!array_key_exists('NeedByDate',$this->options)) {
+        if (!array_key_exists('NeedByDate', $this->options)) {
             $this->log("NeedByDate must be set in order to confirm preorder info!", 'Warning');
             return false;
         }
 
         $this->prepareConfirm();
 
-        $url = $this->urlbase.$this->urlbranch;
+        $url = $this->urlbase . $this->urlbranch;
 
         $query = $this->genQuery();
 
-        $path = $this->options['Action'].'Result';
-        if ($this->mockMode){
+        $path = $this->options['Action'] . 'Result';
+        if ($this->mockMode) {
             $xml = $this->fetchMockFile();
         } else {
-            $response = $this->sendRequest($url, array('Post'=>$query));
+            $response = $this->sendRequest($url, array('Post' => $query));
 
-            if (!$this->checkResponse($response)){
+            if (!$this->checkResponse($response)) {
                 return false;
             }
 
@@ -187,7 +194,8 @@ class AmazonPreorder extends AmazonInboundCore {
      *
      * This changes key options for using <i>confirmPreorder</i>.
      */
-    protected function prepareConfirm() {
+    protected function prepareConfirm()
+    {
         $this->throttleGroup = 'ConfirmPreorder';
         $this->options['Action'] = 'ConfirmPreorder';
     }
@@ -199,8 +207,9 @@ class AmazonPreorder extends AmazonInboundCore {
      * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
-    protected function parseXml($xml) {
-        if (!$xml){
+    protected function parseXml($xml)
+    {
+        if (!$xml) {
             return false;
         }
 
@@ -228,8 +237,9 @@ class AmazonPreorder extends AmazonInboundCore {
      * This method will return <b>FALSE</b> if the date has not been set yet.
      * @return string|boolean date in YYYY-MM-DD format, or <b>FALSE</b> if date not set yet
      */
-    public function getNeedByDate(){
-        if (isset($this->needByDate)){
+    public function getNeedByDate()
+    {
+        if (isset($this->needByDate)) {
             return $this->needByDate;
         } else {
             return false;
@@ -242,8 +252,9 @@ class AmazonPreorder extends AmazonInboundCore {
      * This method will return <b>FALSE</b> if the date has not been set yet.
      * @return string|boolean date in YYYY-MM-DD format, or <b>FALSE</b> if date not set yet
      */
-    public function getFulfillableDate(){
-        if (isset($this->fulfillableDate)){
+    public function getFulfillableDate()
+    {
+        if (isset($this->fulfillableDate)) {
             return $this->fulfillableDate;
         } else {
             return false;
@@ -258,7 +269,8 @@ class AmazonPreorder extends AmazonInboundCore {
      * This method will return boolean <b>FALSE</b> if the date has not been set yet.
      * @return string|boolean "true" or "false", or <b>FALSE</b> if date not set yet
      */
-    public function getHasPreorderableItems(){
+    public function getHasPreorderableItems()
+    {
         return $this->hasPreorderItems;
     }
 
@@ -270,7 +282,8 @@ class AmazonPreorder extends AmazonInboundCore {
      * This method will return boolean <b>FALSE</b> if the date has not been set yet.
      * @return string|boolean "true" or "false", or <b>FALSE</b> if date not set yet
      */
-    public function getIsConfirmed(){
+    public function getIsConfirmed()
+    {
         return $this->isConfirmed;
     }
 
