@@ -893,7 +893,7 @@ class AmazonTransport extends AmazonInboundCore {
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param SimpleXMLElement $xml <p>The XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
     protected function parseXml($xml) {

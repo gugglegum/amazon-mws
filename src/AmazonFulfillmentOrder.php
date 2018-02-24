@@ -107,7 +107,7 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore{
      * Parses XML response into array.
      * 
      * This is what reads the response XML and converts it into an array.
-     * @param SimpleXMLElement $xml <p>The XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
     protected function parseXML($xml) {
@@ -304,7 +304,7 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore{
 
     /**
      * Parses XML for an address into an array.
-     * @param SimpleXMLElement $xml <p>Address node of the XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>Address node of the XML response from Amazon.</p>
      * @return array Parsed structure from XML
      */
     public function parseAddress($xml) {

@@ -195,10 +195,10 @@ abstract class AmazonCore{
      * including the name and path of the file involved. For retrieving response
      * codes, see <i>fetchMockResponse</i>.
      * @param boolean $load [optional] <p>Set this to <b>FALSE</b> to prevent the
-     * method from loading the file's contents into a SimpleXMLElement. This is
+     * method from loading the file's contents into a \SimpleXMLElement. This is
      * for when the contents of the file are not in XML format, or if you simply
      * want to retrieve the raw string of the file.</p>
-     * @return SimpleXMLElement|string|boolean <p>A SimpleXMLElement holding the
+     * @return \SimpleXMLElement|string|boolean <p>A \SimpleXMLElement holding the
      * contents of the file, or a string of said contents if <i>$load</i> is set to
      * <b>FALSE</b>. The return will be <b>FALSE</b> if the file cannot be
      * fetched for any reason.</p>
@@ -713,7 +713,7 @@ abstract class AmazonCore{
     
     /**
      * Checks for a token and changes the proper options
-     * @param SimpleXMLElement $xml <p>response data</p>
+     * @param \SimpleXMLElement $xml <p>response data</p>
      * @return boolean <b>FALSE</b> if no XML data
      */
     protected function checkToken($xml){

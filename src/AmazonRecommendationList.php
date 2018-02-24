@@ -274,7 +274,7 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param SimpleXMLElement $xml <p>The XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
     protected function parseXML($xml){
@@ -340,7 +340,7 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
 
     /**
      * Parses XML response for a single recommendation into an array.
-     * @param SimpleXMLElement $xml
+     * @param \SimpleXMLElement $xml
      * @return array parsed structure from XML
      */
     protected function parseRecommendation($xml) {

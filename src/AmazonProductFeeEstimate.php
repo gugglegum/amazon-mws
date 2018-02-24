@@ -168,7 +168,7 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator{
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param SimpleXMLElement $xml <p>The XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
     protected function parseXml($xml){
@@ -217,7 +217,7 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator{
     /**
      * Parses XML for a single money element into an array.
      * This structure is used many times throughout fee estimates.
-     * @param SimpleXMLElement $xml <p>Money node of the XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>Money node of the XML response from Amazon.</p>
      * @return array Parsed structure from XML
      */
     protected function parseMoney($xml){
@@ -230,7 +230,7 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator{
     /**
      * Parses XML for a single fee detail into an array.
      * This structure is used recursively in fee estimates.
-     * @param SimpleXMLElement $xml <p>Fee Detail node of the XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>Fee Detail node of the XML response from Amazon.</p>
      * @return array Parsed structure from XML
      */
     protected function parseFeeDetail($xml){

@@ -38,7 +38,7 @@ class AmazonOrder extends AmazonOrderCore{
      * so be careful when setting up the object.
      * @param array $config <p>A config array to set.</p>
      * @param string $id [optional] <p>The Order ID to set for the object.</p>
-     * @param SimpleXMLElement $data [optional] <p>XML data from Amazon to be parsed.</p>
+     * @param \SimpleXMLElement $data [optional] <p>XML data from Amazon to be parsed.</p>
      * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
      * This defaults to <b>FALSE</b>.</p>
      * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
@@ -143,7 +143,7 @@ class AmazonOrder extends AmazonOrderCore{
      * Parses XML response into array.
      * 
      * This is what reads the response XML and converts it into an array.
-     * @param SimpleXMLElement $xml <p>The XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
      * @return boolean <b>FALSE</b> if no XML data is found
      */
     protected function parseXML($xml){
