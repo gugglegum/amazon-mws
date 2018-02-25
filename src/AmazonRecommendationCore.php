@@ -27,7 +27,6 @@ namespace gugglegum\AmazonMWS;
  */
 abstract class AmazonRecommendationCore extends AmazonCore
 {
-
     /**
      * AmazonRecommendationCore constructor sets up key information used in all Amazon Recommendations Core requests
      *

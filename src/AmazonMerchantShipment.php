@@ -28,6 +28,9 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonMerchantShipment extends AmazonMerchantCore
 {
+    /**
+     * @var array       Associative array
+     */
     protected $data;
 
     /**

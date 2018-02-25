@@ -27,6 +27,9 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonMerchantShipmentCreator extends AmazonMerchantCore
 {
+    /**
+     * @var AmazonMerchantShipment
+     */
     protected $shipment;
 
     /**

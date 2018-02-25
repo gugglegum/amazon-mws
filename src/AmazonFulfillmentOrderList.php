@@ -28,10 +28,29 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
 {
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $orderList;
+
+    /**
+     * @var bool
+     */
     protected $tokenFlag = false;
+
+    /**
+     * @var bool
+     */
     protected $tokenUseFlag = false;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
+
+    /**
+     * @var int
+     */
     protected $index = 0;
 
     /**
@@ -326,7 +345,7 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return array        Associative array
      */
     public function current()
     {
@@ -343,7 +362,7 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key()
     {
@@ -360,7 +379,7 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return bool
      */
     public function valid()
     {

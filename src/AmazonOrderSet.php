@@ -28,8 +28,19 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonOrderSet extends AmazonOrderCore implements \Iterator
 {
+    /**
+     * @var int
+     */
     protected $i = 0;
+
+    /**
+     * @var int
+     */
     protected $index = 0;
+
+    /**
+     * @var AmazonOrder[]
+     */
     protected $orderList;
 
     /**
@@ -211,7 +222,7 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return AmazonOrder
      */
     public function current()
     {
@@ -228,7 +239,7 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key()
     {
@@ -245,7 +256,7 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return bool
      */
     public function valid()
     {

@@ -27,11 +27,42 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonParticipationList extends AmazonSellersCore
 {
+    /**
+     * @var bool
+     */
     protected $tokenFlag = false;
+
+    /**
+     * @var bool
+     */
     protected $tokenUseFlag = false;
+
+    /**
+     * Participation list
+     *
+     * @var array[]         Indexed array of associative arrays
+     */
     protected $participationList;
+
+    /**
+     * Marketplace list
+     *
+     * @var array[]         Indexed array of associative arrays
+     */
     protected $marketplaceList;
+
+    /**
+     * Index for marketplaces
+     *
+     * @var int
+     */
     protected $indexM = 0;
+
+    /**
+     * Index for participations
+     *
+     * @var int
+     */
     protected $indexP = 0;
 
     /**

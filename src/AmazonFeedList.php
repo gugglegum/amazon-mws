@@ -30,11 +30,36 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonFeedList extends AmazonFeedsCore implements \Iterator
 {
+    /**
+     * @var bool
+     */
     protected $tokenFlag = false;
+
+    /**
+     * @var bool
+     */
     protected $tokenUseFlag = false;
+
+    /**
+     * Feed list
+     *
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $feedList;
+
+    /**
+     * @var int
+     */
     protected $index = 0;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
+
+    /**
+     * @var string  But seems to be numeric
+     */
     protected $count;
 
     /**
@@ -657,7 +682,7 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return array        Associative array
      */
     public function current()
     {
@@ -674,7 +699,7 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key()
     {
@@ -691,7 +716,7 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return bool
      */
     public function valid()
     {

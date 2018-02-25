@@ -33,6 +33,9 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonSubscription extends AmazonSubscriptionCore
 {
+    /**
+     * @var array       Associative array
+     */
     protected $data;
 
     /**

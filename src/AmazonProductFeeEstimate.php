@@ -27,6 +27,9 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
 {
+    /**
+     * @var int
+     */
     protected $i = 0;
 
     /**

@@ -26,10 +26,29 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonServiceStatus extends AmazonCore
 {
+    /**
+     * @var string
+     */
     protected $lastTimestamp;
+
+    /**
+     * @var string
+     */
     protected $status;
+
+    /**
+     * @var string
+     */
     protected $messageId;
+
+    /**
+     * @var string[]
+     */
     protected $messageList;
+
+    /**
+     * @var bool
+     */
     protected $ready = false;
 
     /**

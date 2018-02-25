@@ -31,9 +31,24 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonPreorder extends AmazonInboundCore
 {
+    /**
+     * @var bool
+     */
     protected $hasPreorderItems = false;
+
+    /**
+     * @var string
+     */
     protected $needByDate;
+
+    /**
+     * @var string
+     */
     protected $fulfillableDate;
+
+    /**
+     * @var bool
+     */
     protected $isConfirmed = false;
 
     /**

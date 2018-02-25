@@ -26,6 +26,9 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonPackageTracker extends AmazonOutboundCore
 {
+    /**
+     * @var array       Associative array
+     */
     protected $details;
 
     /**

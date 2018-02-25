@@ -28,6 +28,11 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonShipment extends AmazonInboundCore
 {
+    /**
+     * Shipment ID
+     *
+     * @var string
+     */
     protected $shipmentId;
 
     /**

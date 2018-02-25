@@ -31,7 +31,14 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonTransport extends AmazonInboundCore
 {
+    /**
+     * @var string
+     */
     protected $status;
+
+    /**
+     * @var array       Associative array
+     */
     protected $contents;
 
     /**

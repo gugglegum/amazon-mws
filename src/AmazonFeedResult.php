@@ -28,6 +28,11 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonFeedResult extends AmazonFeedsCore
 {
+    /**
+     * RAW feed
+     *
+     * @var string
+     */
     protected $rawFeed;
 
     /**

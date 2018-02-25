@@ -27,7 +27,6 @@ namespace gugglegum\AmazonMWS;
  */
 abstract class AmazonSubscriptionCore extends AmazonCore
 {
-
     /**
      * AmazonSubscriptionCore constructor sets up key information used in all Amazon Subscriptions Core requests
      *

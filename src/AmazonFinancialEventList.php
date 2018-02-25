@@ -27,8 +27,19 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonFinancialEventList extends AmazonFinanceCore
 {
+    /**
+     * @var bool
+     */
     protected $tokenFlag = false;
+
+    /**
+     * @var bool
+     */
     protected $tokenUseFlag = false;
+
+    /**
+     * @var array       Associative array (not a list actually)
+     */
     protected $list;
 
     /**

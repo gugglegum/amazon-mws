@@ -27,6 +27,9 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonFulfillmentPreview extends AmazonOutboundCore
 {
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $previewList;
 
     /**

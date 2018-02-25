@@ -29,7 +29,14 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonTransportDocument extends AmazonInboundCore
 {
+    /**
+     * @var string
+     */
     protected $doc;
+
+    /**
+     * @var string
+     */
     protected $checksum;
 
     /**

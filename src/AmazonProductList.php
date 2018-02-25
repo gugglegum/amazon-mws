@@ -27,6 +27,9 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonProductList extends AmazonProductsCore implements \Iterator
 {
+    /**
+     * @var int
+     */
     protected $i = 0;
 
     /**
@@ -146,7 +149,7 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return AmazonProduct
      */
     public function current()
     {
@@ -163,7 +166,7 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key()
     {
@@ -180,7 +183,7 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return bool
      */
     public function valid()
     {

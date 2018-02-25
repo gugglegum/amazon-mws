@@ -32,9 +32,25 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * @var AmazonOrder[]
      */
     protected $orderList;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
+
+    /**
+     * @var bool
+     */
     protected $tokenFlag = false;
+
+    /**
+     * @var bool
+     */
     protected $tokenUseFlag = false;
+
+    /**
+     * @var int
+     */
     protected $index = 0;
 
     /**
@@ -607,7 +623,7 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return bool
      */
     public function valid()
     {

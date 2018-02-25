@@ -27,6 +27,11 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonReport extends AmazonReportsCore
 {
+    /**
+     * RAW report
+     *
+     * @var string
+     */
     protected $rawreport;
 
     /**

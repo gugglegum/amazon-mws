@@ -27,7 +27,14 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonShipmentPlanner extends AmazonInboundCore implements \Iterator
 {
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $planList;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
 
     /**
@@ -408,7 +415,7 @@ class AmazonShipmentPlanner extends AmazonInboundCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return array        Associative array
      */
     public function current()
     {
@@ -425,7 +432,7 @@ class AmazonShipmentPlanner extends AmazonInboundCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key()
     {
@@ -442,7 +449,7 @@ class AmazonShipmentPlanner extends AmazonInboundCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return bool
      */
     public function valid()
     {

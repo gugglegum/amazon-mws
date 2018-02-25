@@ -28,7 +28,14 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonSubscriptionList extends AmazonSubscriptionCore implements \Iterator
 {
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $list;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
 
     /**

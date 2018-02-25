@@ -27,6 +27,11 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonReportRequest extends AmazonReportsCore
 {
+    /**
+     * Response data
+     *
+     * @var array       Associative array
+     */
     protected $response;
 
     /**

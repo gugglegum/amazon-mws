@@ -30,11 +30,34 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonRecommendationList extends AmazonRecommendationCore implements \Iterator
 {
+    /**
+     * @var array       Associative array
+     */
     protected $updated;
+
+    /**
+     * @var array       Associative array (not a list actually)
+     */
     protected $list;
+
+    /**
+     * @var string
+     */
     protected $listkey;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
+
+    /**
+     * @var bool
+     */
     protected $tokenFlag = false;
+
+    /**
+     * @var bool
+     */
     protected $tokenUseFlag = false;
 
     /**

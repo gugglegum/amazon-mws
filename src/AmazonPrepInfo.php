@@ -27,8 +27,19 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonPrepInfo extends AmazonInboundCore implements \Iterator
 {
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $prepList;
+
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $invalidList;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
 
     /**

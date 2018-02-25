@@ -26,6 +26,11 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonProduct extends AmazonProductsCore
 {
+    /**
+     * Amazon product data
+     *
+     * @var array       Associative array
+     */
     protected $data;
 
     /**

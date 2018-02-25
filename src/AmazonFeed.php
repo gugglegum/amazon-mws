@@ -28,8 +28,19 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonFeed extends AmazonFeedsCore
 {
+    /**
+     * @var array       Associative array
+     */
     protected $response;
+
+    /**
+     * @var string
+     */
     protected $feedContent;
+
+    /**
+     * @var string
+     */
     protected $feedMD5;
 
     /**

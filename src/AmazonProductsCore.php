@@ -26,6 +26,9 @@ namespace gugglegum\AmazonMWS;
  */
 abstract class AmazonProductsCore extends AmazonCore
 {
+    /**
+     * @var AmazonProduct[]
+     */
     protected $productList;
     protected $index = 0;
 

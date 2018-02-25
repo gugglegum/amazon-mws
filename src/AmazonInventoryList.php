@@ -27,10 +27,29 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonInventoryList extends AmazonInventoryCore implements \Iterator
 {
+    /**
+     * @var bool
+     */
     protected $tokenFlag = false;
+
+    /**
+     * @var bool
+     */
     protected $tokenUseFlag = false;
+
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $supplyList;
+
+    /**
+     * @var int
+     */
     protected $index = 0;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
 
     /**
@@ -555,7 +574,7 @@ class AmazonInventoryList extends AmazonInventoryCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return array        Associative array
      */
     public function current()
     {
@@ -572,7 +591,7 @@ class AmazonInventoryList extends AmazonInventoryCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key()
     {
@@ -589,7 +608,7 @@ class AmazonInventoryList extends AmazonInventoryCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return bool
      */
     public function valid()
     {

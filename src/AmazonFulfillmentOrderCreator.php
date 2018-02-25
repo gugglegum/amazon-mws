@@ -28,7 +28,6 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonFulfillmentOrderCreator extends AmazonOutboundCore
 {
-
     /**
      * Sets the marketplace associated with the fulfillment order. (Optional)
      * @param string $m <p>Marketplace ID</p>

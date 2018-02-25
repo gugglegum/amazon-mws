@@ -29,9 +29,24 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonMerchantServiceList extends AmazonMerchantCore implements \Iterator
 {
+    /**
+     * @var array[]     Indexed array of associative arrays
+     */
     protected $serviceList;
+
+    /**
+     * @var string[]
+     */
     protected $downList;
+
+    /**
+     * @var string[]
+     */
     protected $termsList;
+
+    /**
+     * @var int
+     */
     protected $i = 0;
 
     /**
@@ -662,7 +677,7 @@ class AmazonMerchantServiceList extends AmazonMerchantCore implements \Iterator
 
     /**
      * Iterator function
-     * @return array
+     * @return array        Associative array
      */
     public function current()
     {
@@ -679,7 +694,7 @@ class AmazonMerchantServiceList extends AmazonMerchantCore implements \Iterator
 
     /**
      * Iterator function
-     * @return type
+     * @return int
      */
     public function key()
     {
@@ -696,7 +711,7 @@ class AmazonMerchantServiceList extends AmazonMerchantCore implements \Iterator
 
     /**
      * Iterator function
-     * @return boolean
+     * @return bool
      */
     public function valid()
     {

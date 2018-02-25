@@ -27,6 +27,11 @@ namespace gugglegum\AmazonMWS;
  */
 class AmazonOrder extends AmazonOrderCore
 {
+    /**
+     * Amazon order data
+     *
+     * @var array       Associative array
+     */
     protected $data;
 
     /**

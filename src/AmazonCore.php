@@ -910,7 +910,7 @@ abstract class AmazonCore
     /**
      * generates the string to sign, copied from Amazon
      * @param array $parameters
-     * @return type
+     * @return string
      */
     protected function _calculateStringToSignV2(array $parameters)
     {
