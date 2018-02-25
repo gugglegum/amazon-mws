@@ -41,11 +41,11 @@ class AmazonProduct extends AmazonProductsCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param \SimpleXMLElement $data [optional] <p>XML data from Amazon to be parsed.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param \SimpleXMLElement $data [optional] XML data from Amazon to be parsed.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $data = null, $mock = false, $m = null)
     {
@@ -60,8 +60,8 @@ class AmazonProduct extends AmazonProductsCore
 
     /**
      * Takes in XML data and converts it to an array for the object to use.
-     * @param \SimpleXMLElement $xml <p>XML Product data from Amazon</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml XML Product data from Amazon
+     * @return boolean FALSE if no XML data is found
      */
     public function loadXML($xml)
     {
@@ -275,8 +275,8 @@ class AmazonProduct extends AmazonProductsCore
 
     /**
      * Takes in XML data for Categories and parses it for the object to use
-     * @param \SimpleXMLElement $xml <p>The XML data from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no valid XML data is found
+     * @param \SimpleXMLElement $xml The XML data from Amazon.
+     * @return boolean FALSE if no valid XML data is found
      */
     protected function loadCategories($xml)
     {
@@ -293,8 +293,8 @@ class AmazonProduct extends AmazonProductsCore
 
     /**
      * Takes in XML data for lowest-priced offers and parses it for the object to use
-     * @param \SimpleXMLElement $xml <p>The XML data from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no valid XML data is found
+     * @param \SimpleXMLElement $xml The XML data from Amazon.
+     * @return boolean FALSE if no valid XML data is found
      */
     protected function loadLowestPricedOfferXml($xml)
     {
@@ -423,10 +423,10 @@ class AmazonProduct extends AmazonProductsCore
     /**
      * Recursively builds the hierarchy array.
      *
-     * The returned array will have the fields <b>ProductCategoryId</b> and
-     * <b>ProductCategoryName</b>, as well as maybe a <b>Parent</b> field with the same
+     * The returned array will have the fields ProductCategoryId and
+     * ProductCategoryName, as well as maybe a Parent field with the same
      * structure as the array containing it.
-     * @param \SimpleXMLElement $xml <p>The XML data from Amazon.</p>
+     * @param \SimpleXMLElement $xml The XML data from Amazon.
      * @return array Recursive, multi-dimensional array
      */
     protected function genHierarchy($xml)
@@ -444,7 +444,7 @@ class AmazonProduct extends AmazonProductsCore
     }
 
     /**
-     * See <i>getData</i>.
+     * See `getData()`.
      * @return array Huge array of Product data.
      */
     public function getProduct($num = null)

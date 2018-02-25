@@ -68,10 +68,10 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -98,12 +98,12 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Sets whether or not the object should automatically use tokens if it receives one.
      *
-     * If this option is set to <b>TRUE</b>, the object will automatically perform
+     * If this option is set to TRUE, the object will automatically perform
      * the necessary operations to retrieve the rest of the list using tokens. If
      * this option is off, the object will only ever retrieve the first section of
      * the list.
-     * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param boolean $b [optional] Defaults to TRUE
+     * @return boolean FALSE if improper input
      */
     public function setUseToken($b = true)
     {
@@ -120,8 +120,8 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
      * This method sets the list of Feed Submission IDs to be sent in the next request.
      * Setting this parameter tells Amazon to only return Feed Submissions that match
      * the IDs in the list. If this parameter is set, all other parameters will be ignored.
-     * @param array|string $s <p>A list of Feed Submission IDs, or a single ID string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s A list of Feed Submission IDs, or a single ID string.
+     * @return boolean FALSE if improper input
      */
     public function setFeedIds($s)
     {
@@ -162,8 +162,8 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
      * Setting this parameter tells Amazon to only return Feed Submissions that match
      * the types in the list. If this parameter is not set, Amazon will return
      * Feed Submissions of any type.
-     * @param array|string $s <p>A list of Feed Types, or a single type string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s A list of Feed Types, or a single type string.
+     * @return boolean FALSE if improper input
      */
     public function setFeedTypes($s)
     {
@@ -204,10 +204,10 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
      * Setting this parameter tells Amazon to only return Feed Submissions that match
      * the statuses in the list. If this parameter is not set, Amazon will return
      * Feed Submissions with any status.
-     * @param array|string $s <p>A list of Feed Statuses, or a single status string.<br />
+     * @param array|string $s A list of Feed Statuses, or a single status string.<br />
      * Valid values are "_UNCONFIRMED_", "_SUBMITTED_", "_IN_PROGRESS_", "_IN_SAFETY_NET_",
-     * "_AWAITING_ASYNCHRONOUS_REPLY_", "_CANCELLED_", and "_DONE_".</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * "_AWAITING_ASYNCHRONOUS_REPLY_", "_CANCELLED_", and "_DONE_".
+     * @return boolean FALSE if improper input
      */
     public function setFeedStatuses($s)
     {
@@ -246,8 +246,8 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
      *
      * This method sets the maximum number of Feed Submissions for Amazon to return.
      * If this parameter is not set, Amazon will only send ten.
-     * @param array|string $s <p>Positive integer from 1 to 100.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s Positive integer from 1 to 100.
+     * @return boolean FALSE if improper input
      */
     public function setMaxCount($s)
     {
@@ -265,9 +265,9 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
      * parameter is set, Amazon will only return Feed Submissions that were submitted
      * between the two times given. If these parameters are not set, Amazon will
      * only return Feed Submissions that were submitted within the past 180 days.
-     * The parameters are passed through <i>strtotime</i>, so values such as "-1 hour" are fine.
-     * @param string $s [optional] <p>A time string for the earliest time.</p>
-     * @param string $e [optional] <p>A time string for the latest time.</p>
+     * The parameters are passed through `strtotime()`, so values such as "-1 hour" are fine.
+     * @param string $s [optional] A time string for the earliest time.
+     * @param string $e [optional] A time string for the latest time.
      */
     public function setTimeLimits($s = null, $e = null)
     {
@@ -296,12 +296,12 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Fetches a list of Feed Submissions from Amazon.
      *
-     * Submits a <i>GetFeedSubmissionList</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getFeedList</i>.
+     * Submits a `GetFeedSubmissionList` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getFeedList()`.
      * Other methods are available for fetching specific values from the list.
      * This operation can potentially involve tokens.
-     * @param boolean $r [optional] <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param boolean $r [optional] When set to FALSE, the function will not recurse, defaults to TRUE
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchFeedSubmissions($r = true)
     {
@@ -380,8 +380,8 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -417,9 +417,9 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Fetches a count of Feed Submissions from Amazon.
      *
-     * Submits a <i>GetFeedSubmissionCount</i> request to Amazon. Amazon will send
-     * the number back as a response, which can be retrieved using <i>getCount</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetFeedSubmissionCount` request to Amazon. Amazon will send
+     * the number back as a response, which can be retrieved using `getCount()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function countFeeds()
     {
@@ -446,9 +446,9 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     }
 
     /**
-     * Sets up options for using <i>countFeeds</i>.
+     * Sets up options for using `countFeeds()`.
      *
-     * This changes key options for using <i>countFeeds</i>. Please note: because the
+     * This changes key options for using `countFeeds()`. Please note: because the
      * operation for counting feeds does not use all of the parameters, some of the
      * parameters will be removed. The following parameters are removed:
      * feed IDs, max count, and token.
@@ -471,11 +471,11 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Cancels the feed submissions that match the given parameters. Careful!
      *
-     * Submits a <i>CancelFeedSubmissions</i> request to Amazon. Amazon will send
+     * Submits a `CancelFeedSubmissions` request to Amazon. Amazon will send
      * as a response the list of feeds that were cancelled, along with the count
      * of the number of affected feeds. This data can be retrieved using the same
-     * methods as with <i>fetchFeedSubmissions</i> and <i>countFeeds</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * methods as with `fetchFeedSubmissions()` and `countFeeds()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function cancelFeeds()
     {
@@ -502,9 +502,9 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     }
 
     /**
-     * Sets up options for using <i>cancelFeeds</i>.
+     * Sets up options for using `cancelFeeds()`.
      *
-     * This changes key options for using <i>cancelFeeds</i>. Please note: because the
+     * This changes key options for using `cancelFeeds()`. Please note: because the
      * operation for cancelling feeds does not use all of the parameters, some of the
      * parameters will be removed. The following parameters are removed:
      * feed statuses, max count, and token.
@@ -528,9 +528,9 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the feed submission ID for the specified entry.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getFeedId($i = 0)
     {
@@ -544,9 +544,9 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the feed type for the specified entry.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getFeedType($i = 0)
     {
@@ -560,10 +560,10 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the date submitted for the specified entry.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
+     * This method will return FALSE if the list has not yet been filled.
      * The time will be in the ISO8601 date format.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getDateSubmitted($i = 0)
     {
@@ -577,10 +577,10 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the feed processing status for the specified entry.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * See <i>setFeedStatuses</i> for a list of possible values.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * See `setFeedStatuses()` for a list of possible values.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getFeedStatus($i = 0)
     {
@@ -594,10 +594,10 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the date that the specified entry started being processed.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
+     * This method will return FALSE if the list has not yet been filled.
      * The time will be in the ISO8601 date format.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getDateStarted($i = 0)
     {
@@ -611,10 +611,10 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the date that the specified entry finished being processed.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
+     * This method will return FALSE if the list has not yet been filled.
      * The time will be in the ISO8601 date format.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getDateCompleted($i = 0)
     {
@@ -628,18 +628,18 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the full info for the specified entry.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
+     * This method will return FALSE if the list has not yet been filled.
      * The array returned will have the following fields:
-     * <ul>
-     * <li><b>FeedSubmissionId</b> - unique ID for the feed submission</li>
-     * <li><b>FeedType</b> - feed type for the feed submission</li>
-     * <li><b>SubmittedDate</b> - time in ISO8601 date format</li>
-     * <li><b>FeedProcessingStatus</b> - see <i>setFeedStatuses</i> for a list of possible values</li>
-     * <li><b>StartedProcessingDate</b> - time in ISO8601 date format</li>
-     * <li><b>CompletedProcessingDate</b> - time in ISO8601 date format</li>
-     * </ul>
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return array|boolean array of values, or <b>FALSE</b> if Non-numeric index
+     *
+     *  - FeedSubmissionId - unique ID for the feed submission
+     *  - FeedType - feed type for the feed submission
+     *  - SubmittedDate - time in ISO8601 date format
+     *  - FeedProcessingStatus - see `setFeedStatuses()` for a list of possible values
+     *  - StartedProcessingDate - time in ISO8601 date format
+     *  - CompletedProcessingDate - time in ISO8601 date format
+     *
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return array|boolean array of values, or FALSE if Non-numeric index
      */
     public function getFeedInfo($i = 0)
     {
@@ -653,8 +653,8 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the full list.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getFeedList()
     {
@@ -668,8 +668,8 @@ class AmazonFeedList extends AmazonFeedsCore implements \Iterator
     /**
      * Returns the feed count from either countFeeds or cancelFeeds.
      *
-     * This method will return <b>FALSE</b> if the count has not been set yet.
-     * @return number|boolean number, or <b>FALSE</b> if count not set yet
+     * This method will return FALSE if the count has not been set yet.
+     * @return number|boolean number, or FALSE if count not set yet
      */
     public function getFeedCount()
     {

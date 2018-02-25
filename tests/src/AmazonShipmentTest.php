@@ -248,7 +248,7 @@ class AmazonShipmentTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testUsePlan
-     * @param array $plan <p>Plan from an AmazonShipmentPlanner object</p>
+     * @param array $plan Plan from an AmazonShipmentPlanner object
      */
     public function testCreateShipment($plan)
     {
@@ -308,7 +308,7 @@ class AmazonShipmentTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testUsePlan
-     * @param array $plan <p>Plan from an AmazonShipmentPlanner object</p>
+     * @param array $plan Plan from an AmazonShipmentPlanner object
      */
     public function testUpdateShipment($plan)
     {

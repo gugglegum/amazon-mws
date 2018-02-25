@@ -35,10 +35,10 @@ class AmazonProductInfo extends AmazonProductsCore
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -51,8 +51,8 @@ class AmazonProductInfo extends AmazonProductsCore
      * This method sets the list of seller SKUs to be sent in the next request.
      * Setting this parameter tells Amazon to only return inventory supplies that match
      * the IDs in the list. If this parameter is set, ASINs cannot be set.
-     * @param array|string $s <p>A list of Seller SKUs, or a single SKU string. (max: 20)</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s A list of Seller SKUs, or a single SKU string. (max: 20)
+     * @return boolean FALSE if improper input
      */
     public function setSKUs($s)
     {
@@ -96,8 +96,8 @@ class AmazonProductInfo extends AmazonProductsCore
      * This method sets the list of ASINs to be sent in the next request.
      * Setting this parameter tells Amazon to only return inventory supplies that match
      * the IDs in the list. If this parameter is set, Seller SKUs cannot be set.
-     * @param array|string $s <p>A list of ASINs, or a single ASIN string. (max: 20)</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s A list of ASINs, or a single ASIN string. (max: 20)
+     * @return boolean FALSE if improper input
      */
     public function setASINs($s)
     {
@@ -141,8 +141,8 @@ class AmazonProductInfo extends AmazonProductsCore
      * This method sets the item condition filter to be sent in the next request.
      * Setting this parameter tells Amazon to only return products with conditions that match
      * the one given. If this parameter is not set, Amazon will return products with any condition.
-     * @param string $s <p>Single condition string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Single condition string.
+     * @return boolean FALSE if improper input
      */
     public function setConditionFilter($s)
     {
@@ -157,8 +157,8 @@ class AmazonProductInfo extends AmazonProductsCore
      * Sets the "ExcludeSelf" flag. (Optional)
      *
      * Sets whether or not the next Lowest Offer Listings request should exclude your own listings.
-     * @param string|boolean $s <p>"true" or "false", or boolean</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string|boolean $s "true" or "false", or boolean
+     * @return boolean FALSE if improper input
      */
     public function setExcludeSelf($s = 'true')
     {
@@ -174,10 +174,10 @@ class AmazonProductInfo extends AmazonProductsCore
     /**
      * Fetches a list of competitive pricing on products from Amazon.
      *
-     * Submits a <i>GetCompetitivePricingForSKU</i>
-     * or <i>GetCompetitivePricingForASIN</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getProduct</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetCompetitivePricingForSKU`
+     * or `GetCompetitivePricingForASIN` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getProduct()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchCompetitivePricing()
     {
@@ -208,9 +208,9 @@ class AmazonProductInfo extends AmazonProductsCore
     }
 
     /**
-     * Sets up options for using <i>fetchCompetitivePricing</i>.
+     * Sets up options for using `fetchCompetitivePricing()`.
      *
-     * This changes key options for using <i>fetchCompetitivePricing</i>.
+     * This changes key options for using `fetchCompetitivePricing()`.
      * Please note: because the operation does not use all of the parameters,
      * some of the parameters will be removed. The following parameters are removed:
      * ItemCondition and ExcludeMe.
@@ -236,10 +236,10 @@ class AmazonProductInfo extends AmazonProductsCore
     /**
      * Fetches a list of lowest offers on products from Amazon.
      *
-     * Submits a <i>GetLowestOfferListingsForSKU</i>
-     * or <i>GetLowestOfferListingsForASIN</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getProduct</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetLowestOfferListingsForSKU`
+     * or `GetLowestOfferListingsForASIN` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getProduct()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchLowestOffer()
     {
@@ -270,9 +270,9 @@ class AmazonProductInfo extends AmazonProductsCore
     }
 
     /**
-     * Sets up options for using <i>fetchLowestOffer</i>.
+     * Sets up options for using `fetchLowestOffer()`.
      *
-     * This changes key options for using <i>fetchLowestOffer</i>.
+     * This changes key options for using `fetchLowestOffer()`.
      */
     protected function prepareLowest()
     {
@@ -293,10 +293,10 @@ class AmazonProductInfo extends AmazonProductsCore
     /**
      * Fetches a list of lowest offers on products from Amazon.
      *
-     * Submits a <i>GetLowestPricedOffersForSKU</i>
-     * or <i>GetLowestPricedOffersForASIN</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getProduct</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetLowestPricedOffersForSKU`
+     * or `GetLowestPricedOffersForASIN` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getProduct()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchLowestPricedOffers()
     {
@@ -327,9 +327,9 @@ class AmazonProductInfo extends AmazonProductsCore
     }
 
     /**
-     * Sets up options for using <i>fetchLowestPricedOffers</i>.
+     * Sets up options for using `fetchLowestPricedOffers()`.
      *
-     * This changes key options for using <i>fetchLowestPricedOffers</i>.
+     * This changes key options for using `fetchLowestPricedOffers()`.
      */
     protected function prepareLowestPriced()
     {
@@ -352,10 +352,10 @@ class AmazonProductInfo extends AmazonProductsCore
     /**
      * Fetches a list of your prices on products from Amazon.
      *
-     * Submits a <i>GetMyPriceForSKU</i>
-     * or <i>GetMyPriceForASIN</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getProduct</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetMyPriceForSKU`
+     * or `GetMyPriceForASIN` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getProduct()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchMyPrice()
     {
@@ -386,9 +386,9 @@ class AmazonProductInfo extends AmazonProductsCore
     }
 
     /**
-     * Sets up options for using <i>fetchMyPrice</i>.
+     * Sets up options for using `fetchMyPrice()`.
      *
-     * This changes key options for using <i>fetchMyPrice</i>.
+     * This changes key options for using `fetchMyPrice()`.
      * Please note: because the operation does not use all of the parameters,
      * the ExcludeMe parameter will be removed.
      */
@@ -412,10 +412,10 @@ class AmazonProductInfo extends AmazonProductsCore
     /**
      * Fetches a list of categories for products from Amazon.
      *
-     * Submits a <i>GetProductCategoriesForSKU</i>
-     * or <i>GetProductCategoriesForASIN</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getProduct</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetProductCategoriesForSKU`
+     * or `GetProductCategoriesForASIN` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getProduct()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchCategories()
     {
@@ -446,9 +446,9 @@ class AmazonProductInfo extends AmazonProductsCore
     }
 
     /**
-     * Sets up options for using <i>fetchCategories</i>.
+     * Sets up options for using `fetchCategories()`.
      *
-     * This changes key options for using <i>fetchCategories</i>.
+     * This changes key options for using `fetchCategories()`.
      * Please note: because the operation does not use all of the parameters,
      * some of the parameters will be removed. The following parameters are removed:
      * ItemCondition and ExcludeMe.

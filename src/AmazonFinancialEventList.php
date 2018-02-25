@@ -54,12 +54,12 @@ class AmazonFinancialEventList extends AmazonFinanceCore
     /**
      * Sets whether or not the object should automatically use tokens if it receives one.
      *
-     * If this option is set to <b>TRUE</b>, the object will automatically perform
+     * If this option is set to TRUE, the object will automatically perform
      * the necessary operations to retrieve the rest of the list using tokens. If
      * this option is off, the object will only ever retrieve the first section of
      * the list.
-     * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param boolean $b [optional] Defaults to TRUE
+     * @return boolean FALSE if improper input
      */
     public function setUseToken($b = true)
     {
@@ -75,8 +75,8 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      *
      * This method sets the maximum number of Financial Events for Amazon to return per page.
      * If this parameter is not set, Amazon will send 100 at a time.
-     * @param int $num <p>Positive integer from 1 to 100.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param int $num Positive integer from 1 to 100.
+     * @return boolean FALSE if improper input
      */
     public function setMaxResultsPerPage($num)
     {
@@ -94,8 +94,8 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * relate to the given order. This parameter is required if none of the
      * other filter options are set.
      * If this parameter is set, the group ID and time range options will be removed.
-     * @param string $s <p>Amazon Order ID in 3-7-7 format</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Amazon Order ID in 3-7-7 format
+     * @return boolean FALSE if improper input
      */
     public function setOrderFilter($s)
     {
@@ -114,8 +114,8 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * belong to the given financial event group. This parameter is required if
      * none of the other filter options are set.
      * If this parameter is set, the order ID and time range options will be removed.
-     * @param string $s <p>Financial Event Group ID</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Financial Event Group ID
+     * @return boolean FALSE if improper input
      */
     public function setGroupFilter($s)
     {
@@ -134,11 +134,11 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * parameter is set, Amazon will only return Financial Events posted
      * between the two times given. This parameter is required if none of the
      * other filter options are set.
-     * The parameters are passed through <i>strtotime</i>, so values such as "-1 hour" are fine.
+     * The parameters are passed through `strtotime()`, so values such as "-1 hour" are fine.
      * If this parameter is set, the order ID and group ID options will be removed.
-     * @param string $s <p>A time string for the earliest time.</p>
-     * @param string $e [optional] <p>A time string for the latest time.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s A time string for the earliest time.
+     * @param string $e [optional] A time string for the latest time.
+     * @return boolean FALSE if improper input
      */
     public function setTimeLimits($s, $e = null)
     {
@@ -183,12 +183,12 @@ class AmazonFinancialEventList extends AmazonFinanceCore
     /**
      * Fetches the inventory supply list from Amazon.
      *
-     * Submits a <i>ListFinancialEvents</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getEvents</i>.
+     * Submits a `ListFinancialEvents` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getEvents()`.
      * Other methods are available for fetching specific values from the list.
      * This operation can potentially involve tokens.
-     * @param boolean $r [optional] <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param boolean $r [optional] When set to FALSE, the function will not recurse, defaults to TRUE
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchEventList($r = true)
     {
@@ -249,8 +249,8 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXml($xml)
     {
@@ -478,7 +478,7 @@ class AmazonFinancialEventList extends AmazonFinanceCore
 
     /**
      * Parses XML for a single shipment event into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
      * @return array parsed structure from XML
      */
     protected function parseShipmentEvent($xml)
@@ -591,7 +591,7 @@ class AmazonFinancialEventList extends AmazonFinanceCore
     /**
      * Parses XML for a single charge into an array.
      * This structure is used many times throughout shipment events.
-     * @param \SimpleXMLElement $xml <p>Charge node of the XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml Charge node of the XML response from Amazon.
      * @return array Parsed structure from XML
      */
     protected function parseCharge($xml)
@@ -606,7 +606,7 @@ class AmazonFinancialEventList extends AmazonFinanceCore
     /**
      * Parses XML for a single charge into an array.
      * This structure is used many times throughout shipment events.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
      * @return array parsed structure from XML
      */
     protected function parseFee($xml)
@@ -622,23 +622,23 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all financial events.
      *
      * The array will have the following keys:
-     * <ul>
-     * <li><b>Shipment</b> - see <i>getShipmentEvents</i></li>
-     * <li><b>Refund</b> - see <i>getRefundEvents</i></li>
-     * <li><b>GuaranteeClaim</b> - see <i>getGuaranteeClaimEvents</i></li>
-     * <li><b>Chargeback</b> - see <i>getChargebackEvents</i></li>
-     * <li><b>PayWithAmazon</b> - see <i>getPayWithAmazonEvents</i></li>
-     * <li><b>ServiceProviderCredit</b> - see <i>getServiceProviderCreditEvents</i></li>
-     * <li><b>Retrocharge</b> - see <i>getRetrochargeEvents</i></li>
-     * <li><b>RentalTransaction</b> - see <i>getRentalTransactionEvents</i></li>
-     * <li><b>PerformanceBondRefund</b> - see <i>getPerformanceBondRefundEvents</i></li>
-     * <li><b>ServiceFee</b> - see <i>getServiceFeeEvents</i></li>
-     * <li><b>DebtRecovery</b> - see <i>getDebtRecoveryEvents</i></li>
-     * <li><b>LoanServicing</b> - see <i>getLoanServicingEvents</i></li>
-     * <li><b>Adjustment</b> - see <i>getAdjustmentEvents</i></li>
-     * <li><b>SAFET</b> - see <i>getSafetEvents</i></li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - Shipment - see `getShipmentEvents()`
+     *  - Refund - see `getRefundEvents()`
+     *  - GuaranteeClaim - see `getGuaranteeClaimEvents()`
+     *  - Chargeback - see `getChargebackEvents()`
+     *  - PayWithAmazon - see `getPayWithAmazonEvents()`
+     *  - ServiceProviderCredit - see `getServiceProviderCreditEvents()`
+     *  - Retrocharge - see `getRetrochargeEvents()`
+     *  - RentalTransaction - see `getRentalTransactionEvents()`
+     *  - PerformanceBondRefund - see `getPerformanceBondRefundEvents()`
+     *  - ServiceFee - see `getServiceFeeEvents()`
+     *  - DebtRecovery - see `getDebtRecoveryEvents()`
+     *  - LoanServicing - see `getLoanServicingEvents()`
+     *  - Adjustment - see `getAdjustmentEvents()`
+     *  - SAFET - see `getSafetEvents()`
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      * @see getShipmentEvents
      * @see getRefundEvents
      * @see getGuaranteeClaimEvents
@@ -667,58 +667,58 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all shipment events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>AmazonOrderId</b></li>
-     * <li><b>SellerOrderId</b></li>
-     * <li><b>MarketplaceName</b></li>
-     * <li><b>OrderChargeList</b> (optional) - list of charges, only for MCF COD orders</li>
-     * <li><b>ShipmentFeeList</b> - list of fees</li>
-     * <li><b>OrderFeeList</b> (optional) - list of fees, only for MCF orders</li>
-     * <li><b>DirectPaymentList</b> (optional) - multi-dimensional array, only for COD orders.
-     * Each array in the list has the following keys:</li>
-     * <ul>
-     * <li><b>DirectPaymentType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>PostedDate</b> - ISO 8601 date format</li>
-     * </ul>
+     *
+     *  - AmazonOrderId
+     *  - SellerOrderId
+     *  - MarketplaceName
+     *  - OrderChargeList (optional) - list of charges, only for MCF COD orders
+     *  - ShipmentFeeList - list of fees
+     *  - OrderFeeList (optional) - list of fees, only for MCF orders
+     *  - DirectPaymentList (optional) - multi-dimensional array, only for COD orders.
+     * Each array in the list has the following keys:
+     *
+     *  - DirectPaymentType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - PostedDate - ISO 8601 date format
+     *
      *
      * Each "charge" array has the following keys:
-     * <ul>
-     * <li><b>ChargeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
+     *
+     *  - ChargeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
      * Each "fee" array has the following keys:
-     * <ul>
-     * <li><b>FeeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
+     *
+     *  - FeeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
      * Each "item" array has the following keys:
-     * <ul>
-     * <li><b>SellerSKU</b></li>
-     * <li><b>OrderItemId</b></li>
-     * <li><b>QuantityShipped</b></li>
-     * <li><b>ItemChargeList</b> - list of charges</li>
-     * <li><b>ItemFeeList</b> - list of fees</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * <li><b>PromotionList</b> - list of promotions</li>
-     * <li><b>CostOfPointsGranted</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * </ul>
+     *
+     *  - SellerSKU
+     *  - OrderItemId
+     *  - QuantityShipped
+     *  - ItemChargeList - list of charges
+     *  - ItemFeeList - list of fees
+     *  - CurrencyCode - ISO 4217 currency code
+     *  - PromotionList - list of promotions
+     *  - CostOfPointsGranted (optional) - array
+     *
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *
      * Each "promotion" array has the following keys:
-     * <ul>
-     * <li><b>PromotionType</b></li>
-     * <li><b>PromotionId</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - PromotionType
+     *  - PromotionId
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getShipmentEvents()
     {
@@ -732,26 +732,26 @@ class AmazonFinancialEventList extends AmazonFinanceCore
     /**
      * Returns all refund events.
      *
-     * The structure for each event array is the same as in <i>getShipmentEvents</i>,
+     * The structure for each event array is the same as in `getShipmentEvents()`,
      * but with the following additional keys in each "item" array:
-     * <ul>
-     * <li><b>OrderChargeAdjustmentList</b> (optional) - list of charges, only for MCF COD orders</li>
-     * <li><b>ShipmentFeeAdjustmentList</b> - list of fees</li>
-     * <li><b>OrderFeeAdjustmentList</b> (optional) - list of fees, only for MCF orders</li>
-     * </ul>
+     *
+     *  - OrderChargeAdjustmentList (optional) - list of charges, only for MCF COD orders
+     *  - ShipmentFeeAdjustmentList - list of fees
+     *  - OrderFeeAdjustmentList (optional) - list of fees, only for MCF orders
+     *
      * Each "item" array will have the following additional keys:
-     * <ul>
-     * <li><b>OrderAdjustmentItemId</b></li>
-     * <li><b>ItemChargeAdjustmentList</b> - list of charges</li>
-     * <li><b>ItemFeeAdjustmentList</b> - list of fees</li>
-     * <li><b>PromotionAdjustmentList</b> - list of promotions</li>
-     * <li><b>CostOfPointsReturned</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - OrderAdjustmentItemId
+     *  - ItemChargeAdjustmentList - list of charges
+     *  - ItemFeeAdjustmentList - list of fees
+     *  - PromotionAdjustmentList - list of promotions
+     *  - CostOfPointsReturned (optional) - array
+     *
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      * @see getShipmentEvents
      */
     public function getRefundEvents()
@@ -766,8 +766,8 @@ class AmazonFinancialEventList extends AmazonFinanceCore
     /**
      * Returns all guarantee claim events.
      *
-     * The structure for each event array is the same as in <i>getRefundEvents</i>.
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     * The structure for each event array is the same as in `getRefundEvents()`.
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      * @see getRefundEvents
      */
     public function getGuaranteeClaimEvents()
@@ -782,8 +782,8 @@ class AmazonFinancialEventList extends AmazonFinanceCore
     /**
      * Returns all chargeback events.
      *
-     * The structure for each event array is the same as in <i>getRefundEvents</i>.
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     * The structure for each event array is the same as in `getRefundEvents()`.
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      * @see getRefundEvents
      */
     public function getChargebackEvents()
@@ -799,29 +799,29 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all pay with Amazon events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>SellerOrderId</b></li>
-     * <li><b>TransactionPostedDate</b> - ISO 8601 date format</li>
-     * <li><b>BusinessObjectType</b> - "PaymentContract"</li>
-     * <li><b>SalesChannel</b></li>
-     * <li><b>Charge</b> - array</li>
-     * <ul>
-     * <li><b>ChargeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>FeeList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>FeeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>PaymentAmountType</b> - "Sales"</li>
-     * <li><b>AmountDescription</b></li>
-     * <li><b>FulfillmentChannel</b> - "MFN" or "AFN"</li>
-     * <li><b>StoreName</b></li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - SellerOrderId
+     *  - TransactionPostedDate - ISO 8601 date format
+     *  - BusinessObjectType - "PaymentContract"
+     *  - SalesChannel
+     *  - Charge - array
+     *
+     *  - ChargeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - FeeList - multi-dimensional array, each array has the following keys:
+     *
+     *  - FeeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - PaymentAmountType - "Sales"
+     *  - AmountDescription
+     *  - FulfillmentChannel - "MFN" or "AFN"
+     *  - StoreName
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getPayWithAmazonEvents()
     {
@@ -836,17 +836,17 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all service provider credit events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>ProviderTransactionType</b> - "ProviderCredit" or "ProviderCreditReversal"</li>
-     * <li><b>SellerOrderId</b></li>
-     * <li><b>MarketplaceId</b></li>
-     * <li><b>MarketplaceCountryCode</b> - two-letter country code in ISO 3166-1 alpha-2 format</li>
-     * <li><b>SellerId</b></li>
-     * <li><b>SellerStoreName</b></li>
-     * <li><b>ProviderId</b></li>
-     * <li><b>ProviderStoreName</b></li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - ProviderTransactionType - "ProviderCredit" or "ProviderCreditReversal"
+     *  - SellerOrderId
+     *  - MarketplaceId
+     *  - MarketplaceCountryCode - two-letter country code in ISO 3166-1 alpha-2 format
+     *  - SellerId
+     *  - SellerStoreName
+     *  - ProviderId
+     *  - ProviderStoreName
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getServiceProviderCreditEvents()
     {
@@ -861,19 +861,19 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all retrocharge events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>RetrochargeEventType</b> -"Retrocharge" or "RetrochargeReversal"</li>
-     * <li><b>AmazonOrderId</b></li>
-     * <li><b>PostedDate</b> - ISO 8601 date format</li>
-     * <li><b>BaseTax</b> - array</li>
-     * <ul>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>ShippingTax</b> - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * <li><b>MarketplaceName</b></li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RetrochargeEventType -"Retrocharge" or "RetrochargeReversal"
+     *  - AmazonOrderId
+     *  - PostedDate - ISO 8601 date format
+     *  - BaseTax - array
+     *
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - ShippingTax - array with Amount and CurrencyCode
+     *  - MarketplaceName
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getRetrochargeEvents()
     {
@@ -888,28 +888,28 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all rental transaction events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>AmazonOrderId</b></li>
-     * <li><b>RentalEventType</b></li>
-     * <li><b>ExtensionLength</b> (optional)</li>
-     * <li><b>PostedDate</b> - ISO 8601 date format</li>
-     * <li><b>RentalChargeList</b> - multi-dimensional array, each with the following keys:</li>
-     * <ul>
-     * <li><b>ChargeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>RentalFeeList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>FeeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>MarketplaceName</b></li>
-     * <li><b>RentalInitialValue</b> (optional) - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * <li><b>RentalReimbursement</b> (optional) - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - AmazonOrderId
+     *  - RentalEventType
+     *  - ExtensionLength (optional)
+     *  - PostedDate - ISO 8601 date format
+     *  - RentalChargeList - multi-dimensional array, each with the following keys:
+     *
+     *  - ChargeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - RentalFeeList - multi-dimensional array, each array has the following keys:
+     *
+     *  - FeeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - MarketplaceName
+     *  - RentalInitialValue (optional) - array with Amount and CurrencyCode
+     *  - RentalReimbursement (optional) - array with Amount and CurrencyCode
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getRentalTransactionEvents()
     {
@@ -924,13 +924,13 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all performance bond refund events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>MarketplaceCountryCode</b> - two-letter country code in ISO 3166-1 alpha-2 format</li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * <li><b>ProductGroupList</b> - simple array of category names</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - MarketplaceCountryCode - two-letter country code in ISO 3166-1 alpha-2 format
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *  - ProductGroupList - simple array of category names
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getPerformanceBondRefundEvents()
     {
@@ -945,21 +945,21 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all service fee events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>AmazonOrderId</b></li>
-     * <li><b>FeeReason</b></li>
-     * <li><b>FeeList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>FeeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>SellerSKU</b></li>
-     * <li><b>FnSKU</b></li>
-     * <li><b>FeeDescription</b></li>
-     * <li><b>ASIN</b></li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - AmazonOrderId
+     *  - FeeReason
+     *  - FeeList - multi-dimensional array, each array has the following keys:
+     *
+     *  - FeeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - SellerSKU
+     *  - FnSKU
+     *  - FeeDescription
+     *  - ASIN
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getServiceFeeEvents()
     {
@@ -974,30 +974,30 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all debt recovery events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>DebtRecoveryType</b> - "DebtPayment", "DebtPaymentFailure", or "DebtAdjustment"</li>
-     * <li><b>RecoveryAmount</b> - array</li>
-     * <ul>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * <li><b>OverPaymentCredit</b> (optional) - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * <li><b>DebtRecoveryItemList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>RecoveryAmount</b> - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * <li><b>OriginalAmount</b> - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * <li><b>GroupBeginDate</b> - ISO 8601 date format</li>
-     * <li><b>GroupEndDate</b> - ISO 8601 date format</li>
-     * </ul>
-     * <li><b>ChargeInstrumentList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>Description</b></li>
-     * <li><b>Tail</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - DebtRecoveryType - "DebtPayment", "DebtPaymentFailure", or "DebtAdjustment"
+     *  - RecoveryAmount - array
+     *
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *  - OverPaymentCredit (optional) - array with Amount and CurrencyCode
+     *  - DebtRecoveryItemList - multi-dimensional array, each array has the following keys:
+     *
+     *  - RecoveryAmount - array with Amount and CurrencyCode
+     *  - OriginalAmount - array with Amount and CurrencyCode
+     *  - GroupBeginDate - ISO 8601 date format
+     *  - GroupEndDate - ISO 8601 date format
+     *
+     *  - ChargeInstrumentList - multi-dimensional array, each array has the following keys:
+     *
+     *  - Description
+     *  - Tail
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getDebtRecoveryEvents()
     {
@@ -1012,12 +1012,12 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all loan servicing events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * <li><b>SourceBusinessEventType</b> - "LoanAdvance", "LoanPayment", or "LoanRefund"</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *  - SourceBusinessEventType - "LoanAdvance", "LoanPayment", or "LoanRefund"
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getLoanServicingEvents()
     {
@@ -1032,22 +1032,22 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all adjustment events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>AdjustmentType</b> "FBAInventoryReimbursement", "ReserveEvent", "PostageBilling", or "PostageRefund"</li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * <li><b>AdjustmentItemList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>Quantity</b></li>
-     * <li><b>PerUnitAmount</b> - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * <li><b>TotalAmount</b> - array with <b>Amount</b> and <b>CurrencyCode</b></li>
-     * <li><b>SellerSKU</b></li>
-     * <li><b>FnSKU</b></li>
-     * <li><b>ProductDescription</b></li>
-     * <li><b>ASIN</b></li>
-     * </ul>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - AdjustmentType "FBAInventoryReimbursement", "ReserveEvent", "PostageBilling", or "PostageRefund"
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *  - AdjustmentItemList - multi-dimensional array, each array has the following keys:
+     *
+     *  - Quantity
+     *  - PerUnitAmount - array with Amount and CurrencyCode
+     *  - TotalAmount - array with Amount and CurrencyCode
+     *  - SellerSKU
+     *  - FnSKU
+     *  - ProductDescription
+     *  - ASIN
+     *
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getAdjustmentEvents()
     {
@@ -1062,22 +1062,22 @@ class AmazonFinancialEventList extends AmazonFinanceCore
      * Returns all SAFE-T reimbursement events.
      *
      * Each event array will have the following keys:
-     * <ul>
-     * <li><b>PostedDate</b> - ISO 8601 date format</li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * <li><b>SAFETClaimId</b></li>
-     * <li><b>SAFETReimbursementItemList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>ItemChargeList</b> - multi-dimensional array, each array has the following keys:</li>
-     * <ul>
-     * <li><b>ChargeType</b></li>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
-     * </ul>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - PostedDate - ISO 8601 date format
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *  - SAFETClaimId
+     *  - SAFETReimbursementItemList - multi-dimensional array, each array has the following keys:
+     *
+     *  - ItemChargeList - multi-dimensional array, each array has the following keys:
+     *
+     *  - ChargeType
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
+     *
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getSafetEvents()
     {

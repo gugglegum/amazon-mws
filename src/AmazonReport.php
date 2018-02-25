@@ -42,11 +42,11 @@ class AmazonReport extends AmazonReportsCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $id [optional] <p>The report ID to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $id [optional] The report ID to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $id = null, $mock = false, $m = null)
     {
@@ -72,8 +72,8 @@ class AmazonReport extends AmazonReportsCore
      *
      * This method sets the report ID to be sent in the next request.
      * This parameter is required for fetching the report from Amazon.
-     * @param string|integer $n <p>Must be numeric</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string|integer $n Must be numeric
+     * @return boolean FALSE if improper input
      */
     public function setReportId($n)
     {
@@ -87,10 +87,10 @@ class AmazonReport extends AmazonReportsCore
     /**
      * Sends a request to Amazon for a report.
      *
-     * Submits a <i>GetReport</i> request to Amazon. In order to do this,
+     * Submits a `GetReport` request to Amazon. In order to do this,
      * a report ID is required. Amazon will send
-     * the data back as a response, which can be saved using <i>saveReport</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * the data back as a response, which can be saved using `saveReport()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchReport()
     {
@@ -118,10 +118,10 @@ class AmazonReport extends AmazonReportsCore
 
     /**
      * Gets the raw report data.
-     * This method will return <b>FALSE</b> if the data has not yet been retrieved.
+     * This method will return FALSE if the data has not yet been retrieved.
      * Please note that this data is often very large.
-     * @param string $path <p>filename to save the file in</p>
-     * @return string|boolean raw data string, or <b>FALSE</b> if data has not been retrieved yet
+     * @param string $path filename to save the file in
+     * @return string|boolean raw data string, or FALSE if data has not been retrieved yet
      */
     public function getRawReport()
     {
@@ -133,8 +133,8 @@ class AmazonReport extends AmazonReportsCore
 
     /**
      * Saves the raw report data to a path you specify
-     * @param string $path <p>filename to save the file in</p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param string $path filename to save the file in
+     * @return boolean FALSE if something goes wrong
      */
     public function saveReport($path)
     {

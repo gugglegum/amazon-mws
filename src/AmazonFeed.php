@@ -24,7 +24,7 @@ namespace gugglegum\AmazonMWS;
  * This Amazon Feeds Core object can submit feeds to Amazon.
  * In order to submit a feed, the feed's contents (as direct input or from a file)
  * and feed type must be set. Once the feed has been submitted,
- * the response from Amazon can be viewed with <i>getResponse</i>.
+ * the response from Amazon can be viewed with `getResponse()`.
  */
 class AmazonFeed extends AmazonFeedsCore
 {
@@ -49,10 +49,10 @@ class AmazonFeed extends AmazonFeedsCore
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -75,9 +75,9 @@ class AmazonFeed extends AmazonFeedsCore
      *
      * Thie method sets the feed's contents from direct input.
      * This parameter is required in order to submit a feed to Amazon.
-     * @param string $s <p>The contents to put in the file.</p>
-     * It can be relative or absolute.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s The contents to put in the file.
+     * It can be relative or absolute.
+     * @return boolean FALSE if improper input
      */
     public function setFeedContent($s)
     {
@@ -94,8 +94,8 @@ class AmazonFeed extends AmazonFeedsCore
      *
      * This method loads the contents of a file to send as the feed. This
      * parameter is required in order to submit a feed to Amazon.
-     * @param string $path <p>The path to a file you want to use.
-     * It can be relative or absolute.</p>
+     * @param string $path The path to a file you want to use.
+     * It can be relative or absolute.
      */
     public function loadFeedFile($path)
     {
@@ -116,9 +116,9 @@ class AmazonFeed extends AmazonFeedsCore
      * This method sets the Feed Type to be sent in the next request. This tells
      * Amazon how the Feed should be processsed.
      * This parameter is required in order to submit a feed to Amazon.
-     * @param string $s <p>A value from the list of valid Feed Types.
-     * See the comment inside the function for the complete list.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s A value from the list of valid Feed Types.
+     * See the comment inside the function for the complete list.
+     * @return boolean FALSE if improper input
      */
     public function setFeedType($s)
     {
@@ -177,8 +177,8 @@ class AmazonFeed extends AmazonFeedsCore
      * Marketplace. These should be IDs for Marketplaces that you are registered
      * to sell in. If this is not set, Amazon will only use the first Marketplace
      * you are registered for.
-     * @param array|string $s <p>A list of Marketplace IDs, or a single ID string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s A list of Marketplace IDs, or a single ID string.
+     * @return boolean FALSE if improper input
      */
     public function setMarketplaceIds($s)
     {
@@ -216,14 +216,14 @@ class AmazonFeed extends AmazonFeedsCore
      * Turns on or off Purge mode. (Optional)
      *
      *
-     * <b>Warning! This parameter can only be used once every 24 hours!</b>
+     * Warning! This parameter can only be used once every 24 hours!
      *
      * This method sets whether or not the tab delimited feed you provide should
      * completely replace old data. Use this parameter only in exceptional cases.
      * If this is not set, Amazon assumes it to be false.
-     * @param boolean|string $s [optional] <p>The value "true" or "false", either as
-     * a boolean or a string. It defaults to "true".</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param boolean|string $s [optional] The value "true" or "false", either as
+     * a boolean or a string. It defaults to "true".
+     * @return boolean FALSE if improper input
      */
     public function setPurge($s = 'true')
     {
@@ -246,11 +246,11 @@ class AmazonFeed extends AmazonFeedsCore
     /**
      * Submits a feed to Amazon.
      *
-     * Submits a <i>SubmitFeed</i> request to Amazon. In order to do this, both
+     * Submits a `SubmitFeed` request to Amazon. In order to do this, both
      * the feed's contents and feed type are required. The request will not be
      * sent if either of these are not set. Amazon will send a response back,
-     * which can be retrieved using <i>getResponse</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * which can be retrieved using `getResponse()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function submitFeed()
     {
@@ -294,8 +294,8 @@ class AmazonFeed extends AmazonFeedsCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -328,13 +328,13 @@ class AmazonFeed extends AmazonFeedsCore
      * Returns the response data in array.
      *
      * It will contain the following fields:
-     * <ul>
-     * <li><b>FeedSubmissionId</b> - Unique ID for the feed submission</li>
-     * <li><b>FeedType</b> - Same as the feed type you gave</li>
-     * <li><b>SubmittedDate</b> - The timestamp for when the Feed was received</li>
-     * <li><b>FeedProcessingStatus</b> - The status of the feed, likely "_SUBMITTED_"</li>
-     * </ul>
-     * @return array|boolean associative array, or <b>FALSE</b> if no response is found
+     *
+     *  - FeedSubmissionId - Unique ID for the feed submission
+     *  - FeedType - Same as the feed type you gave
+     *  - SubmittedDate - The timestamp for when the Feed was received
+     *  - FeedProcessingStatus - The status of the feed, likely "_SUBMITTED_"
+     *
+     * @return array|boolean associative array, or FALSE if no response is found
      */
     public function getResponse()
     {

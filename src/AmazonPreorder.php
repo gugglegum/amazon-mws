@@ -59,11 +59,11 @@ class AmazonPreorder extends AmazonInboundCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $id [optional] <p>The Fulfillment Shipment ID to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $id [optional] The Fulfillment Shipment ID to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $id = null, $mock = false, $m = null)
     {
@@ -76,8 +76,8 @@ class AmazonPreorder extends AmazonInboundCore
 
     /**
      * Sets the shipment ID. (Required)
-     * @param string $s <p>Shipment ID</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Shipment ID
+     * @return boolean FALSE if improper input
      */
     public function setShipmentId($s)
     {
@@ -92,10 +92,10 @@ class AmazonPreorder extends AmazonInboundCore
      * Sets the maximum arrival date for the shipment. (Required to confirm)
      *
      * This method sets the max arrival date to be sent in the next request.
-     * This parameter is required to use <i>confirmPreorder</i> and is removed
-     * by <i>fetchPreorderInfo</i>.
-     * @param string $d <p>A time string</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * This parameter is required to use `confirmPreorder()` and is removed
+     * by `fetchPreorderInfo()`.
+     * @param string $d A time string
+     * @return boolean FALSE if improper input
      */
     public function setNeedByDate($d)
     {
@@ -111,12 +111,12 @@ class AmazonPreorder extends AmazonInboundCore
     /**
      * Fetches preorder information from Amazon.
      *
-     * Submits a <i>GetPreorderInfo</i> request to Amazon. In order to do this,
+     * Submits a `GetPreorderInfo` request to Amazon. In order to do this,
      * a fulfillment shipment ID is required. Amazon will send the data back as
-     * a response, which can be retrieved using <i>getNeedByDate</i>,
-     * <i>getFulfillableDate</i>, <i>getHasPreorderableItems</i>,
-     * and <i>getIsConfirmed</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * a response, which can be retrieved using `getNeedByDate()`,
+     * `getFulfillableDate()`, `getHasPreorderableItems()`,
+     * and `getIsConfirmed()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchPreorderInfo()
     {
@@ -148,9 +148,9 @@ class AmazonPreorder extends AmazonInboundCore
     }
 
     /**
-     * Sets up options for using <i>fetchPreorderInfo</i>.
+     * Sets up options for using `fetchPreorderInfo()`.
      *
-     * This changes key options for using <i>fetchPreorderInfo</i>.
+     * This changes key options for using `fetchPreorderInfo()`.
      * Please note: because the operation does not use all of the parameters,
      * some of the parameters will be removed. The following parameters are removed:
      * NeedByDate.
@@ -165,11 +165,11 @@ class AmazonPreorder extends AmazonInboundCore
     /**
      * Confirms preorder information for a shipment with Amazon.
      *
-     * Submits a <i>ConfirmPreorder</i> request to Amazon. In order to do this,
+     * Submits a `ConfirmPreorder` request to Amazon. In order to do this,
      * a fulfillment shipment ID and an arrival date are required.
      * Amazon will send the data back as a response, which can be retrieved
-     * using <i>getNeedByDate</i> and <i>getFulfillableDate</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * using `getNeedByDate()` and `getFulfillableDate()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function confirmPreorder()
     {
@@ -205,9 +205,9 @@ class AmazonPreorder extends AmazonInboundCore
     }
 
     /**
-     * Sets up options for using <i>confirmPreorder</i>.
+     * Sets up options for using `confirmPreorder()`.
      *
-     * This changes key options for using <i>confirmPreorder</i>.
+     * This changes key options for using `confirmPreorder()`.
      */
     protected function prepareConfirm()
     {
@@ -219,8 +219,8 @@ class AmazonPreorder extends AmazonInboundCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXml($xml)
     {
@@ -247,10 +247,10 @@ class AmazonPreorder extends AmazonInboundCore
     /**
      * Returns the date that the shipment must arrive by in order to fulfill preorders.
      *
-     * After <i>confirmPreorder</i>, this date should be the same as
-     * the <i>NeedByDate</i> option that was sent with the request.
-     * This method will return <b>FALSE</b> if the date has not been set yet.
-     * @return string|boolean date in YYYY-MM-DD format, or <b>FALSE</b> if date not set yet
+     * After `confirmPreorder()`, this date should be the same as
+     * the `NeedByDate` option that was sent with the request.
+     * This method will return FALSE if the date has not been set yet.
+     * @return string|boolean date in YYYY-MM-DD format, or FALSE if date not set yet
      */
     public function getNeedByDate()
     {
@@ -264,8 +264,8 @@ class AmazonPreorder extends AmazonInboundCore
     /**
      * Returns the date that preorderable items in the shipment can be purchased.
      *
-     * This method will return <b>FALSE</b> if the date has not been set yet.
-     * @return string|boolean date in YYYY-MM-DD format, or <b>FALSE</b> if date not set yet
+     * This method will return FALSE if the date has not been set yet.
+     * @return string|boolean date in YYYY-MM-DD format, or FALSE if date not set yet
      */
     public function getFulfillableDate()
     {
@@ -281,8 +281,8 @@ class AmazonPreorder extends AmazonInboundCore
      *
      * Note that this method will return the string "false" if Amazon indicates
      * that the shipment does not have preorderable items.
-     * This method will return boolean <b>FALSE</b> if the date has not been set yet.
-     * @return string|boolean "true" or "false", or <b>FALSE</b> if date not set yet
+     * This method will return boolean FALSE if the date has not been set yet.
+     * @return string|boolean "true" or "false", or FALSE if date not set yet
      */
     public function getHasPreorderableItems()
     {
@@ -294,8 +294,8 @@ class AmazonPreorder extends AmazonInboundCore
      *
      * Note that this method will return the string "false" if Amazon indicates
      * that the shipment information has not yet been confirmed.
-     * This method will return boolean <b>FALSE</b> if the date has not been set yet.
-     * @return string|boolean "true" or "false", or <b>FALSE</b> if date not set yet
+     * This method will return boolean FALSE if the date has not been set yet.
+     * @return string|boolean "true" or "false", or FALSE if date not set yet
      */
     public function getIsConfirmed()
     {

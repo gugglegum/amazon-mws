@@ -39,11 +39,11 @@ class AmazonPackageTracker extends AmazonOutboundCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $id [optional] <p>The package ID to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $id [optional] The package ID to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config = null, $id = null, $mock = false, $m = null)
     {
@@ -61,8 +61,8 @@ class AmazonPackageTracker extends AmazonOutboundCore
      *
      * This method sets the package ID to be sent in the next request.
      * This parameter is required for fetching the tracking information from Amazon.
-     * @param string|integer $n <p>Must be numeric</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string|integer $n Must be numeric
+     * @return boolean FALSE if improper input
      */
     public function setPackageNumber($n)
     {
@@ -76,10 +76,10 @@ class AmazonPackageTracker extends AmazonOutboundCore
     /**
      * Sends a request to Amazon for package tracking details.
      *
-     * Submits a <i>GetPackageTrackingDetails</i> request to Amazon. In order to do this,
+     * Submits a `GetPackageTrackingDetails` request to Amazon. In order to do this,
      * a package ID is required. Amazon will send
-     * the data back as a response, which can be retrieved using <i>getDetails</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * the data back as a response, which can be retrieved using `getDetails()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchTrackingDetails()
     {
@@ -112,8 +112,8 @@ class AmazonPackageTracker extends AmazonOutboundCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $d <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $d The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($d)
     {
@@ -153,28 +153,28 @@ class AmazonPackageTracker extends AmazonOutboundCore
     /**
      * Returns the full package tracking information.
      *
-     * This method will return <b>FALSE</b> if the data has not yet been filled.
+     * This method will return FALSE if the data has not yet been filled.
      * The array returned will have the following fields:
-     * <ul>
-     * <li><b>PackageNumber</b> - the same package ID you provided, hopefully</li>
-     * <li><b>TrackingNumber</b> - the tracking number for the package</li>
-     * <li><b>CarrierCode</b> - name of the carrier</li>
-     * <li><b>CarrierPhoneNumber</b> - the phone number of the carrier</li>
-     * <li><b>CarrierURL</b> - the URL of the carrier's website</li>
-     * <li><b>ShipDate</b> - time the package was shipped, in ISO 8601 date format</li>
-     * <li><b>ShipToAddress</b> - an array containing the fields <b>City</b>, <b>State</b>, and <b>Country</b></li>
-     * <li><b>CurrentStatus</b> - delivery status of the package</li>
-     * <li><b>SignedForBy</b> - name of the person who signed for the package</li>
-     * <li><b>EstimatedArrivalDate</b> - in ISO 8601 date format</li>
-     * <li><b>TrackingEvents</b> - multi-dimensional array of tracking events, each with the following fields:</li>
-     * <ul>
-     * <li><b>EventDate</b> - in ISO 8601 date format</li>
-     * <li><b>EventAddress</b> - an array containing the fields <b>City</b>, <b>State</b>, and <b>Country</b></li>
-     * <li><b>EventCode</b> - a code number</li>
-     * </ul>
-     * <li><b>AdditionalLocationInfo</b> - further information on how the package was delivered (ex: to a front door)</li>
-     * </ul>
-     * @return array|boolean data array, or <b>FALSE</b> if data not filled yet
+     *
+     *  - PackageNumber - the same package ID you provided, hopefully
+     *  - TrackingNumber - the tracking number for the package
+     *  - CarrierCode - name of the carrier
+     *  - CarrierPhoneNumber - the phone number of the carrier
+     *  - CarrierURL - the URL of the carrier's website
+     *  - ShipDate - time the package was shipped, in ISO 8601 date format
+     *  - ShipToAddress - an array containing the fields City, State, and Country
+     *  - CurrentStatus - delivery status of the package
+     *  - SignedForBy - name of the person who signed for the package
+     *  - EstimatedArrivalDate - in ISO 8601 date format
+     *  - TrackingEvents - multi-dimensional array of tracking events, each with the following fields:
+     *
+     *  - EventDate - in ISO 8601 date format
+     *  - EventAddress - an array containing the fields City, State, and Country
+     *  - EventCode - a code number
+     *
+     *  - AdditionalLocationInfo - further information on how the package was delivered (ex: to a front door)
+     *
+     * @return array|boolean data array, or FALSE if data not filled yet
      */
     public function getDetails()
     {

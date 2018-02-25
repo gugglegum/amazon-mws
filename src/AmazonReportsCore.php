@@ -33,10 +33,10 @@ abstract class AmazonReportsCore extends AmazonCore
      * The parameters are passed by the child objects' constructors, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {

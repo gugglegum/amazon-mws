@@ -41,10 +41,10 @@ class AmazonShipment extends AmazonInboundCore
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -60,8 +60,8 @@ class AmazonShipment extends AmazonInboundCore
      * Note that the label preperation preference will be set to "AMAZON_LABEL_PREFERRED" if the
      * fulfillment preview selects the label type as "AMAZON_LABEL" and "SELLER_LABEL" otherwise.
      * This information is required to submit a shipment, but this method is not required.
-     * @param array $x <p>plan array from <i>AmazonShipmentPlanner</i></p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array $x plan array from `AmazonShipmentPlanner`
+     * @return boolean FALSE if improper input
      */
     public function usePlan($x)
     {
@@ -89,8 +89,8 @@ class AmazonShipment extends AmazonInboundCore
      * Sets the name for the shipment. (Required)
      *
      * This information is required to create a fulfillment shipment.
-     * @param string $n <p>name</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $n name
+     * @return boolean FALSE if improper input
      */
     public function setShipmentName($n)
     {
@@ -107,18 +107,18 @@ class AmazonShipment extends AmazonInboundCore
      * This method sets the shipper's address to be sent in the next request.
      * This parameter is required for creating a fulfillment order with Amazon.
      * The array provided should have the following fields:
-     * <ul>
-     * <li><b>Name</b> - max: 50 char</li>
-     * <li><b>AddressLine1</b> - max: 180 char</li>
-     * <li><b>AddressLine2</b> (optional) - max: 60 char</li>
-     * <li><b>City</b> - max: 30 char</li>
-     * <li><b>DistrictOrCounty</b> (optional) - max: 25 char</li>
-     * <li><b>StateOrProvinceCode</b> (recommended) - 2 digits</li>
-     * <li><b>CountryCode</b> - 2 digits</li>
-     * <li><b>PostalCode</b> - max: 30 char</li>
-     * </ul>
-     * @param array $a <p>See above.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     *
+     *  - Name - max: 50 char
+     *  - AddressLine1 - max: 180 char
+     *  - AddressLine2 (optional) - max: 60 char
+     *  - City - max: 30 char
+     *  - DistrictOrCounty (optional) - max: 25 char
+     *  - StateOrProvinceCode (recommended) - 2 digits
+     *  - CountryCode - 2 digits
+     *  - PostalCode - max: 30 char
+     *
+     * @param array $a See above.
+     * @return boolean FALSE if improper input
      */
     public function setAddress($a)
     {
@@ -172,8 +172,8 @@ class AmazonShipment extends AmazonInboundCore
      * Sets the name for the shipment. (Required)
      *
      * This information is required to create a fulfillment shipment.
-     * @param string $d <p>destination fulfillment center ID</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $d destination fulfillment center ID
+     * @return boolean FALSE if improper input
      */
     public function setDestination($d)
     {
@@ -188,8 +188,8 @@ class AmazonShipment extends AmazonInboundCore
      * Sets the label prep type preference for the shipment. (Required)
      *
      * This information is required to create a fulfillment shipment.
-     * @param string $p <p>"SELLER_LABEL", "AMAZON_LABEL_ONLY", or "AMAZON_LABEL_PREFERRED"</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $p "SELLER_LABEL", "AMAZON_LABEL_ONLY", or "AMAZON_LABEL_PREFERRED"
+     * @return boolean FALSE if improper input
      */
     public function setLabelPrepPreference($p)
     {
@@ -206,20 +206,20 @@ class AmazonShipment extends AmazonInboundCore
      * This method sets the Fulfillment Order ID to be sent in the next request.
      * This parameter is required for creating a fulfillment order with Amazon.
      * The array provided should contain a list of arrays, each with the following fields:
-     * <ul>
-     * <li><b>SellerSKU</b> - max: 50 char</li>
-     * <li><b>Quantity</b> - numeric</li>
-     * <li><b>QuantityInCase</b> (optional) - numeric</li>
-     * <li><b>PrepDetailsList</b> (optional) - array</li>
-     * <ul>
-     * <li><b>PrepInstruction</b> - "Polybagging", "BubbleWrapping", "Taping",
-     * "BlackShrinkWrapping", "Labeling", or "HangGarment"</li>
-     * <li><b>PrepOwner</b> - "AMAZON" or "SELLER"</li>
-     * </ul>
-     * <li><b>ReleaseDate</b> (optional) - date string</li>
-     * </ul>
-     * @param array $a <p>See above.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     *
+     *  - SellerSKU - max: 50 char
+     *  - Quantity - numeric
+     *  - QuantityInCase (optional) - numeric
+     *  - PrepDetailsList (optional) - array
+     *
+     *  - PrepInstruction - "Polybagging", "BubbleWrapping", "Taping",
+     * "BlackShrinkWrapping", "Labeling", or "HangGarment"
+     *  - PrepOwner - "AMAZON" or "SELLER"
+     *
+     *  - ReleaseDate (optional) - date string
+     *
+     * @param array $a See above.
+     * @return boolean FALSE if improper input
      */
     public function setItems($a)
     {
@@ -281,8 +281,8 @@ class AmazonShipment extends AmazonInboundCore
 
     /**
      * Sets the shipment status. (Required)
-     * @param string $s <p>"WORKING", "SHIPPED", or "CANCELLED" (updating only)</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s "WORKING", "SHIPPED", or "CANCELLED" (updating only)
+     * @return boolean FALSE if improper input
      */
     public function setStatus($s)
     {
@@ -299,8 +299,8 @@ class AmazonShipment extends AmazonInboundCore
 
     /**
      * Sets the shipment ID. (Required)
-     * @param string $s <p>Shipment ID</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Shipment ID
+     * @return boolean FALSE if improper input
      */
     public function setShipmentId($s)
     {
@@ -313,7 +313,7 @@ class AmazonShipment extends AmazonInboundCore
 
     /**
      * Set whether or not cases are required. (Required if cases used)
-     * @param boolean $b <p>Defaults to <b>TRUE</b>.</p>
+     * @param boolean $b Defaults to TRUE.
      */
     protected function setCases($b = true)
     {
@@ -327,11 +327,11 @@ class AmazonShipment extends AmazonInboundCore
     /**
      * Sends a request to Amazon to create an Inbound Shipment.
      *
-     * Submits a <i>CreateInboundShipment</i> request to Amazon. In order to do this,
+     * Submits a `CreateInboundShipment` request to Amazon. In order to do this,
      * all parameters must be set. Data for these headers can be generated using an
-     * <i>AmazonShipmentPlanner</i> object. Amazon will send back the Shipment ID
-     * as a response, which can be retrieved using <i>getShipmentId</i>.
-     * @return boolean <b>TRUE</b> if success, <b>FALSE</b> if something goes wrong
+     * `AmazonShipmentPlanner` object. Amazon will send back the Shipment ID
+     * as a response, which can be retrieved using `getShipmentId()`.
+     * @return boolean TRUE if success, FALSE if something goes wrong
      */
     public function createShipment()
     {
@@ -382,11 +382,11 @@ class AmazonShipment extends AmazonInboundCore
     /**
      * Sends a request to Amazon to create an Inbound Shipment.
      *
-     * Submits a <i>UpdateInboundShipment</i> request to Amazon. In order to do this,
+     * Submits a `UpdateInboundShipment` request to Amazon. In order to do this,
      * all parameters must be set. Data for these headers can be generated using an
-     * <i>AmazonShipmentPlanner</i> object. Amazon will send back the Shipment ID
-     * as a response, which can be retrieved using <i>getShipmentId</i>.
-     * @return boolean <b>TRUE</b> if success, <b>FALSE</b> if something goes wrong
+     * `AmazonShipmentPlanner` object. Amazon will send back the Shipment ID
+     * as a response, which can be retrieved using `getShipmentId()`.
+     * @return boolean TRUE if success, FALSE if something goes wrong
      */
     public function updateShipment()
     {
@@ -436,7 +436,7 @@ class AmazonShipment extends AmazonInboundCore
 
     /**
      * Returns the shipment ID of the newly created/modified order.
-     * @return string|boolean single value, or <b>FALSE</b> if Shipment ID not fetched yet
+     * @return string|boolean single value, or FALSE if Shipment ID not fetched yet
      */
     public function getShipmentId()
     {

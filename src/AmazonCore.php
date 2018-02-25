@@ -28,68 +28,67 @@ namespace gugglegum\AmazonMWS;
  * signature generation.
  *
  * The general flow for using a class in this library is as follows:
- * <ol>
- * <li>Create an object (or objects) of the desired type.</li>
- * <li>Set the request parameters using "set_____" functions.
+ *
+ *  - Create an object (or objects) of the desired type.
+ *  - Set the request parameters using "set_____" functions.
  * Some classes allow you to set parameters when constructing the object.
- * Some classes don't need any parameters, and a few don't have any at all.</li>
- * <li>Send the request to Amazon using the class's unique function. (Usually "fetch___")
- * If not enough parameters have been set, the request will not go through.</li>
- * <li>Retrieve the data received with "get____" functions. Some classes can
- * be iterated through using foreach.</li>
- * <li>Repeat. Please note that performing Amazon actions sometimes alters or
+ * Some classes don't need any parameters, and a few don't have any at all.
+ *  - Send the request to Amazon using the class's unique function. (Usually "fetch___")
+ * If not enough parameters have been set, the request will not go through.
+ *  - Retrieve the data received with "get____" functions. Some classes can
+ * be iterated through using foreach.
+ *  - Repeat. Please note that performing Amazon actions sometimes alters or
  * removes parameters previously set, so it is recommended that you set all of the
  * desired parameters again before making a second action, or better yet, use a new object.
  * The exception to this is follow-up actions, which rely on the data previously
- * received from Amazon and do not require any parameters.</li>
- * </ol>
+ * received from Amazon and do not require any parameters.
+ *
  * While there are a lot of functions, they all share one of the structures listed below.
  * Once you know how to use one class, you should be able to use the other classes.
- * <ul>
- * <li><b>Constructor</b> - Some classes let you pass an extra value when creating the class
+ *
+ *  - Constructor - Some classes let you pass an extra value when creating the class
  * in order to automatically set one of the parameters necessary for the class. Other
  * than that, all of the classes are created the same way and have the same options
- * for setting mock mode and other testing features.</li>
- * <li><b>Set an Option Flag</b> - These are functions for toggling a setting that only has an
+ * for setting mock mode and other testing features.
+ *  - Set an Option Flag - These are functions for toggling a setting that only has an
  * On or Off setting. The single value they take is usually a boolean (or sometimes
  * a string with the words "true" or "false") and the value is often optional. If
  * no value is passed, the setting will be enabled. Passing a value of false is
- * the only way to deactivate the option afterwards.</li>
- * <li><b>Set Single Value</b> - These are functions meant for setting a parameter that
+ * the only way to deactivate the option afterwards.
+ *  - Set Single Value - These are functions meant for setting a parameter that
  * uses only a single value. For example, setting a shipment ID to
  * receive the items for. They typically require only a single parameter, usually a string.
  * Occasionally, the function will require a number, or a specific string value. In
- * these cases, the function will not set the parameter if the value is incorrect.</li>
- * <li><b>Set Multiple Values</b> - These are functions for setting options that can take
+ * these cases, the function will not set the parameter if the value is incorrect.
+ *  - Set Multiple Values - These are functions for setting options that can take
  * a list of values. These functions can take either an array of values, or a single
  * string. If this function is used a second time, the first list of values will be
- * completely removed and replaced with the new values.</li>
- * <li><b>Set Time Options</b> - A number of classes have functions for setting time limit
+ * completely removed and replaced with the new values.
+ *  - Set Time Options - A number of classes have functions for setting time limit
  * options. This is typically a pair of time points, but depending on the class, it
- * may only need one. All values passed to these functions are passed through <i>strtotime</i>
+ * may only need one. All values passed to these functions are passed through `strtotime()`
  * before being used, so a wide variety of values is accepted. For more information on
- * what is acceptible, see the documentation for <i>strtotime</i>.</li>
- * <li><b>Amazon Actions</b> - These are functions with names like "fetch____" or "cancel___",
+ * what is acceptible, see the documentation for `strtotime()`.
+ *  - Amazon Actions - These are functions with names like "fetch____" or "cancel___",
  * and they are what send the request to Amazon. No parameter is ever needed, and the output
- * is always only to indicate if the action was successful.</li>
- * <li><b>Retrieve Value from a Single Object</b> - These functions are for retrieving
+ * is always only to indicate if the action was successful.
+ *  - Retrieve Value from a Single Object - These functions are for retrieving
  * data sent by Amazon from a class that is not dedicated to a list of information.
- * No parameters are needed.</li>
- * <li><b>Retrieve Value from a List Object</b> - These functions are also for retrieving data,
+ * No parameters are needed.
+ *  - Retrieve Value from a List Object - These functions are also for retrieving data,
  * but from classes that contain a list of different information sets. These functions can
  * take an integer for a list index, which then returns the value from the specified entry.
  * If no index is given, it defaults to returning the first entry in the list. In the case
- * of complex lists, sometimes a second index may be used.</li>
- * <li><b>Retrieve a List Entry</b> - These functions return either part of or all of
+ * of complex lists, sometimes a second index may be used.
+ *  - Retrieve a List Entry - These functions return either part of or all of
  * a class object's data list. An optional index can be passed to return a particular
  * data set. If no index is given, the entire list of data is returned. Keep in mind
- * that the arrays returned by these functions are usually pretty large.</li>
- * <li><b>Follow-Up Actions</b> - There are only a few of these functions, and are mostly
+ * that the arrays returned by these functions are usually pretty large.
+ *  - Follow-Up Actions - There are only a few of these functions, and are mostly
  * "fetchItems" functions for lists of orders or shipments. These functions send a request
  * to Amazon for every entry in the object's data list. Please note that these functions
  * will generally take a while to perform and will return a lot of data. These are the
- * only non-"get" functions that will return the information.</li>
- * </ul>
+ * only non-"get" functions that will return the information.
  */
 abstract class AmazonCore
 {
@@ -115,15 +114,15 @@ abstract class AmazonCore
      *
      * This constructor is called when initializing all objects in this library.
      * The parameters are passed by the child objects' constructors.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * When this is set to <b>TRUE</b>, the object will fetch responses from
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * When this is set to TRUE, the object will fetch responses from
      * files you specify instead of sending the requests to Amazon.
      * The log will indicate whether mock mode is on or off each time
-     * an object is initialized. This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.
+     * an object is initialized. This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      * When Mock Mode is enabled, the object will retrieve one of these files
-     * from the list to use as a response. See <i>setMock</i> for more information.</p>
+     * from the list to use as a response. See `setMock()` for more information.
      */
     protected function __construct(array $config = null, $mock = false, $m = null)
     {
@@ -158,12 +157,12 @@ abstract class AmazonCore
      * This method is also used to set response codes used by certain functions.
      * Mock Mode is particularly useful when you need
      * to test functions such as canceling orders or adding new products.
-     * @param boolean $b [optional] <p>When set to <b>TRUE</b>, Mock Mode is
-     * enabled for the object. Defaults to <b>TRUE</b>.</p>
-     * @param array|string|integer $files [optional] <p>The list of files (or single file)
+     * @param boolean $b [optional] When set to TRUE, Mock Mode is
+     * enabled for the object. Defaults to TRUE.
+     * @param array|string|integer $files [optional] The list of files (or single file)
      * to be used with Mock Mode. If a single string is given, this method will
-     * put it into an array. Integers can also be given, for use in <i>fetchMockResponse</i>.
-     * These numbers should only be response codes, such as <b>200</b> or <b>404</b>.</p>
+     * put it into an array. Integers can also be given, for use in `fetchMockResponse()`.
+     * These numbers should only be response codes, such as 200 or 404.
      */
     public function setMock($b = true, $files = null)
     {
@@ -196,15 +195,15 @@ abstract class AmazonCore
      * files from the mock file list are retrieved and passed back to the caller.
      * The success or failure of the operation will be recorded in the log,
      * including the name and path of the file involved. For retrieving response
-     * codes, see <i>fetchMockResponse</i>.
-     * @param boolean $load [optional] <p>Set this to <b>FALSE</b> to prevent the
+     * codes, see `fetchMockResponse()`.
+     * @param boolean $load [optional] Set this to FALSE to prevent the
      * method from loading the file's contents into a \SimpleXMLElement. This is
      * for when the contents of the file are not in XML format, or if you simply
-     * want to retrieve the raw string of the file.</p>
-     * @return \SimpleXMLElement|string|boolean <p>A \SimpleXMLElement holding the
-     * contents of the file, or a string of said contents if <i>$load</i> is set to
-     * <b>FALSE</b>. The return will be <b>FALSE</b> if the file cannot be
-     * fetched for any reason.</p>
+     * want to retrieve the raw string of the file.
+     * @return \SimpleXMLElement|string|boolean A \SimpleXMLElement holding the
+     * contents of the file, or a string of said contents if `$load` is set to
+     * FALSE. The return will be FALSE if the file cannot be
+     * fetched for any reason.
      */
     protected function fetchMockFile($load = true)
     {
@@ -248,7 +247,7 @@ abstract class AmazonCore
      * Sets mock index back to 0.
      *
      * This method is used for returning to the beginning of the mock file list.
-     * @param boolean $mute [optional]<p>Set to <b>TRUE</b> to prevent logging.</p>
+     * @param boolean $mute [optional]Set to TRUE to prevent logging.
      */
     protected function resetMock($mute = false)
     {
@@ -265,16 +264,16 @@ abstract class AmazonCore
      * HTTP response. The success or failure of this operation will be recorded
      * in the log, including the response code returned. This is only used by
      * a few operations. The response array will contain the following fields:
-     * <ul>
-     * <li><b>head</b> - ignored, but set for the sake of completion</li>
-     * <li><b>body</b> - empty XML, also ignored</li>
-     * <li><b>code</b> - the response code fetched from the list</li>
-     * <li><b>answer</b> - answer message</li>
-     * <li><b>error</b> - error message, same value as answer, not set if status is 200</li>
-     * <li><b>ok</b> - 1 or 0, depending on if the status is 200</li>
-     * </ul>
+     *
+     *  - head - ignored, but set for the sake of completion
+     *  - body - empty XML, also ignored
+     *  - code - the response code fetched from the list
+     *  - answer - answer message
+     *  - error - error message, same value as answer, not set if status is 200
+     *  - ok - 1 or 0, depending on if the status is 200
+     *
      * @return boolean|array An array containing the HTTP response, or simply
-     * the value <b>FALSE</b> if the response could not be found or does not
+     * the value FALSE if the response could not be found or does not
      * match the list of valid responses.
      */
     protected function fetchMockResponse()
@@ -336,9 +335,9 @@ abstract class AmazonCore
      *
      * Verifies whether or not the HTTP response has the 200 OK code. If the code
      * is not 200, the incident and error message returned are logged.
-     * @param array $r <p>The HTTP response array. Expects the array to have
-     * the fields <i>code</i>, <i>body</i>, and <i>error</i>.</p>
-     * @return boolean <b>TRUE</b> if the status is 200 OK, <b>FALSE</b> otherwise.
+     * @param array $r The HTTP response array. Expects the array to have
+     * the fields `code`, `body`, and `error`.
+     * @return boolean TRUE if the status is 200 OK, FALSE otherwise.
      */
     protected function checkResponse($r)
     {
@@ -361,7 +360,7 @@ abstract class AmazonCore
      * This method can be used to change the config file after the object has
      * been initiated. The file will not be set if it cannot be found or read.
      * This is useful for testing, in cases where you want to use a different file.
-     * @param array $config <p>An associative array with configuration data.</p>
+     * @param array $config An associative array with configuration data.
      * @throws Exception If the file cannot be found or read.
      */
     public function setConfig(array $config)
@@ -380,7 +379,7 @@ abstract class AmazonCore
      *
      * Use this method to change the log file used. This method is called
      * each time the config file is changed.
-     * @param string $path <p>The path to the log file.</p>
+     * @param string $path The path to the log file.
      * @throws Exception If the file cannot be found or read.
      */
     public function setLogPath($path)
@@ -404,8 +403,8 @@ abstract class AmazonCore
 //     * for making requests with Amazon. If the store cannot be found in the
 //     * config file, or if any of the key values are missing,
 //     * the incident will be logged.
-//     * @param string $s [optional] <p>The store name to look for.
-//     * This parameter is not required if there is only one store defined in the config file.</p>
+//     * @param string $s [optional] The store name to look for.
+//     * This parameter is not required if there is only one store defined in the config file.
 //     * @throws Exception If the file can't be found.
 //     */
 //    public function setStore($s = null)
@@ -441,7 +440,7 @@ abstract class AmazonCore
      *
      * When the throttle stop is enabled, throttled requests will not  be repeated.
      * This setting is off by default.
-     * @param boolean $b <p>Defaults to <b>TRUE</b>.</p>
+     * @param boolean $b Defaults to TRUE.
      */
     public function setThrottleStop($b = true)
     {
@@ -453,12 +452,12 @@ abstract class AmazonCore
      *
      * This method adds a message line to the log file defined by the config.
      * This includes the priority level, user IP, and a backtrace of the call.
-     * @param string $msg <p>The message to write to the log.</p>
-     * @param string $level [optional] <p>The priority level of the message.
+     * @param string $msg The message to write to the log.
+     * @param string $level [optional] The priority level of the message.
      * This is merely for the benefit of the user and does not affect how
      * the code runs. The values used in this library are "Info", "Warning",
-     * "Urgent", and "Throttle".</p>
-     * @return boolean <b>FALSE</b> if the message is empty, NULL if logging is muted
+     * "Urgent", and "Throttle".
+     * @return boolean FALSE if the message is empty, NULL if logging is muted
      * @throws Exception If the file can't be written to.
      */
     protected function log($msg, $level = 'Info')
@@ -546,13 +545,13 @@ abstract class AmazonCore
      * Generates timestamp in ISO8601 format.
      *
      * This method creates a timestamp from the provided string in ISO8601 format.
-     * The string given is passed through <i>strtotime</i> before being used. The
+     * The string given is passed through `strtotime()` before being used. The
      * value returned is actually two minutes early, to prevent it from tripping up
      * Amazon. If no time is given, the current time is used.
-     * @param string|int $time [optional] <p>The time to use. Since any string values are
-     * passed through <i>strtotime</i> first, values such as "-1 hour" are fine.
+     * @param string|int $time [optional] The time to use. Since any string values are
+     * passed through `strtotime()` first, values such as "-1 hour" are fine.
      * Unix timestamps are also allowed. Purely numeric values are treated as unix timestamps.
-     * Defaults to the current time.</p>
+     * Defaults to the current time.
      * @return string Unix timestamp of the time, minus 2 minutes.
      * @throws \InvalidArgumentException
      */
@@ -597,8 +596,8 @@ abstract class AmazonCore
      * Sends a request to Amazon via cURL
      *
      * This method will keep trying if the request was throttled.
-     * @param string $url <p>URL to feed to cURL</p>
-     * @param array $param <p>parameter array to feed to cURL</p>
+     * @param string $url URL to feed to cURL
+     * @param array $param parameter array to feed to cURL
      * @return array cURL response array
      */
     protected function sendRequest($url, $param)
@@ -618,17 +617,17 @@ abstract class AmazonCore
     /**
      * Gives the latest response data received from Amazon.
      * Response arrays contain the following keys:
-     * <ul>
-     * <li><b>head</b> - The raw HTTP head, including the response code and content length</li>
-     * <li><b>body</b> - The raw HTTP body, which will almost always be in XML format</li>
-     * <li><b>code</b> - The HTTP response code extracted from the head for convenience</li>
-     * <li><b>answer</b> - The HTTP response message extracted from the head for convenience</li>
-     * <li><b>ok</b> - Contains a <b>1</b> if the response was normal, or <b>0</b> if there was a problem</li>
-     * <li><b>headarray</b> - An associative array of the head data, for convenience</li>
-     * </ul>
-     * @param int $i [optional] <p>If set, retrieves the specific response instead of the last one.
-     * If the index for the response is not used, <b>FALSE</b> will be returned.</p>
-     * @return array associative array of HTTP response or <b>FALSE</b> if not set yet
+     *
+     *  - `head` - The raw HTTP head, including the response code and content length
+     *  - `body` - The raw HTTP body, which will almost always be in XML format
+     *  - `code` - The HTTP response code extracted from the head for convenience
+     *  - `answer` - The HTTP response message extracted from the head for convenience
+     *  - `ok` - Contains a `1` if the response was normal, or `0` if there was a problem
+     *  - `headarray` - An associative array of the head data, for convenience
+     *
+     * @param int $i [optional] If set, retrieves the specific response instead of the last one.
+     * If the index for the response is not used, FALSE will be returned.
+     * @return array associative array of HTTP response or FALSE if not set yet
      */
     public function getLastResponse($i = NULL)
     {
@@ -644,7 +643,7 @@ abstract class AmazonCore
 
     /**
      * Gives all response code received from Amazon.
-     * @return array list of associative arrays of HTTP response or <b>FALSE</b> if not set yet
+     * @return array list of associative arrays of HTTP response or FALSE if not set yet
      * @see getLastResponse
      */
     public function getRawResponses()
@@ -659,7 +658,7 @@ abstract class AmazonCore
     /**
      * Gives the response code from the last response.
      * This data can also be found in the array given by getLastResponse.
-     * @return string|int standard REST response code (200, 404, etc.) or <b>NULL</b> if no response
+     * @return string|int standard REST response code (200, 404, etc.) or NULL if no response
      * @see getLastResponse
      */
     public function getLastResponseCode()
@@ -673,7 +672,7 @@ abstract class AmazonCore
     /**
      * Gives the last response with an error code.
      * This may or may not be the same as the last response if multiple requests were made.
-     * @return array associative array of HTTP response or <b>NULL</b> if no error response yet
+     * @return array associative array of HTTP response or NULL if no error response yet
      * @see getLastResponse
      */
     public function getLastErrorResponse()
@@ -691,7 +690,7 @@ abstract class AmazonCore
      * Gives the Amazon error code from the last error response.
      * The error code uses words rather than numbers. (Ex: "InvalidParameterValue")
      * This data can also be found in the XML body given by getLastErrorResponse.
-     * @return string Amazon error code or <b>NULL</b> if not set yet or no error response yet
+     * @return string Amazon error code or NULL if not set yet or no error response yet
      * @see getLastErrorResponse
      */
     public function getLastErrorCode()
@@ -709,7 +708,7 @@ abstract class AmazonCore
      * Gives the error message from the last error response.
      * Not all error responses will have error messages.
      * This data can also be found in the XML body given by getLastErrorResponse.
-     * @return string Amazon error code or <b>NULL</b> if not set yet or no error response yet
+     * @return string Amazon error code or NULL if not set yet or no error response yet
      * @see getLastErrorResponse
      */
     public function getLastErrorMessage()
@@ -736,8 +735,8 @@ abstract class AmazonCore
 
     /**
      * Checks for a token and changes the proper options
-     * @param \SimpleXMLElement $xml <p>response data</p>
-     * @return boolean <b>FALSE</b> if no XML data
+     * @param \SimpleXMLElement $xml response data
+     * @return boolean FALSE if no XML data
      */
     protected function checkToken($xml)
     {
@@ -753,12 +752,12 @@ abstract class AmazonCore
     /**
      * Disables or enables the use of SSL verification when sending requests to Amazon.
      *
-     * This is <b>not recommended</b> for a production environment,
-     * as it is a <b>security risk</b> and can put merchant credentials in danger.
+     * This is *not recommended* for a production environment,
+     * as it is a security risk and can put merchant credentials in danger.
      * However, this option is still available in case it is needed.
      *
      * Use at your own risk.
-     * @param boolean $b [optional] <p>Defaults to <b>TRUE</b>.</p>
+     * @param boolean $b [optional] Defaults to TRUE.
      */
     public function setDisableSslVerify($b = true)
     {

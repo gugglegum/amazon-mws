@@ -36,11 +36,11 @@ class AmazonProductSearch extends AmazonProductsCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $q [optional] <p>The query string to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $q [optional] The query string to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $q = null, $mock = false, $m = null)
     {
@@ -61,8 +61,8 @@ class AmazonProductSearch extends AmazonProductsCore
 
     /**
      * Sets the query to search for. (Required)
-     * @param string $q <p>search query</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $q search query
+     * @return boolean FALSE if improper input
      */
     public function setQuery($q)
     {
@@ -79,8 +79,8 @@ class AmazonProductSearch extends AmazonProductsCore
      * Setting this parameter tells Amazon to only return products from the given
      * context. If this parameter is not set, Amazon will return products from
      * any context.
-     * @param string $q <p>See comment inside for list of valid values.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $q See comment inside for list of valid values.
+     * @return boolean FALSE if improper input
      */
     public function setContextId($q)
     {
@@ -138,10 +138,10 @@ class AmazonProductSearch extends AmazonProductsCore
     /**
      * Fetches a list of products from Amazon that match the given query.
      *
-     * Submits a <i>ListMatchingProducts</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getProduct</i>.
+     * Submits a `ListMatchingProducts` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getProduct()`.
      * In order to perform this action, a search query is required.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @return boolean FALSE if something goes wrong
      */
     public function searchProducts()
     {

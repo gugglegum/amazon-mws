@@ -23,7 +23,7 @@ namespace gugglegum\AmazonMWS;
  *
  * This Amazon Order Core object retrieves the data from a set of orders on Amazon.
  * In order to fetch this data, a list of Amazon Order IDs is required. If you
- * wish to retrieve information for only one order, please use the <i>AmazonOrder</i>
+ * wish to retrieve information for only one order, please use the `AmazonOrder`
  * class instead.
  */
 class AmazonOrderSet extends AmazonOrderCore implements \Iterator
@@ -44,18 +44,18 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
     protected $orderList;
 
     /**
-     * AmazonOrderSet is a variation of <i>AmazonOrder</i> that pulls multiple specified orders.
+     * AmazonOrderSet is a variation of `AmazonOrder` that pulls multiple specified orders.
      *
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $o [optional] <p>The Order IDs to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $o [optional] The Order IDs to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config = null, $o = null, $mock = false, $m = null)
     {
@@ -82,9 +82,9 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
      *
      * This method sets the list of Order IDs to be sent in the next request.
      * If you wish to retrieve information for only one order, please use the
-     * <i>AmazonOrder</i> class instead.
-     * @param array|string $o <p>A list of Amazon Order IDs, or a single ID string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * `AmazonOrder` class instead.
+     * @param array|string $o A list of Amazon Order IDs, or a single ID string.
+     * @return boolean FALSE if improper input
      */
     public function setOrderIds($o)
     {
@@ -124,10 +124,10 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
     /**
      * Fetches the specified order from Amazon.
      *
-     * Submits a <i>GetOrder</i> request to Amazon. In order to do this,
+     * Submits a `GetOrder` request to Amazon. In order to do this,
      * a list of Amazon order IDs is required. Amazon will send
-     * the data back as a response, which can be retrieved using <i>getOrders</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * the data back as a response, which can be retrieved using `getOrders()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchOrders()
     {
@@ -160,8 +160,8 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -181,12 +181,12 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
     /**
      * Returns array of item lists or a single item list.
      *
-     * If <i>$i</i> is not specified, the method will fetch the items for every
+     * If `$i` is not specified, the method will fetch the items for every
      * order in the list. Please note that for lists with a high number of orders,
      * this operation could take a while due to throttling. (Two seconds per order when throttled.)
-     * @param boolean $token [optional] <p>whether or not to automatically use tokens when fetching items.</p>
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to null.</p>
-     * @return array|AmazonOrderItemList <i>AmazonOrderItemList</i> object or array of objects, or <b>FALSE</b> if non-numeric index
+     * @param boolean $token [optional] whether or not to automatically use tokens when fetching items.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to null.
+     * @return array|AmazonOrderItemList `AmazonOrderItemList` object or array of objects, or FALSE if non-numeric index
      */
     public function fetchItems($token = false, $i = null)
     {
@@ -209,7 +209,7 @@ class AmazonOrderSet extends AmazonOrderCore implements \Iterator
 
     /**
      * Returns the list of orders.
-     * @return array|boolean array of <i>AmazonOrder</i> objects, or <b>FALSE</b> if list not filled yet
+     * @return array|boolean array of `AmazonOrder` objects, or FALSE if list not filled yet
      */
     public function getOrders()
     {

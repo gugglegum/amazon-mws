@@ -72,12 +72,12 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Sets whether or not the object should automatically use tokens if it receives one.
      *
-     * If this option is set to <b>TRUE</b>, the object will automatically perform
+     * If this option is set to TRUE, the object will automatically perform
      * the necessary operations to retrieve the rest of the list using tokens. If
      * this option is off, the object will only ever retrieve the first section of
      * the list.
-     * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param boolean $b [optional] Defaults to TRUE
+     * @return boolean FALSE if improper input
      */
     public function setUseToken($b = true)
     {
@@ -96,8 +96,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * recommendations from all categories.
      * Possible category values: "Inventory", "Selection", "Pricing", "Fulfillment",
      * "ListingQuality", "GlobalSelling", and "Advertising".
-     * @param string $s <p>Category name</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Category name
+     * @return boolean FALSE if improper input
      */
     public function setCategory($s)
     {
@@ -117,10 +117,10 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * The given array should be two-dimensional, with the first level indexed by
      * the name of the category, and the second level as a list of key/value pairs
      * of filters for that specific category.
-     * See <i>setCategory</i> for a list of valid categories.
+     * See `setCategory()` for a list of valid categories.
      * See the comment inside for a list of valid filters.
-     * @param array $a <p>See above.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array $a See above.
+     * @return boolean FALSE if improper input
      * @see setCategory
      */
     public function setFilter($a)
@@ -175,11 +175,11 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Fetches recommendation update times from Amazon.
      *
-     * Submits a <i>GetLastUpdatedTimeForRecommendations</i> request to Amazon.
+     * Submits a `GetLastUpdatedTimeForRecommendations` request to Amazon.
      * Amazon will send dates back as a response, which can be retrieved using
-     * <i>getLastUpdateTimes</i>.
+     * `getLastUpdateTimes()`.
      * Other methods are available for fetching individual times.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchLastUpdateTimes()
     {
@@ -210,9 +210,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     }
 
     /**
-     * Sets up options for using <i>fetchLastUpdateTimes</i>.
+     * Sets up options for using `fetchLastUpdateTimes()`.
      *
-     * This changes key options for using <i>fetchLastUpdateTimes</i>.
+     * This changes key options for using `fetchLastUpdateTimes()`.
      * Please note: because this operation does not use all of the parameters,
      * the following parameters are removed:
      * category, filters, and token.
@@ -230,12 +230,12 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Fetches a list of active recommendations from Amazon.
      *
-     * Submits a <i>ListRecommendations</i> request to Amazon. Amazon will send
+     * Submits a `ListRecommendations` request to Amazon. Amazon will send
      * the data back as a response, categorized into seven lists. These lists
-     * can be retrieved using <i>getLists</i>.
+     * can be retrieved using `getLists()`.
      * Other methods are available for fetching individual lists.
-     * @param boolean $r [optional] <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param boolean $r [optional] When set to FALSE, the function will not recurse, defaults to TRUE
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchRecommendations($r = true)
     {
@@ -307,8 +307,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -407,9 +407,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns a list of all update times.
      *
-     * The returned array will have keys from any of the categories listed in <i>setCategory</i>.
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean array of timestamps, or <b>FALSE</b> if list not set yet
+     * The returned array will have keys from any of the categories listed in `setCategory()`.
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean array of timestamps, or FALSE if list not set yet
      */
     public function getLastUpdateTimes()
     {
@@ -423,8 +423,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns the last update time for Inventory recommendations.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean date in ISO 8601 date time format, or FALSE if not set yet
      */
     public function getInventoryLastUpdateTime()
     {
@@ -438,8 +438,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns the last update time for Selection recommendations.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean date in ISO 8601 date time format, or FALSE if not set yet
      */
     public function getSelectionLastUpdateTime()
     {
@@ -453,8 +453,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns the last update time for Pricing recommendations.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean date in ISO 8601 date time format, or FALSE if not set yet
      */
     public function getPricingLastUpdateTime()
     {
@@ -468,8 +468,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns the last update time for Fulfillment recommendations.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean date in ISO 8601 date time format, or FALSE if not set yet
      */
     public function getFulfillmentLastUpdateTime()
     {
@@ -483,8 +483,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns the last update time for Global Selling recommendations.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean date in ISO 8601 date time format, or FALSE if not set yet
      */
     public function getGlobalSellingLastUpdateTime()
     {
@@ -498,8 +498,8 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns the last update time for Advertising recommendations.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean date in ISO 8601 date time format, or <b>FALSE</b> if not set yet
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean date in ISO 8601 date time format, or FALSE if not set yet
      */
     public function getAdvertisingLastUpdateTime()
     {
@@ -513,9 +513,9 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
     /**
      * Returns all recommendations from all categories.
      *
-     * The returned array will have keys from any of the categories listed in <i>setCategory</i>.
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     * The returned array will have keys from any of the categories listed in `setCategory()`.
+     * This method will return FALSE if the list has not yet been filled.
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      * @see setCategory
      */
     public function getLists()
@@ -531,28 +531,28 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns recommendations from the Inventory category.
      *
      * Each recommendation array will have the following keys:
-     * <ul>
-     * <li><b>RecommendationId</b> - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}</li>
-     * <li><b>RecommendationReason</b></li>
-     * <li><b>LastUpdated</b> - ISO 8601 date format</li>
-     * <li><b>ItemIdentifier</b> - array</li>
-     * <ul>
-     * <li><b>ASIN</b></li>
-     * <li><b>SKU</b></li>
-     * <li><b>UPC</b></li>
-     * </ul>
-     * <li><b>ItemName</b> (optional)</li>
-     * <li><b>FulfillmentChannel</b> (optional) - "MFN" or "AFN"</li>
-     * <li><b>SalesForTheLast14Days</b> (optional) - integer</li>
-     * <li><b>SalesForTheLast30Days</b> (optional) - integer</li>
-     * <li><b>AvailableQuantity</b> (optional) - integer</li>
-     * <li><b>DaysUntilStockRunsOut</b> (optional) - integer</li>
-     * <li><b>InboundQuantity</b> (optional) - integer</li>
-     * <li><b>RecommendedInboundQuantity</b> (optional) - integer</li>
-     * <li><b>DaysOutOfStockLast30Days</b> (optional) - integer</li>
-     * <li><b>LostSalesInLast30Days</b> (optional) - integer</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RecommendationId - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}
+     *  - RecommendationReason
+     *  - LastUpdated - ISO 8601 date format
+     *  - ItemIdentifier - array
+     *
+     *  - ASIN
+     *  - SKU
+     *  - UPC
+     *
+     *  - ItemName (optional)
+     *  - FulfillmentChannel (optional) - "MFN" or "AFN"
+     *  - SalesForTheLast14Days (optional) - integer
+     *  - SalesForTheLast30Days (optional) - integer
+     *  - AvailableQuantity (optional) - integer
+     *  - DaysUntilStockRunsOut (optional) - integer
+     *  - InboundQuantity (optional) - integer
+     *  - RecommendedInboundQuantity (optional) - integer
+     *  - DaysOutOfStockLast30Days (optional) - integer
+     *  - LostSalesInLast30Days (optional) - integer
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getInventoryList()
     {
@@ -567,30 +567,30 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns recommendations from the Selection category.
      *
      * Each recommendation array will have the following keys:
-     * <ul>
-     * <li><b>RecommendationId</b> - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}</li>
-     * <li><b>RecommendationReason</b></li>
-     * <li><b>LastUpdated</b> - ISO 8601 date format</li>
-     * <li><b>ItemIdentifier</b> - array</li>
-     * <ul>
-     * <li><b>ASIN</b></li>
-     * <li><b>SKU</b></li>
-     * <li><b>UPC</b></li>
-     * </ul>
-     * <li><b>ItemName</b> (optional)</li>
-     * <li><b>BrandName</b> (optional)</li>
-     * <li><b>ProductCategory</b> (optional)</li>
-     * <li><b>SalesRank</b> (optional)</li>
-     * <li><b>BuyboxPrice</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Amount</b> - decimal number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 format</li>
-     * </ul>
-     * <li><b>NumberOfOffers</b> (optional) - integer</li>
-     * <li><b>AverageCustomerReview</b> (optional) - decimal number</li>
-     * <li><b>NumberOfCustomerReviews</b> (optional) - integer</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RecommendationId - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}
+     *  - RecommendationReason
+     *  - LastUpdated - ISO 8601 date format
+     *  - ItemIdentifier - array
+     *
+     *  - ASIN
+     *  - SKU
+     *  - UPC
+     *
+     *  - ItemName (optional)
+     *  - BrandName (optional)
+     *  - ProductCategory (optional)
+     *  - SalesRank (optional)
+     *  - BuyboxPrice (optional) - array
+     *
+     *  - Amount - decimal number
+     *  - CurrencyCode - ISO 4217 format
+     *
+     *  - NumberOfOffers (optional) - integer
+     *  - AverageCustomerReview (optional) - decimal number
+     *  - NumberOfCustomerReviews (optional) - integer
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getSelectionList()
     {
@@ -605,35 +605,35 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns recommendations from the Pricing category.
      *
      * Each recommendation array will have the following keys:
-     * <ul>
-     * <li><b>RecommendationId</b> - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}</li>
-     * <li><b>RecommendationReason</b></li>
-     * <li><b>LastUpdated</b> - ISO 8601 date format</li>
-     * <li><b>ItemIdentifier</b> - array</li>
-     * <ul>
-     * <li><b>ASIN</b></li>
-     * <li><b>SKU</b></li>
-     * <li><b>UPC</b></li>
-     * </ul>
-     * <li><b>ItemName</b> (optional)</li>
-     * <li><b>Condition</b> (optional)</li>
-     * <li><b>SubCondition</b> (optional)</li>
-     * <li><b>FulfillmentChannel</b> (optional) - "MFN" or "AFN"</li>
-     * <li><b>YourPricePlusShipping</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Amount</b> - decimal number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 format</li>
-     * </ul>
-     * <li><b>LowestPricePlusShipping</b> (optional) - array with "Amount" and "CurrencyCode"</li>
-     * <li><b>PriceDifferenceToLowPrice</b> (optional) - array with "Amount" and "CurrencyCode"</li>
-     * <li><b>MedianPricePlusShipping</b> (optional) - array with "Amount" and "CurrencyCode"</li>
-     * <li><b>LowestMerchantFulfilledOfferPrice</b> (optional) - array with "Amount" and "CurrencyCode"</li>
-     * <li><b>LowestAmazonFulfilledOfferPrice</b> (optional) - array with "Amount" and "CurrencyCode"</li>
-     * <li><b>NumberOfOffers</b> (optional) - integer</li>
-     * <li><b>NumberOfMerchantFulfilledOffers</b> (optional) - integer</li>
-     * <li><b>NumberOfAmazonFulfilledOffers</b> (optional) - integer</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RecommendationId - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}
+     *  - RecommendationReason
+     *  - LastUpdated - ISO 8601 date format
+     *  - ItemIdentifier - array
+     *
+     *  - ASIN
+     *  - SKU
+     *  - UPC
+     *
+     *  - ItemName (optional)
+     *  - Condition (optional)
+     *  - SubCondition (optional)
+     *  - FulfillmentChannel (optional) - "MFN" or "AFN"
+     *  - YourPricePlusShipping (optional) - array
+     *
+     *  - Amount - decimal number
+     *  - CurrencyCode - ISO 4217 format
+     *
+     *  - LowestPricePlusShipping (optional) - array with "Amount" and "CurrencyCode"
+     *  - PriceDifferenceToLowPrice (optional) - array with "Amount" and "CurrencyCode"
+     *  - MedianPricePlusShipping (optional) - array with "Amount" and "CurrencyCode"
+     *  - LowestMerchantFulfilledOfferPrice (optional) - array with "Amount" and "CurrencyCode"
+     *  - LowestAmazonFulfilledOfferPrice (optional) - array with "Amount" and "CurrencyCode"
+     *  - NumberOfOffers (optional) - integer
+     *  - NumberOfMerchantFulfilledOffers (optional) - integer
+     *  - NumberOfAmazonFulfilledOffers (optional) - integer
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getPricingList()
     {
@@ -648,42 +648,42 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns recommendations from the Fulfillment category.
      *
      * Each recommendation array will have the following keys:
-     * <ul>
-     * <li><b>RecommendationId</b> - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}</li>
-     * <li><b>RecommendationReason</b></li>
-     * <li><b>LastUpdated</b> - ISO 8601 date format</li>
-     * <li><b>ItemIdentifier</b> - array</li>
-     * <ul>
-     * <li><b>ASIN</b></li>
-     * <li><b>SKU</b></li>
-     * <li><b>UPC</b></li>
-     * </ul>
-     * <li><b>ItemName</b> (optional)</li>
-     * <li><b>BrandName</b> (optional)</li>
-     * <li><b>ProductCategory</b> (optional)</li>
-     * <li><b>SalesRank</b> (optional) - integer</li>
-     * <li><b>BuyboxPrice</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Amount</b> - decimal number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 format</li>
-     * </ul>
-     * <li><b>NumberOfOffers</b> (optional) - integer</li>
-     * <li><b>NumberOfOffersFulfilledByAmazon</b> (optional) - integer</li>
-     * <li><b>AverageCustomerReview</b> (optional) - decimal number</li>
-     * <li><b>NumberOfCustomerReviews</b> (optional) - integer</li>
-     * <li><b>ItemDimensions</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Height</b> - array</li>
-     * <ul>
-     * <li><b>Value</b> - decimal number</li>
-     * <li><b>Unit</b></li>
-     * </ul>
-     * <li><b>Width</b> - array with "Value" and "Unit"</li>
-     * <li><b>Length</b> - array with "Value" and "Unit"</li>
-     * <li><b>Weight</b> - array with "Value" and "Unit"</li>
-     * </ul>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RecommendationId - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}
+     *  - RecommendationReason
+     *  - LastUpdated - ISO 8601 date format
+     *  - ItemIdentifier - array
+     *
+     *  - ASIN
+     *  - SKU
+     *  - UPC
+     *
+     *  - ItemName (optional)
+     *  - BrandName (optional)
+     *  - ProductCategory (optional)
+     *  - SalesRank (optional) - integer
+     *  - BuyboxPrice (optional) - array
+     *
+     *  - Amount - decimal number
+     *  - CurrencyCode - ISO 4217 format
+     *
+     *  - NumberOfOffers (optional) - integer
+     *  - NumberOfOffersFulfilledByAmazon (optional) - integer
+     *  - AverageCustomerReview (optional) - decimal number
+     *  - NumberOfCustomerReviews (optional) - integer
+     *  - ItemDimensions (optional) - array
+     *
+     *  - Height - array
+     *
+     *  - Value - decimal number
+     *  - Unit
+     *
+     *  - Width - array with "Value" and "Unit"
+     *  - Length - array with "Value" and "Unit"
+     *  - Weight - array with "Value" and "Unit"
+     *
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getFulfillmentList()
     {
@@ -698,21 +698,21 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns recommendations from the Listing Quality category.
      *
      * Each recommendation array will have the following keys:
-     * <ul>
-     * <li><b>RecommendationId</b> - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}</li>
-     * <li><b>RecommendationReason</b></li>
-     * <li><b>QualitySet</b> - "Defect" or "Quarantine"</li>
-     * <li><b>DefectGroup</b> (optional) - description, for Defect quality set</li>
-     * <li><b>DefectAttribute</b> - for Defect quality set</li>
-     * <li><b>ItemIdentifier</b> - array</li>
-     * <ul>
-     * <li><b>ASIN</b></li>
-     * <li><b>SKU</b></li>
-     * <li><b>UPC</b></li>
-     * </ul>
-     * <li><b>ItemName</b> (optional)</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RecommendationId - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}
+     *  - RecommendationReason
+     *  - QualitySet - "Defect" or "Quarantine"
+     *  - DefectGroup (optional) - description, for Defect quality set
+     *  - DefectAttribute - for Defect quality set
+     *  - ItemIdentifier - array
+     *
+     *  - ASIN
+     *  - SKU
+     *  - UPC
+     *
+     *  - ItemName (optional)
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getListingList()
     {
@@ -727,42 +727,42 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns recommendations from the Global Selling category.
      *
      * Each recommendation array will have the following keys:
-     * <ul>
-     * <li><b>RecommendationId</b> - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}</li>
-     * <li><b>RecommendationReason</b></li>
-     * <li><b>LastUpdated</b> - ISO 8601 date format</li>
-     * <li><b>ItemIdentifier</b> - array</li>
-     * <ul>
-     * <li><b>ASIN</b></li>
-     * <li><b>SKU</b></li>
-     * <li><b>UPC</b></li>
-     * </ul>
-     * <li><b>ItemName</b> (optional)</li>
-     * <li><b>BrandName</b> (optional)</li>
-     * <li><b>ProductCategory</b> (optional)</li>
-     * <li><b>SalesRank</b> (optional) - integer</li>
-     * <li><b>BuyboxPrice</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Amount</b> - decimal number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 format</li>
-     * </ul>
-     * <li><b>NumberOfOffers</b> (optional) - integer</li>
-     * <li><b>NumberOfOffersFulfilledByAmazon</b> (optional) - integer</li>
-     * <li><b>AverageCustomerReview</b> (optional) - decimal number</li>
-     * <li><b>NumberOfCustomerReviews</b> (optional) - integer</li>
-     * <li><b>ItemDimensions</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Height</b> - array</li>
-     * <ul>
-     * <li><b>Value</b> - decimal number</li>
-     * <li><b>Unit</b></li>
-     * </ul>
-     * <li><b>Width</b> - array with "Value" and "Unit"</li>
-     * <li><b>Length</b> - array with "Value" and "Unit"</li>
-     * <li><b>Weight</b> - array with "Value" and "Unit"</li>
-     * </ul>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RecommendationId - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}
+     *  - RecommendationReason
+     *  - LastUpdated - ISO 8601 date format
+     *  - ItemIdentifier - array
+     *
+     *  - ASIN
+     *  - SKU
+     *  - UPC
+     *
+     *  - ItemName (optional)
+     *  - BrandName (optional)
+     *  - ProductCategory (optional)
+     *  - SalesRank (optional) - integer
+     *  - BuyboxPrice (optional) - array
+     *
+     *  - Amount - decimal number
+     *  - CurrencyCode - ISO 4217 format
+     *
+     *  - NumberOfOffers (optional) - integer
+     *  - NumberOfOffersFulfilledByAmazon (optional) - integer
+     *  - AverageCustomerReview (optional) - decimal number
+     *  - NumberOfCustomerReviews (optional) - integer
+     *  - ItemDimensions (optional) - array
+     *
+     *  - Height - array
+     *
+     *  - Value - decimal number
+     *  - Unit
+     *
+     *  - Width - array with "Value" and "Unit"
+     *  - Length - array with "Value" and "Unit"
+     *  - Weight - array with "Value" and "Unit"
+     *
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getGlobalSellingList()
     {
@@ -777,30 +777,30 @@ class AmazonRecommendationList extends AmazonRecommendationCore implements \Iter
      * Returns recommendations from the Advertising category.
      *
      * Each recommendation array will have the following keys:
-     * <ul>
-     * <li><b>RecommendationId</b> - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}</li>
-     * <li><b>RecommendationReason</b></li>
-     * <li><b>LastUpdated</b> - ISO 8601 date format</li>
-     * <li><b>ItemIdentifier</b> - array</li>
-     * <ul>
-     * <li><b>ASIN</b></li>
-     * <li><b>SKU</b></li>
-     * <li><b>UPC</b></li>
-     * </ul>
-     * <li><b>ItemName</b> (optional)</li>
-     * <li><b>BrandName</b> (optional)</li>
-     * <li><b>ProductCategory</b> (optional)</li>
-     * <li><b>SalesRank</b> (optional) - integer</li>
-     * <li><b>YourPricePlusShipping</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Amount</b> - decimal number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 format</li>
-     * </ul>
-     * <li><b>LowestPricePlusShipping</b> (optional) - array with "Amount" and "CurrencyCode"</li>
-     * <li><b>AvailableQuantity</b> (optional) - integer</li>
-     * <li><b>SalesForTheLast30Days</b> (optional) - integer</li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - RecommendationId - {Category}-{RecommendationReason}-{ASIN}-{SKU}-{UPC}-{ItemName}
+     *  - RecommendationReason
+     *  - LastUpdated - ISO 8601 date format
+     *  - ItemIdentifier - array
+     *
+     *  - ASIN
+     *  - SKU
+     *  - UPC
+     *
+     *  - ItemName (optional)
+     *  - BrandName (optional)
+     *  - ProductCategory (optional)
+     *  - SalesRank (optional) - integer
+     *  - YourPricePlusShipping (optional) - array
+     *
+     *  - Amount - decimal number
+     *  - CurrencyCode - ISO 4217 format
+     *
+     *  - LowestPricePlusShipping (optional) - array with "Amount" and "CurrencyCode"
+     *  - AvailableQuantity (optional) - integer
+     *  - SalesForTheLast30Days (optional) - integer
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getAdvertisingList()
     {

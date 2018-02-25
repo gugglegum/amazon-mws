@@ -48,7 +48,7 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     protected $index = 0;
 
     /**
-     * @var int 
+     * @var int
      */
     protected $i = 0;
 
@@ -58,10 +58,10 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -80,12 +80,12 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Sets whether or not the object should automatically use tokens if it receives one.
      *
-     * If this option is set to <b>TRUE</b>, the object will automatically perform
+     * If this option is set to TRUE, the object will automatically perform
      * the necessary operations to retrieve the rest of the list using tokens. If
      * this option is off, the object will only ever retrieve the first section of
      * the list.
-     * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param boolean $b [optional] Defaults to TRUE
+     * @return boolean FALSE if improper input
      */
     public function setUseToken($b = true)
     {
@@ -103,20 +103,20 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
      * Setting this parameter tells Amazon to only return shipments with statuses
      * that match those in the list. This parameter is required if the Shipment ID filter
      * is not used. Below is a list of valid statuses:
-     * <ul>
-     * <li>WORKING</li>
-     * <li>SHIPPED</li>
-     * <li>IN_TRANSIT</li>
-     * <li>DELIVERED</li>
-     * <li>CHECKED_IN</li>
-     * <li>RECEIVING</li>
-     * <li>CLOSED</li>
-     * <li>CANCELLED</li>
-     * <li>DELETED</li>
-     * <li>ERROR</li>
-     * </ul>
-     * @param array|string $s <p>A list of statuses, or a single status string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     *
+     *  - WORKING
+     *  - SHIPPED
+     *  - IN_TRANSIT
+     *  - DELIVERED
+     *  - CHECKED_IN
+     *  - RECEIVING
+     *  - CLOSED
+     *  - CANCELLED
+     *  - DELETED
+     *  - ERROR
+     *
+     * @param array|string $s A list of statuses, or a single status string.
+     * @return boolean FALSE if improper input
      */
     public function setStatusFilter($s)
     {
@@ -157,8 +157,8 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
      * Setting this parameter tells Amazon to only return Shipments that match
      * the IDs in the list. This parameter is required if the Shipment Status filter
      * is not used.
-     * @param array|string $s <p>A list of Feed Submission IDs, or a single ID string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s A list of Feed Submission IDs, or a single ID string.
+     * @return boolean FALSE if improper input
      */
     public function setIdFilter($s)
     {
@@ -196,8 +196,8 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
      * Sets the time frame filter for the shipments fetched. (Optional)
      *
      * If no times are specified, times default to the current time.
-     * @param string|int $lower <p>Date the order was created after, is passed through strtotime</p>
-     * @param string|int $upper <p>Date the order was created before, is passed through strtotime</p>
+     * @param string|int $lower Date the order was created after, is passed through strtotime
+     * @param string|int $upper Date the order was created before, is passed through strtotime
      * @throws \InvalidArgumentException
      */
     public function setTimeLimits($lower = null, $upper = null)
@@ -240,12 +240,12 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Fetches a list of shipments from Amazon.
      *
-     * Submits a <i>ListInboundShipments</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getShipment</i>.
+     * Submits a `ListInboundShipments` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getShipment()`.
      * Other methods are available for fetching specific values from the list.
      * This operation can potentially involve tokens.
-     * @param boolean <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param boolean When set to FALSE, the function will not recurse, defaults to TRUE
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchShipments($r = true)
     {
@@ -309,8 +309,8 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -369,12 +369,12 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns array of item lists or a single item list.
      *
-     * If <i>$i</i> is not specified, the method will fetch the items for every
+     * If `$i` is not specified, the method will fetch the items for every
      * shipment in the list. Please note that for lists with a high number of shipments,
      * this operation could take a while due to throttling. (Two seconds per order when throttled.)
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to null.</p>
-     * @param boolean $token [optional] <p>whether or not to automatically use tokens when fetching items.</p>
-     * @return array|AmazonShipmentItemList <i>AmazonShipmentItemList</i> object or array of objects, or <b>FALSE</b> if non-numeric index
+     * @param int $i [optional] List index to retrieve the value from. Defaults to null.
+     * @param boolean $token [optional] whether or not to automatically use tokens when fetching items.
+     * @return array|AmazonShipmentItemList `AmazonShipmentItemList` object or array of objects, or FALSE if non-numeric index
      */
     public function fetchItems($i = null, $token = false)
     {
@@ -407,9 +407,9 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the shipment ID for the specified entry.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getShipmentId($i = 0)
     {
@@ -426,9 +426,9 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the name for the specified shipment.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getShipmentName($i = 0)
     {
@@ -445,20 +445,20 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the shipping address for the specified entry.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
+     * This method will return FALSE if the list has not yet been filled.
      * The returned array will have the following fields:
-     * <ul>
-     * <li><b>Name</b></li>
-     * <li><b>AddressLine1</b></li>
-     * <li><b>AddressLine2</b> (optional)</li>
-     * <li><b>City</b></li>
-     * <li><b>DistrictOrCounty</b> (optional)</li>
-     * <li><b>StateOrProvinceCode</b> (optional)</li>
-     * <li><b>CountryCode</b></li>
-     * <li><b>PostalCode</b></li>
-     * </ul>
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return array|boolean array, or <b>FALSE</b> if Non-numeric index
+     *
+     *  - Name
+     *  - AddressLine1
+     *  - AddressLine2 (optional)
+     *  - City
+     *  - DistrictOrCounty (optional)
+     *  - StateOrProvinceCode (optional)
+     *  - CountryCode
+     *  - PostalCode
+     *
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return array|boolean array, or FALSE if Non-numeric index
      */
     public function getAddress($i = 0)
     {
@@ -475,9 +475,9 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the Destination Fulfillment Center ID for the specified shipment.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getDestinationFulfillmentCenterId($i = 0)
     {
@@ -494,9 +494,9 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the label prep type for the specified shipment.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getLabelPrepType($i = 0)
     {
@@ -513,9 +513,9 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the shipment status for the specified shipment.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean single value, or FALSE if Non-numeric index
      */
     public function getShipmentStatus($i = 0)
     {
@@ -532,9 +532,9 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns whether or not cases are required for the specified shipment.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean "true" or "false", or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean "true" or "false", or FALSE if Non-numeric index
      */
     public function getIfCasesRequired($i = 0)
     {
@@ -551,9 +551,9 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the maximum arrival date for the specified shipment.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
-     * @return string|boolean Date in YYYY-MM-DD format, or <b>FALSE</b> if Non-numeric index
+     * This method will return FALSE if the list has not yet been filled.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to 0.
+     * @return string|boolean Date in YYYY-MM-DD format, or FALSE if Non-numeric index
      */
     public function getConfirmedNeedByDate($i = 0)
     {
@@ -570,19 +570,19 @@ class AmazonShipmentList extends AmazonInboundCore implements \Iterator
     /**
      * Returns the full list.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
+     * This method will return FALSE if the list has not yet been filled.
      * The array for a single shipment will have the following fields:
-     * <ul>
-     * <li><b>ShipmentId</b> (optional)</li>
-     * <li><b>ShipmentName</b> (optional)</li>
-     * <li><b>ShipFromAddress</b> (see <i>getAddress</i> for details)</li>
-     * <li><b>DestinationFulfillmentCenterId</b> (optional)</li>
-     * <li><b>LabelPrepType</b> (optional)</li>
-     * <li><b>ShipmentStatus</b> (optional)</li>
-     * <li><b>AreCasesRequired</b></li>
-     * </ul>
-     * @param int $i [optional] <p>List index of the report to return. Defaults to NULL.</p>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - ShipmentId (optional)
+     *  - ShipmentName (optional)
+     *  - ShipFromAddress (see `getAddress()` for details)
+     *  - DestinationFulfillmentCenterId (optional)
+     *  - LabelPrepType (optional)
+     *  - ShipmentStatus (optional)
+     *  - AreCasesRequired
+     *
+     * @param int $i [optional] List index of the report to return. Defaults to NULL.
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getShipment($i = null)
     {

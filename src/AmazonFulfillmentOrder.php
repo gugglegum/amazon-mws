@@ -24,7 +24,7 @@ namespace gugglegum\AmazonMWS;
  * This Amazon Outbound Core object can retrieve a fulfillment order
  * from Amazon, or cancel it. In order to fetch or cancel an order,
  * a Shipment ID is needed. Shipment IDs are given by Amazon by
- * using the <i>AmazonFulfillmentPreview</i> object.
+ * using the `AmazonFulfillmentPreview` object.
  */
 class AmazonFulfillmentOrder extends AmazonOutboundCore
 {
@@ -43,11 +43,11 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $id [optional] <p>The Fulfillment Order ID to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $id [optional] The Fulfillment Order ID to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $id = null, $mock = false, $m = null)
     {
@@ -63,8 +63,8 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore
      *
      * This method sets the Fulfillment Order ID to be sent in the next request.
      * This parameter is required for fetching the fulfillment order from Amazon.
-     * @param string $s <p>Maximum 40 characters.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Maximum 40 characters.
+     * @return boolean FALSE if improper input
      */
     public function setOrderId($s)
     {
@@ -78,10 +78,10 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore
     /**
      * Fetches data on a fulfillment order from Amazon.
      *
-     * Submits a <i>GetFulfillmentOrder</i> request to Amazon. In order to do this,
+     * Submits a `GetFulfillmentOrder` request to Amazon. In order to do this,
      * a fulfillment order ID is required. Amazon will send
-     * the data back as a response, which can be retrieved using <i>getOrder</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * the data back as a response, which can be retrieved using `getOrder()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchOrder()
     {
@@ -116,8 +116,8 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -314,7 +314,7 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore
 
     /**
      * Parses XML for an address into an array.
-     * @param \SimpleXMLElement $xml <p>Address node of the XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml Address node of the XML response from Amazon.
      * @return array Parsed structure from XML
      */
     public function parseAddress($xml)
@@ -346,10 +346,10 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore
     /**
      * Cancels a fulfillment order on Amazon.
      *
-     * Submits a <i>CancelFulfillmentOrder</i> request to Amazon. In order to do this,
+     * Submits a `CancelFulfillmentOrder` request to Amazon. In order to do this,
      * a fulfillment order ID is required. Amazon will send back an HTTP response,
      * so there is no data to retrieve afterwards.
-     * @return boolean <b>TRUE</b> if the cancellation was successful, <b>FALSE</b> if something goes wrong
+     * @return boolean TRUE if the cancellation was successful, FALSE if something goes wrong
      */
     public function cancelOrder()
     {
@@ -380,16 +380,16 @@ class AmazonFulfillmentOrder extends AmazonOutboundCore
     /**
      * Returns the full order information.
      *
-     * This method will return <b>FALSE</b> if the data has not yet been filled.
+     * This method will return FALSE if the data has not yet been filled.
      * The array returned will have the following fields:
-     * <ul>
-     * <li><b>Details</b> - array of general information, such as destination address</li>
-     * <li><b>Items</b> - multi-dimensional array of item data</li>
-     * <li><b>Shipments</b> - multi-dimensional array of shipment data</li>
-     * <li><b>ReturnItems</b> - multi-dimensional array of return item data</li>
-     * <li><b>ReturnAuthorizations</b> - multi-dimensional array of return authorization data</li>
-     * </ul>
-     * @return array|boolean data array, or <b>FALSE</b> if data not filled yet
+     *
+     *  - `Details` - array of general information, such as destination address
+     *  - `Items` - multi-dimensional array of item data
+     *  - `Shipments` - multi-dimensional array of shipment data
+     *  - `ReturnItems` - multi-dimensional array of return item data
+     *  - `ReturnAuthorizations` - multi-dimensional array of return authorization data
+     *
+     * @return array|boolean data array, or FALSE if data not filled yet
      */
     public function getOrder()
     {

@@ -38,10 +38,10 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -62,26 +62,26 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
      * This method sets the list of estimate requests to be sent in the next request.
      * This parameter is required for getting fee estimates from Amazon.
      * The array provided should contain a list of arrays, each with the following fields:
-     * <ul>
-     * <li><b>MarketplaceId</b> - an Amazon marketplace ID</li>
-     * <li><b>IdType</b> - "ASIN" or "SellerSKU"</li>
-     * <li><b>IdValue</b> - product identifier</li>
-     * <li><b>ListingPrice</b> - array</li>
-     * <ul>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * <li><b>Value</b> - number</li>
-     * </ul>
-     * <li><b>Shipping</b> (optional) - array</li>
-     * <ul>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * <li><b>Value</b> - number</li>
-     * </ul>
-     * <li><b>Points</b> (optional) - number</li>
-     * <li><b>Identifier</b> - unique value that will identify this request</li>
-     * <li><b>IsAmazonFulfilled</b> - if offer is fulfilled by Amazon, boolean</li>
-     * </ul>
-     * @param array $a <p>See above.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     *
+     *  - MarketplaceId - an Amazon marketplace ID
+     *  - IdType - "ASIN" or "SellerSKU"
+     *  - IdValue - product identifier
+     *  - ListingPrice - array
+     *
+     *  - CurrencyCode - ISO 4217 currency code
+     *  - Value - number
+     *
+     *  - Shipping (optional) - array
+     *
+     *  - CurrencyCode - ISO 4217 currency code
+     *  - Value - number
+     *
+     *  - Points (optional) - number
+     *  - Identifier - unique value that will identify this request
+     *  - IsAmazonFulfilled - if offer is fulfilled by Amazon, boolean
+     *
+     * @param array $a See above.
+     * @return boolean FALSE if improper input
      */
     public function setRequests($a)
     {
@@ -140,9 +140,9 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
     /**
      * Fetches a list of product fee estimates from Amazon.
      *
-     * Submits a <i>GetMyFeesEstimate</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getEstimates</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetMyFeesEstimate` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getEstimates()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchEstimates()
     {
@@ -176,8 +176,8 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXml($xml)
     {
@@ -226,7 +226,7 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
     /**
      * Parses XML for a single money element into an array.
      * This structure is used many times throughout fee estimates.
-     * @param \SimpleXMLElement $xml <p>Money node of the XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml Money node of the XML response from Amazon.
      * @return array Parsed structure from XML
      */
     protected function parseMoney($xml)
@@ -240,7 +240,7 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
     /**
      * Parses XML for a single fee detail into an array.
      * This structure is used recursively in fee estimates.
-     * @param \SimpleXMLElement $xml <p>Fee Detail node of the XML response from Amazon.</p>
+     * @param \SimpleXMLElement $xml Fee Detail node of the XML response from Amazon.
      * @return array Parsed structure from XML
      */
     protected function parseFeeDetail($xml)
@@ -267,45 +267,45 @@ class AmazonProductFeeEstimate extends AmazonProductsCore implements \Iterator
     /**
      * Returns fee estimate specified or array of fee estimates.
      * Each estimate array will have the following keys:
-     * <ul>
-     * <li><b>MarketplaceId</b></li>
-     * <li><b>IdType</b> - "ASIN" or "SellerSKU"</li>
-     * <li><b>IdValue</b></li>
-     * <li><b>ListingPrice</b> - money array</li>
-     * <li><b>Shipping</b> (optional) - money array</li>
-     * <li><b>Points</b> (optional)</li>
-     * <li><b>IsAmazonFulfilled</b> - "true" or "false"</li>
-     * <li><b>SellerInputIdentifier</b></li>
-     * <li><b>TimeOfFeesEstimation</b> - ISO 8601 date format</li>
-     * <li><b>Status</b></li>
-     * <li><b>TotalFeesEstimate</b> (optional) - money array</li>
-     * <li><b>FeeDetailList</b> (optional) - array of fee detail arrays</li>
-     * <li><b>Error</b> (optional) - array</li>
-     * <ul>
-     * <li><b>Type</b></li>
-     * <li><b>Code</b></li>
-     * <li><b>Message</b></li>
-     * </ul>
-     * </ul>
+     *
+     *  - MarketplaceId
+     *  - IdType - "ASIN" or "SellerSKU"
+     *  - IdValue
+     *  - ListingPrice - money array
+     *  - Shipping (optional) - money array
+     *  - Points (optional)
+     *  - IsAmazonFulfilled - "true" or "false"
+     *  - SellerInputIdentifier
+     *  - TimeOfFeesEstimation - ISO 8601 date format
+     *  - Status
+     *  - TotalFeesEstimate (optional) - money array
+     *  - FeeDetailList (optional) - array of fee detail arrays
+     *  - Error (optional) - array
+     *
+     *  - Type
+     *  - Code
+     *  - Message
+     *
+     *
      *
      * Each "money" array has the following keys:
-     * <ul>
-     * <li><b>Amount</b> - number</li>
-     * <li><b>CurrencyCode</b> - ISO 4217 currency code</li>
-     * </ul>
+     *
+     *  - Amount - number
+     *  - CurrencyCode - ISO 4217 currency code
+     *
      * Each "fee detail" array has the following keys:
-     * <ul>
-     * <li><b>FeeType</b> - "ReferralFee", "VariableClosingFee", "PerItemFee",
+     *
+     *  - FeeType - "ReferralFee", "VariableClosingFee", "PerItemFee",
      *                      "FBAFees", "FBAPickAndPack", "FBAWeightHandling",
-     *                      "FBAOrderHandling", or "FBADeliveryServicesFee"</li>
-     * <li><b>FeeAmount</b> - money array</li>
-     * <li><b>FeePromotion</b> (optional) - money array</li>
-     * <li><b>TaxAmount</b> (optional) - money array</li>
-     * <li><b>FinalFee</b> - money array</li>
-     * <li><b>IncludedFeeDetailList</b> (optional) - array of fee detail arrays</li>
-     * </ul>
-     * @param int $num [optional] <p>List index to retrieve the value from.</p>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *                      "FBAOrderHandling", or "FBADeliveryServicesFee"
+     *  - FeeAmount - money array
+     *  - FeePromotion (optional) - money array
+     *  - TaxAmount (optional) - money array
+     *  - FinalFee - money array
+     *  - IncludedFeeDetailList (optional) - array of fee detail arrays
+     *
+     * @param int $num [optional] List index to retrieve the value from.
+     * @return array|boolean multi-dimensional array, or FALSE if list not filled yet
      */
     public function getEstimates($num = null)
     {

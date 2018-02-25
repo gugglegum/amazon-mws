@@ -59,10 +59,10 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -78,9 +78,9 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
      * If this parameter is set, Amazon will only return fulfillment orders that
      * were last updated after the time set. If this parameter is not set, Amazon
      * will only return orders that were updated in the past 36 hours.
-     * The parameter is passed through <i>strtotime</i>, so values such as "-1 hour" are fine.
-     * @param string $s <p>Time string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * The parameter is passed through `strtotime()`, so values such as "-1 hour" are fine.
+     * @param string $s Time string.
+     * @return boolean FALSE if improper input
      */
     public function setStartTime($s)
     {
@@ -94,7 +94,7 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
 
     /**
      * The "FulfillmentMethod" option is no longer used.
-     * @return boolean <b>FALSE</b>
+     * @return boolean FALSE
      * @deprecated since 1.3.0
      */
     public function setMethodFilter($s)
@@ -115,12 +115,12 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
     /**
      * Sets whether or not the object should automatically use tokens if it receives one.
      *
-     * If this option is set to <b>TRUE</b>, the object will automatically perform
+     * If this option is set to TRUE, the object will automatically perform
      * the necessary operations to retrieve the rest of the list using tokens. If
      * this option is off, the object will only ever retrieve the first section of
      * the list.
-     * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param boolean $b [optional] Defaults to TRUE
+     * @return boolean FALSE if improper input
      */
     public function setUseToken($b = true)
     {
@@ -134,11 +134,11 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
     /**
      * Fetches the fulfillment order list from Amazon.
      *
-     * Submits a <i>ListAllFulfillmentOrders</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getOrder</i>.
+     * Submits a `ListAllFulfillmentOrders` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getOrder()`.
      * This operation can potentially involve tokens.
-     * @param boolean <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param boolean When set to FALSE, the function will not recurse, defaults to TRUE
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchOrderList($r = true)
     {
@@ -199,8 +199,8 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -286,10 +286,10 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
     /**
      * Creates a list of full order objects from the list. (Warning: could take a while.)
      *
-     * This method automatically creates an array of <i>AmazonFulfillmentOrder</i> objects
+     * This method automatically creates an array of `AmazonFulfillmentOrder` objects
      * and fetches all of their full information from Amazon. Because of throttling, this
      * could take a while if the list has more than a few orders.
-     * @return array|boolean array of <i>AmazonFulfillmentOrder</i> objects, or <b>FALSE</b> if list not filled yet
+     * @return array|boolean array of `AmazonFulfillmentOrder` objects, or FALSE if list not filled yet
      */
     public function getFullList()
     {
@@ -310,26 +310,26 @@ class AmazonFulfillmentOrderList extends AmazonOutboundCore implements \Iterator
     /**
      * Returns the specified fulfillment order, or all of them.
      *
-     * This method will return <b>FALSE</b> if the list has not yet been filled.
+     * This method will return FALSE if the list has not yet been filled.
      * The array for a single fulfillment order will have the following fields:
-     * <ul>
-     * <li><b>SellerFulfillmentOrderId</b> - the ID for the order</li>
-     * <li><b>DisplayableOrderId</b> - your ID for the order</li>
-     * <li><b>DisplayableOrderDateTime</b> - the time the order was created, in ISO 8601 date format</li>
-     * <li><b>ShippingSpeedCategory</b> - shipping speed for the order</li>
-     * <li><b>DeliveryWindow</b> (optional) - array of ISO 8601 dates with the keys "StartDateTime" and "EndDateTime"</li>
-     * <li><b>DestinationAddress</b> - address array, see <i>AmazonFulfillmentOrderCreator</i> for more details</li>
-     * <li><b>FulfillmentAction</b> (optional) - "Ship" or "Hold"</li>
-     * <li><b>FulfillmentPolicy</b> (optional) - "FillOrKill", "FillAll", or "FillAllAvailable"</li>
-     * <li><b>ReceivedDateTime</b> - the time the order was received by the Amazon fulfillment center, in ISO 8601 date format</li>
-     * <li><b>FulfillmentOrderStatus</b> - the status of the order</li>
-     * <li><b>StatusUpdatedDateTime</b> - the time the status was last updated, in ISO 8601 date format</li>
-     * <li><b>NotificationEmailList</b> (optional) - list of email addresses</li>
-     * <li><b>CODSettings</b> (optional) - array, see <i>AmazonFulfillmentOrderCreator</i> for more details</li>
-     * </ul>
-     * @param int $i [optional] <p>List index to retrieve the value from.
-     * If none is given, the entire list will be returned. Defaults to NULL.</p>
-     * @return array|boolean array, multi-dimensional array, or <b>FALSE</b> if list not filled yet
+     *
+     *  - SellerFulfillmentOrderId - the ID for the order
+     *  - DisplayableOrderId - your ID for the order
+     *  - DisplayableOrderDateTime - the time the order was created, in ISO 8601 date format
+     *  - ShippingSpeedCategory - shipping speed for the order
+     *  - DeliveryWindow (optional) - array of ISO 8601 dates with the keys "StartDateTime" and "EndDateTime"
+     *  - DestinationAddress - address array, see `AmazonFulfillmentOrderCreator` for more details
+     *  - FulfillmentAction (optional) - "Ship" or "Hold"
+     *  - FulfillmentPolicy (optional) - "FillOrKill", "FillAll", or "FillAllAvailable"
+     *  - ReceivedDateTime - the time the order was received by the Amazon fulfillment center, in ISO 8601 date format
+     *  - FulfillmentOrderStatus - the status of the order
+     *  - StatusUpdatedDateTime - the time the status was last updated, in ISO 8601 date format
+     *  - NotificationEmailList (optional) - list of email addresses
+     *  - CODSettings (optional) - array, see `AmazonFulfillmentOrderCreator` for more details
+     *
+     * @param int $i [optional] List index to retrieve the value from.
+     * If none is given, the entire list will be returned. Defaults to NULL.
+     * @return array|boolean array, multi-dimensional array, or FALSE if list not filled yet
      */
     public function getOrder($i = null)
     {

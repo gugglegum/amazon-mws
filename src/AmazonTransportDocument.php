@@ -47,11 +47,11 @@ class AmazonTransportDocument extends AmazonInboundCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $id [optional] <p>The Fulfillment Shipment ID to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $id [optional] The Fulfillment Shipment ID to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $id = null, $mock = false, $m = null)
     {
@@ -64,8 +64,8 @@ class AmazonTransportDocument extends AmazonInboundCore
 
     /**
      * Sets the shipment ID. (Required)
-     * @param string $s <p>Shipment ID</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s Shipment ID
+     * @return boolean FALSE if improper input
      */
     public function setShipmentId($s)
     {
@@ -80,8 +80,8 @@ class AmazonTransportDocument extends AmazonInboundCore
      * Sets the page type. (Required for labels)
      *
      * This parameter is required for fetching label documents from Amazon.
-     * @param string $s <p>See the comment inside for a list of valid values.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s See the comment inside for a list of valid values.
+     * @return boolean FALSE if improper input
      */
     public function setPageType($s)
     {
@@ -104,11 +104,11 @@ class AmazonTransportDocument extends AmazonInboundCore
     /**
      * Sets the package ID(s) to get labels for. (Required for getting package labels)
      *
-     * The package identifiers should match the <i>CartonId</i> values sent in a
-     * previous <i>FBA Inbound Shipment Carton Information Feed</i>.
-     * Use the <i>AmazonFeed</i> object to send a feed.
-     * @param array|string $s <p>A list of package IDs, or a single ID string.</p>
-     * @return boolean <b>FALSE</b> if improper input or needed parameters are not set
+     * The package identifiers should match the `CartonId` values sent in a
+     * previous FBA Inbound Shipment Carton Information Feed.
+     * Use the `AmazonFeed` object to send a feed.
+     * @param array|string $s A list of package IDs, or a single ID string.
+     * @return boolean FALSE if improper input or needed parameters are not set
      */
     public function setPackageIds($s)
     {
@@ -145,8 +145,8 @@ class AmazonTransportDocument extends AmazonInboundCore
     /**
      * Sets the number of pallets to get labels for. (Required for getting pallet labels)
      *
-     * @param int $n <p>number of boxes</p>
-     * @return boolean <b>FALSE</b> if improper input or needed parameters are not set
+     * @param int $n number of boxes
+     * @return boolean FALSE if improper input or needed parameters are not set
      */
     public function setPalletCount($n)
     {
@@ -160,10 +160,10 @@ class AmazonTransportDocument extends AmazonInboundCore
     /**
      * Gets a document containing package labels for a shipment from Amazon.
      *
-     * Submits a <i>GetUniquePackageLabels</i> request to Amazon. In order to do this,
+     * Submits a `GetUniquePackageLabels` request to Amazon. In order to do this,
      * a fulfillment shipment ID and list of package IDs are required.
-     * Amazon will send a document back as a response, which can be retrieved using <i>getDocument</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Amazon will send a document back as a response, which can be retrieved using `getDocument()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchPackageLabels()
     {
@@ -199,9 +199,9 @@ class AmazonTransportDocument extends AmazonInboundCore
     }
 
     /**
-     * Sets up options for using <i>fetchPackageLabels</i>.
+     * Sets up options for using `fetchPackageLabels()`.
      *
-     * This changes key options for using <i>fetchPackageLabels</i>.
+     * This changes key options for using `fetchPackageLabels()`.
      * Please note: because the operation does not use all of the parameters,
      * some of the parameters will be removed. The following parameters are removed:
      * number of pallets.
@@ -217,10 +217,10 @@ class AmazonTransportDocument extends AmazonInboundCore
     /**
      * Gets a document containing package labels for a shipment from Amazon.
      *
-     * Submits a <i>GetPalletLabels</i> request to Amazon. In order to do this,
+     * Submits a `GetPalletLabels` request to Amazon. In order to do this,
      * a fulfillment shipment ID and the number of pallets are required.
-     * Amazon will send a document back as a response, which can be retrieved using <i>getDocument</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Amazon will send a document back as a response, which can be retrieved using `getDocument()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchPalletLabels()
     {
@@ -256,9 +256,9 @@ class AmazonTransportDocument extends AmazonInboundCore
     }
 
     /**
-     * Sets up options for using <i>fetchPalletLabels</i>.
+     * Sets up options for using `fetchPalletLabels()`.
      *
-     * This changes key options for using <i>fetchPalletLabels</i>.
+     * This changes key options for using `fetchPalletLabels()`.
      * Please note: because the operation does not use all of the parameters,
      * some of the parameters will be removed. The following parameters are removed:
      * package IDs.
@@ -274,10 +274,10 @@ class AmazonTransportDocument extends AmazonInboundCore
     /**
      * Gets a bill of lading document for a shipment from Amazon.
      *
-     * Submits a <i>GetBillOfLading</i> request to Amazon. In order to do this,
+     * Submits a `GetBillOfLading` request to Amazon. In order to do this,
      * a fulfillment shipment ID for a Less Than Truckload/Full Truckload shipment is required.
-     * Amazon will send a document back as a response, which can be retrieved using <i>getDocument</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Amazon will send a document back as a response, which can be retrieved using `getDocument()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchBillOfLading()
     {
@@ -309,9 +309,9 @@ class AmazonTransportDocument extends AmazonInboundCore
     }
 
     /**
-     * Sets up options for using <i>fetchBillOfLading</i>.
+     * Sets up options for using `fetchBillOfLading()`.
      *
-     * This changes key options for using <i>fetchBillOfLading</i>.
+     * This changes key options for using `fetchBillOfLading()`.
      * Please note: because the operation does not use all of the parameters,
      * some of the parameters will be removed. The following parameters are removed:
      * package IDs, number of pallets.
@@ -329,8 +329,8 @@ class AmazonTransportDocument extends AmazonInboundCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXml($xml)
     {
@@ -349,9 +349,9 @@ class AmazonTransportDocument extends AmazonInboundCore
      * Returns the file contents for the transport document.
      *
      * The contents of the document depends on which action was used to retrieve the document.
-     * This method will return <b>FALSE</b> if the file has not been fetched yet.
-     * @param boolean $raw [optional] <p>Set to TRUE to get the raw, base64-encoded file contents.</p>
-     * @return string|boolean file contents, encoded file, or <b>FALSE</b> if file not fetched yet
+     * This method will return FALSE if the file has not been fetched yet.
+     * @param boolean $raw [optional] Set to TRUE to get the raw, base64-encoded file contents.
+     * @return string|boolean file contents, encoded file, or FALSE if file not fetched yet
      */
     public function getDocument($raw = FALSE)
     {
@@ -370,9 +370,9 @@ class AmazonTransportDocument extends AmazonInboundCore
     /**
      * Returns the checksum the transport document.
      *
-     * This method will return <b>FALSE</b> if the file has not been fetched yet.
-     * @param boolean $raw [optional] <p>Set to TRUE to get the raw, base64-encoded checksum.</p>
-     * @return string|boolean checksum, or <b>FALSE</b> if file not fetched yet
+     * This method will return FALSE if the file has not been fetched yet.
+     * @param boolean $raw [optional] Set to TRUE to get the raw, base64-encoded checksum.
+     * @return string|boolean checksum, or FALSE if file not fetched yet
      */
     public function getChecksum($raw = FALSE)
     {

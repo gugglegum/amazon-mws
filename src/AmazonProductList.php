@@ -38,10 +38,10 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -59,8 +59,8 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
     /**
      * Sets the ID type. (Required)
      *
-     * @param string $s <p>"ASIN", "GCID", "SellerSKU", "UPC", "EAN", "ISBN", or "JAN"</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $s "ASIN", "GCID", "SellerSKU", "UPC", "EAN", "ISBN", or "JAN"
+     * @return boolean FALSE if improper input
      */
     public function setIdType($s)
     {
@@ -75,8 +75,8 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
      * Sets the request ID(s). (Required)
      *
      * This method sets the list of product IDs to be sent in the next request.
-     * @param array|string $s <p>A list of product IDs, or a single type string. (max: 5)</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $s A list of product IDs, or a single type string. (max: 5)
+     * @return boolean FALSE if improper input
      */
     public function setProductIds($s)
     {
@@ -113,9 +113,9 @@ class AmazonProductList extends AmazonProductsCore implements \Iterator
     /**
      * Fetches a list of products from Amazon.
      *
-     * Submits a <i>GetMatchingProductForId</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getProduct</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * Submits a `GetMatchingProductForId` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getProduct()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchProductList()
     {

@@ -24,7 +24,7 @@ namespace gugglegum\AmazonMWS;
  * This Amazon Merchant Fulfillment Core object can retrieve (or simply contain)
  * a merchant-fulfilled shipment from Amazon, or cancel it.
  * In order to fetch or cancel a shipment, a Shipment ID is needed.
- * Shipment IDs are given by Amazon by using the <i>AmazonMerchantShipmentCreator</i> object.
+ * Shipment IDs are given by Amazon by using the `AmazonMerchantShipmentCreator` object.
  */
 class AmazonMerchantShipment extends AmazonMerchantCore
 {
@@ -41,12 +41,12 @@ class AmazonMerchantShipment extends AmazonMerchantCore
      * on these parameters and common methods.
      * Please note that two extra parameters come before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $id [optional] <p>The Shipment ID to set for the object.</p>
-     * @param \SimpleXMLElement $data [optional] <p>XML data from Amazon to be parsed.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $id [optional] The Shipment ID to set for the object.
+     * @param \SimpleXMLElement $data [optional] XML data from Amazon to be parsed.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $id = null, $data = null, $mock = false, $m = null)
     {
@@ -65,8 +65,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
      *
      * This method sets the shipment ID to be sent in the next request.
      * This parameter is required for fetching the shipment from Amazon.
-     * @param string $id <p>either string or number</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $id either string or number
+     * @return boolean FALSE if improper input
      */
     public function setShipmentId($id)
     {
@@ -81,11 +81,11 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Fetches the specified merchant-fulfilled shipment from Amazon.
      *
-     * Submits a <i>GetShipment</i> request to Amazon. In order to do this,
+     * Submits a `GetShipment` request to Amazon. In order to do this,
      * a shipment ID is required. Amazon will send
-     * the data back as a response, which can be retrieved using <i>getShipment</i>.
+     * the data back as a response, which can be retrieved using `getShipment()`.
      * Other methods are available for fetching specific values from the shipment.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchShipment()
     {
@@ -120,8 +120,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -248,11 +248,11 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Cancels a merchant-fulfilled shipment on Amazon.
      *
-     * Submits a <i>CancelShipment</i> request to Amazon. In order to do this,
+     * Submits a `CancelShipment` request to Amazon. In order to do this,
      * a shipment ID is required. Amazon will send back data about the shipment
-     * as a response, including its status, which can be retrieved using <i>getData</i>.
+     * as a response, including its status, which can be retrieved using `getData()`.
      * Other methods are available for fetching specific values from the shipment.
-     * @return boolean <b>TRUE</b> if the cancellation was successful, <b>FALSE</b> if something goes wrong
+     * @return boolean TRUE if the cancellation was successful, FALSE if something goes wrong
      */
     public function cancelShipment()
     {
@@ -286,8 +286,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the shipment data.
      *
-     * This method will return <b>FALSE</b> if the shipment data has not been retrieved yet.
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if shipment not set yet
+     * This method will return FALSE if the shipment data has not been retrieved yet.
+     * @return array|boolean multi-dimensional array, or FALSE if shipment not set yet
      */
     public function getData()
     {
@@ -301,8 +301,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the Amazon-generated shipment ID.
      *
-     * This method will return <b>FALSE</b> if the shipment ID has not been set yet.
-     * @return string|boolean single value, or <b>FALSE</b> if shipment ID not set yet
+     * This method will return FALSE if the shipment ID has not been set yet.
+     * @return string|boolean single value, or FALSE if shipment ID not set yet
      */
     public function getShipmentId()
     {
@@ -316,8 +316,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the Amazon Order ID.
      *
-     * This method will return <b>FALSE</b> if the order ID has not been set yet.
-     * @return string|boolean single value, or <b>FALSE</b> if order ID not set yet
+     * This method will return FALSE if the order ID has not been set yet.
+     * @return string|boolean single value, or FALSE if order ID not set yet
      */
     public function getAmazonOrderId()
     {
@@ -331,8 +331,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the Seller's Order ID.
      *
-     * This method will return <b>FALSE</b> if the order ID has not been set yet.
-     * @return string|boolean single value, or <b>FALSE</b> if order ID not set yet
+     * This method will return FALSE if the order ID has not been set yet.
+     * @return string|boolean single value, or FALSE if order ID not set yet
      */
     public function getSellerOrderId()
     {
@@ -346,13 +346,13 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns a list of Items for the Shipment.
      *
-     * This method will return <b>FALSE</b> if the items have not been set yet.
+     * This method will return FALSE if the items have not been set yet.
      * The array returned contains one or more arrays with the following fields:
-     * <ul>
-     * <li><b>OrderItemId</b></li>
-     * <li><b>Quantity</b></li>
-     * </ul>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if items not set yet
+     *
+     *  - OrderItemId
+     *  - Quantity
+     *
+     * @return array|boolean multi-dimensional array, or FALSE if items not set yet
      */
     public function getItems()
     {
@@ -366,22 +366,22 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns an array containing all of the shipper's address information.
      *
-     * This method will return <b>FALSE</b> if the label has not been set yet.
+     * This method will return FALSE if the label has not been set yet.
      * The returned array will have the following fields:
-     * <ul>
-     * <li><b>Name</b></li>
-     * <li><b>AddressLine1</b></li>
-     * <li><b>AddressLine2</b></li>
-     * <li><b>AddressLine3</b></li>
-     * <li><b>DistrictOrCounty</b></li>
-     * <li><b>Email</b></li>
-     * <li><b>City</b></li>
-     * <li><b>StateOrProvinceCode</b></li>
-     * <li><b>PostalCode</b></li>
-     * <li><b>CountryCode</b></li>
-     * <li><b>Phone</b></li>
-     * </ul>
-     * @return array|boolean associative array, or <b>FALSE</b> if label not set yet
+     *
+     *  - Name
+     *  - AddressLine1
+     *  - AddressLine2
+     *  - AddressLine3
+     *  - DistrictOrCounty
+     *  - Email
+     *  - City
+     *  - StateOrProvinceCode
+     *  - PostalCode
+     *  - CountryCode
+     *  - Phone
+     *
+     * @return array|boolean associative array, or FALSE if label not set yet
      */
     public function getShipFromAddress()
     {
@@ -395,22 +395,22 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns an array containing all of the customer's address information.
      *
-     * This method will return <b>FALSE</b> if the label has not been set yet.
+     * This method will return FALSE if the label has not been set yet.
      * The returned array will have the following fields:
-     * <ul>
-     * <li><b>Name</b></li>
-     * <li><b>AddressLine1</b></li>
-     * <li><b>AddressLine2</b></li>
-     * <li><b>AddressLine3</b></li>
-     * <li><b>DistrictOrCounty</b></li>
-     * <li><b>Email</b> (always blank)</li>
-     * <li><b>City</b></li>
-     * <li><b>StateOrProvinceCode</b></li>
-     * <li><b>PostalCode</b></li>
-     * <li><b>CountryCode</b></li>
-     * <li><b>Phone</b> (always blank)</li>
-     * </ul>
-     * @return array|boolean associative array, or <b>FALSE</b> if label not set yet
+     *
+     *  - Name
+     *  - AddressLine1
+     *  - AddressLine2
+     *  - AddressLine3
+     *  - DistrictOrCounty
+     *  - Email (always blank)
+     *  - City
+     *  - StateOrProvinceCode
+     *  - PostalCode
+     *  - CountryCode
+     *  - Phone (always blank)
+     *
+     * @return array|boolean associative array, or FALSE if label not set yet
      */
     public function getShipToAddress()
     {
@@ -424,16 +424,16 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns an array containing all of the Package Dimension information.
      *
-     * This method will return <b>FALSE</b> if the package dimensions have not been set yet.
+     * This method will return FALSE if the package dimensions have not been set yet.
      * The returned array will have the following fields:
-     * <ul>
-     * <li><b>Length</b></li>
-     * <li><b>Width</b></li>
-     * <li><b>Height</b></li>
-     * <li><b>Unit</b></li>
-     * <li><b>PredefinedPackageDimensions</b> (optional)</li>
-     * </ul>
-     * @return array|boolean associative array, or <b>FALSE</b> if package dimensions not set yet
+     *
+     *  - Length
+     *  - Width
+     *  - Height
+     *  - Unit
+     *  - PredefinedPackageDimensions (optional)
+     *
+     * @return array|boolean associative array, or FALSE if package dimensions not set yet
      */
     public function getPackageDimensions()
     {
@@ -447,10 +447,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the weight.
      *
-     * This method will return <b>FALSE</b> if the weight has not been set yet.
-     * If an array is returned, it will have the fields <b>Value</b> and <b>Unit</b>.
-     * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the value</p>
-     * @return array|string|boolean array, single value, or <b>FALSE</b> if weight not set yet
+     * This method will return FALSE if the weight has not been set yet.
+     * If an array is returned, it will have the fields Value and Unit.
+     * @param boolean $only [optional] set to TRUE to get only the value
+     * @return array|string|boolean array, single value, or FALSE if weight not set yet
      */
     public function getWeight($only = false)
     {
@@ -468,10 +468,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the insurance amount.
      *
-     * This method will return <b>FALSE</b> if the insurance amount has not been set yet.
-     * If an array is returned, it will have the fields <b>Amount</b> and <b>CurrencyCode</b>.
-     * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the value</p>
-     * @return array|string|boolean array, single value, or <b>FALSE</b> if insurance amount not set yet
+     * This method will return FALSE if the insurance amount has not been set yet.
+     * If an array is returned, it will have the fields Amount and CurrencyCode.
+     * @param boolean $only [optional] set to TRUE to get only the value
+     * @return array|string|boolean array, single value, or FALSE if insurance amount not set yet
      */
     public function getInsurance($only = false)
     {
@@ -489,22 +489,22 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns an array containing all of the Service information.
      *
-     * This method will return <b>FALSE</b> if the package dimensions have not been set yet.
+     * This method will return FALSE if the package dimensions have not been set yet.
      * The returned array will have the following fields:
-     * <ul>
-     * <li><b>ShippingServiceName</b></li>
-     * <li><b>CarrierName</b></li>
-     * <li><b>ShippingServiceId</b></li>
-     * <li><b>ShippingServiceOfferId</b></li>
-     * <li><b>ShipDate</b></li>
-     * <li><b>EarliestEstimatedDeliveryDate</b> (optional)</li>
-     * <li><b>LatestEstimatedDeliveryDate</b> (optional)</li>
-     * <li><b>Rate</b> - contains <b>Value</b> and <b>CurrencyCode</b></li>
-     * <li><b>DeliveryExperience</b></li>
-     * <li><b>DeclaredValue</b> (optional) - contains <b>Value</b> and <b>CurrencyCode</b></li>
-     * <li><b>CarrierWillPickUp</b></li>
-     * </ul>
-     * @return array|boolean associative array, or <b>FALSE</b> if package dimensions not set yet
+     *
+     *  - ShippingServiceName
+     *  - CarrierName
+     *  - ShippingServiceId
+     *  - ShippingServiceOfferId
+     *  - ShipDate
+     *  - EarliestEstimatedDeliveryDate (optional)
+     *  - LatestEstimatedDeliveryDate (optional)
+     *  - Rate - contains Value and CurrencyCode
+     *  - DeliveryExperience
+     *  - DeclaredValue (optional) - contains Value and CurrencyCode
+     *  - CarrierWillPickUp
+     *
+     * @return array|boolean associative array, or FALSE if package dimensions not set yet
      */
     public function getService()
     {
@@ -518,10 +518,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the service rate.
      *
-     * This method will return <b>FALSE</b> if the service has not been set yet.
-     * If an array is returned, it will have the fields <b>Amount</b> and <b>CurrencyCode</b>.
-     * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the value</p>
-     * @return array|string|boolean array, single value, or <b>FALSE</b> if service not set yet
+     * This method will return FALSE if the service has not been set yet.
+     * If an array is returned, it will have the fields Amount and CurrencyCode.
+     * @param boolean $only [optional] set to TRUE to get only the value
+     * @return array|string|boolean array, single value, or FALSE if service not set yet
      * @see getService
      */
     public function getServiceRate($only = false)
@@ -540,10 +540,10 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the declared value.
      *
-     * This method will return <b>FALSE</b> if the declared value has not been set yet.
-     * If an array is returned, it will have the fields <b>Amount</b> and <b>CurrencyCode</b>.
-     * @param boolean $only [optional] <p>set to <b>TRUE</b> to get only the value</p>
-     * @return array|string|boolean array, single value, or <b>FALSE</b> if declared value not set yet
+     * This method will return FALSE if the declared value has not been set yet.
+     * If an array is returned, it will have the fields Amount and CurrencyCode.
+     * @param boolean $only [optional] set to TRUE to get only the value
+     * @return array|string|boolean array, single value, or FALSE if declared value not set yet
      * @see getService
      */
     public function getDeclaredValue($only = false)
@@ -562,29 +562,29 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns an array containing all of the Label information.
      *
-     * This method will return <b>FALSE</b> if the label has not been set yet.
+     * This method will return FALSE if the label has not been set yet.
      * The returned array will have the following fields:
-     * <ul>
-     * <li><b>Dimensions</b>:
-     * <ul>
-     * <li><b>Length</b></li>
-     * <li><b>Width</b></li>
-     * <li><b>Unit</b></li>
-     * </ul>
-     * </li>
-     * <li><b>FileContents</b>:
-     * <ul>
-     * <li><b>Contents</b></li>
-     * <li><b>FileType</b></li>
-     * <li><b>Checksum</b></li>
-     * </ul>
-     * </li>
-     * <li><b>CustomTextForLabel</b></li>
-     * <li><b>LabelFormat</b></li>
-     * <li><b>StandardIdForLabel</b></li>
-     * </ul>
-     * @param boolean $raw [optional] <p>Set to TRUE to get the raw, double-encoded file contents.</p>
-     * @return array|boolean multi-dimensional array, or <b>FALSE</b> if label not set yet
+     *
+     *  - Dimensions:
+     *
+     *  - Length
+     *  - Width
+     *  - Unit
+     *
+     *
+     *  - FileContents:
+     *
+     *  - Contents
+     *  - FileType
+     *  - Checksum
+     *
+     *
+     *  - CustomTextForLabel
+     *  - LabelFormat
+     *  - StandardIdForLabel
+     *
+     * @param boolean $raw [optional] Set to TRUE to get the raw, double-encoded file contents.
+     * @return array|boolean multi-dimensional array, or FALSE if label not set yet
      */
     public function getLabelData($raw = FALSE)
     {
@@ -607,9 +607,9 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the file contents for the Label.
      *
-     * This method will return <b>FALSE</b> if the status has not been set yet.
-     * @param boolean $raw [optional] <p>Set to TRUE to get the raw, double-encoded file contents.</p>
-     * @return string|boolean single value, or <b>FALSE</b> if status not set yet
+     * This method will return FALSE if the status has not been set yet.
+     * @param boolean $raw [optional] Set to TRUE to get the raw, double-encoded file contents.
+     * @return string|boolean single value, or FALSE if status not set yet
      */
     public function getLabelFileContents($raw = FALSE)
     {
@@ -631,8 +631,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the Shipment's Status.
      *
-     * This method will return <b>FALSE</b> if the status has not been set yet.
-     * @return string|boolean single value, or <b>FALSE</b> if status not set yet
+     * This method will return FALSE if the status has not been set yet.
+     * @return string|boolean single value, or FALSE if status not set yet
      */
     public function getStatus()
     {
@@ -646,8 +646,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the Tracking ID.
      *
-     * This method will return <b>FALSE</b> if the tracking ID has not been set yet.
-     * @return string|boolean single value, or <b>FALSE</b> if tracking ID not set yet
+     * This method will return FALSE if the tracking ID has not been set yet.
+     * @return string|boolean single value, or FALSE if tracking ID not set yet
      */
     public function getTrackingId()
     {
@@ -661,8 +661,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the date at which the shipment was created.
      *
-     * This method will return <b>FALSE</b> if the tracking ID has not been set yet.
-     * @return string|boolean timestamp, or <b>FALSE</b> if tracking ID not set yet
+     * This method will return FALSE if the tracking ID has not been set yet.
+     * @return string|boolean timestamp, or FALSE if tracking ID not set yet
      */
     public function getDateCreated()
     {
@@ -676,8 +676,8 @@ class AmazonMerchantShipment extends AmazonMerchantCore
     /**
      * Returns the date at which the shipment was last updated.
      *
-     * This method will return <b>FALSE</b> if the tracking ID has not been set yet.
-     * @return string|boolean timestamp, or <b>FALSE</b> if tracking ID not set yet
+     * This method will return FALSE if the tracking ID has not been set yet.
+     * @return string|boolean timestamp, or FALSE if tracking ID not set yet
      */
     public function getDateLastUpdated()
     {

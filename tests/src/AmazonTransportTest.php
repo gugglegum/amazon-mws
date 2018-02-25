@@ -1485,10 +1485,10 @@ class AmazonTransportTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Simplified copy of method <i>determineDetailOption</i> in class
-     * @param string $t <p>shipment type ("SP" or "LTL")</p>
-     * @param boolean $p <p>partnered or not</p>
-     * @return string|boolean parameter prefix or <b>FALSE</b> if it could not be determined
+     * Simplified copy of method `determineDetailOption()` in class
+     * @param string $t shipment type ("SP" or "LTL")
+     * @param boolean $p partnered or not
+     * @return string|boolean parameter prefix or FALSE if it could not be determined
      */
     private function findOp($t, $p)
     {

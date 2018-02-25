@@ -54,15 +54,15 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
     protected $index = 0;
 
     /**
-     * Amazon Order Lists pull a set of Orders and turn them into an array of <i>AmazonOrder</i> objects.
+     * Amazon Order Lists pull a set of Orders and turn them into an array of `AmazonOrder` objects.
      *
      * The parameters are passed to the parent constructor, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config = null, $mock = false, $m = null)
     {
@@ -91,12 +91,12 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
     /**
      * Sets whether or not the object should automatically use tokens if it receives one.
      *
-     * If this option is set to <b>TRUE</b>, the object will automatically perform
+     * If this option is set to TRUE, the object will automatically perform
      * the necessary operations to retrieve the rest of the list using tokens. If
      * this option is off, the object will only ever retrieve the first section of
      * the list.
-     * @param boolean $b [optional] <p>Defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param boolean $b [optional] Defaults to TRUE
+     * @return boolean FALSE if improper input
      */
     public function setUseToken($b = true)
     {
@@ -111,10 +111,10 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Sets the time frame for the orders fetched. (Optional)
      *
      * Sets the time frame for the orders fetched. If no times are specified, times default to the current time.
-     * @param string $mode <p>"Created" or "Modified"</p>
-     * @param string $lower [optional] <p>A time string for the earliest time.</p>
-     * @param string $upper [optional] <p>A time string for the latest time.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $mode "Created" or "Modified"
+     * @param string $lower [optional] A time string for the earliest time.
+     * @param string $upper [optional] A time string for the latest time.
+     * @return boolean FALSE if improper input
      */
     public function setLimits($mode, $lower = null, $upper = null)
     {
@@ -166,8 +166,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Setting this parameter tells Amazon to only return Orders with statuses that match
      * those in the list. If this parameter is not set, Amazon will return
      * Orders of any status.
-     * @param array|string $list <p>A list of Order Statuses, or a single status string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $list A list of Order Statuses, or a single status string.
+     * @return boolean FALSE if improper input
      */
     public function setOrderStatusFilter($list)
     {
@@ -210,8 +210,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Setting this parameter tells Amazon to only return Orders made in marketplaces that match
      * those in the list. If this parameter is not set, Amazon will return
      * Orders belonging to the current store's default marketplace.
-     * @param array|string $list <p>A list of Marketplace IDs, or a single Marketplace ID.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $list A list of Marketplace IDs, or a single Marketplace ID.
+     * @return boolean FALSE if improper input
      */
     public function setMarketplaceFilter($list)
     {
@@ -256,8 +256,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
 
     /**
      * Sets (or resets) the Fulfillment Channel Filter
-     * @param string $filter <p>'AFN' or 'MFN' or NULL</p>
-     * @return boolean <b>FALSE</b> on failure
+     * @param string $filter 'AFN' or 'MFN' or NULL
+     * @return boolean FALSE on failure
      */
     public function setFulfillmentChannelFilter($filter)
     {
@@ -277,8 +277,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Setting this parameter tells Amazon to only return Orders with payment methods
      * that match those in the list. If this parameter is not set, Amazon will return
      * Orders with any payment method.
-     * @param array|string $list <p>A list of Payment Methods, or a single method string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $list A list of Payment Methods, or a single method string.
+     * @return boolean FALSE if improper input
      */
     public function setPaymentMethodFilter($list)
     {
@@ -320,8 +320,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Setting this parameter tells Amazon to only return Orders with email addresses
      * that match the email address given. If this parameter is set, the following options
      * will be removed: SellerOrderId, OrderStatus, PaymentMethod, FulfillmentChannel, LastUpdatedAfter, LastUpdatedBefore.
-     * @param string $filter <p>A single email address string. Set to NULL to remove the option.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $filter A single email address string. Set to NULL to remove the option.
+     * @return boolean FALSE if improper input
      */
     public function setEmailFilter($filter)
     {
@@ -348,8 +348,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Setting this parameter tells Amazon to only return Orders with seller order IDs
      * that match the seller order ID given. If this parameter is set, the following options
      * will be removed: BuyerEmail, OrderStatus, PaymentMethod, FulfillmentChannel, LastUpdatedAfter, LastUpdatedBefore.
-     * @param array|string $filter <p>A single seller order ID. Set to NULL to remove the option.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $filter A single seller order ID. Set to NULL to remove the option.
+     * @return boolean FALSE if improper input
      */
     public function setSellerOrderIdFilter($filter)
     {
@@ -374,8 +374,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      *
      * This method sets the maximum number of Feed Submissions for Amazon to return per page.
      * If this parameter is not set, Amazon will send 100 at a time.
-     * @param array|string $num <p>Positive integer from 1 to 100.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $num Positive integer from 1 to 100.
+     * @return boolean FALSE if improper input
      */
     public function setMaxResultsPerPage($num)
     {
@@ -393,8 +393,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Setting this parameter tells Amazon to only return TFM Orders with statuses that match
      * those in the list. If this parameter is not set, Amazon will return
      * Orders of any status, including non-TFM orders.
-     * @param array|string $list <p>A list of TFM Shipment Statuses, or a single status string.</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param array|string $list A list of TFM Shipment Statuses, or a single status string.
+     * @return boolean FALSE if improper input
      */
     public function setTfmShipmentStatusFilter($list)
     {
@@ -431,13 +431,13 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
     }
 
     /**
-     * Fetches orders from Amazon and puts them in an array of <i>AmazonOrder</i> objects.
+     * Fetches orders from Amazon and puts them in an array of `AmazonOrder` objects.
      *
-     * Submits a <i>ListOrders</i> request to Amazon. Amazon will send
-     * the list back as a response, which can be retrieved using <i>getList</i>.
+     * Submits a `ListOrders` request to Amazon. Amazon will send
+     * the list back as a response, which can be retrieved using `getList()`.
      * This operation can potentially involve tokens.
-     * @param boolean $r [optional] <p>When set to <b>FALSE</b>, the function will not recurse, defaults to <b>TRUE</b></p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param boolean $r [optional] When set to FALSE, the function will not recurse, defaults to TRUE
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchOrders($r = true)
     {
@@ -513,8 +513,8 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -548,12 +548,12 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
     /**
      * Returns array of item lists or a single item list.
      *
-     * If <i>$i</i> is not specified, the method will fetch the items for every
+     * If `$i` is not specified, the method will fetch the items for every
      * order in the list. Please note that for lists with a high number of orders,
      * this operation could take a while due to throttling. (Two seconds per order when throttled.)
-     * @param boolean $token [optional] <p>whether or not to automatically use tokens when fetching items.</p>
-     * @param int $i [optional] <p>List index to retrieve the value from. Defaults to null.</p>
-     * @return AmazonOrderItemList|AmazonOrderItemList[]|bool <i>AmazonOrderItemList</i> object or array of objects, or <b>FALSE</b> if non-numeric index
+     * @param boolean $token [optional] whether or not to automatically use tokens when fetching items.
+     * @param int $i [optional] List index to retrieve the value from. Defaults to null.
+     * @return AmazonOrderItemList|AmazonOrderItemList[]|bool `AmazonOrderItemList` object or array of objects, or FALSE if non-numeric index
      */
     public function fetchItems($token = false, $i = null)
     {
@@ -576,7 +576,7 @@ class AmazonOrderList extends AmazonOrderCore implements \Iterator
 
     /**
      * Returns the list of orders.
-     * @return AmazonOrder[]|boolean array of <i>AmazonOrder</i> objects, or <b>FALSE</b> if list not filled yet
+     * @return AmazonOrder[]|boolean array of `AmazonOrder` objects, or FALSE if list not filled yet
      */
     public function getList()
     {

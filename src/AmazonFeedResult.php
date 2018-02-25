@@ -43,11 +43,11 @@ class AmazonFeedResult extends AmazonFeedsCore
      * on these parameters and common methods.
      * Please note that an extra parameter comes before the usual Mock Mode parameters,
      * so be careful when setting up the object.
-     * @param array $config <p>A config array to set.</p>
-     * @param string $id [optional] <p>The Feed Submission ID to set for the object.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param string $id [optional] The Feed Submission ID to set for the object.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $id = null, $mock = false, $m = null)
     {
@@ -74,8 +74,8 @@ class AmazonFeedResult extends AmazonFeedsCore
      *
      * This method sets the feed submission ID to be sent in the next request. This
      * parameter is required in order to retrieve a feed from Amazon.
-     * @param string|integer $n <p>Must be numeric</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string|integer $n Must be numeric
+     * @return boolean FALSE if improper input
      */
     public function setFeedId($n)
     {
@@ -89,10 +89,10 @@ class AmazonFeedResult extends AmazonFeedsCore
     /**
      * Sends a request to Amazon for a feed.
      *
-     * Submits a <i>GetFeedSubmissionResult</i> request to Amazon. In order to
+     * Submits a `GetFeedSubmissionResult` request to Amazon. In order to
      * do this, a feed submission ID is required. Amazon will send back the raw results
-     * of the feed as a response, which can be saved to a file using <i>saveFeed</i>.
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * of the feed as a response, which can be saved to a file using `saveFeed()`.
+     * @return boolean FALSE if something goes wrong
      */
     public function fetchFeedResult()
     {
@@ -122,8 +122,8 @@ class AmazonFeedResult extends AmazonFeedsCore
      * Saves the raw report data to a path you specify.
      *
      * This method will record in the log whether or not the save was successful.
-     * @param string $path <p>path for the file to save the feed data in</p>
-     * @return boolean <b>FALSE</b> if something goes wrong
+     * @param string $path path for the file to save the feed data in
+     * @return boolean FALSE if something goes wrong
      */
     public function saveFeed($path)
     {
@@ -143,7 +143,7 @@ class AmazonFeedResult extends AmazonFeedsCore
      * Returns the entire raw report data.
      *
      * This is useful for handling the report with an external file management system.
-     * @return string|boolean The raw report data as a string, or <b>FALSE</b> if there is no data
+     * @return string|boolean The raw report data as a string, or FALSE if there is no data
      */
     public function getRawFeed()
     {

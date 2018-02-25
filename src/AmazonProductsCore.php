@@ -30,6 +30,10 @@ abstract class AmazonProductsCore extends AmazonCore
      * @var AmazonProduct[]
      */
     protected $productList;
+
+    /**
+     * @var int
+     */
     protected $index = 0;
 
     /**
@@ -39,10 +43,10 @@ abstract class AmazonProductsCore extends AmazonCore
      * The parameters are passed by the child objects' constructors, which are
      * in turn passed to the AmazonCore constructor. See it for more information
      * on these parameters and common methods.
-     * @param array $config <p>A config array to set.</p>
-     * @param boolean $mock [optional] <p>This is a flag for enabling Mock Mode.
-     * This defaults to <b>FALSE</b>.</p>
-     * @param array|string $m [optional] <p>The files (or file) to use in Mock Mode.</p>
+     * @param array $config A config array to set.
+     * @param boolean $mock [optional] This is a flag for enabling Mock Mode.
+     * This defaults to FALSE.
+     * @param array|string $m [optional] The files (or file) to use in Mock Mode.
      */
     public function __construct(array $config, $mock = false, $m = null)
     {
@@ -70,8 +74,8 @@ abstract class AmazonProductsCore extends AmazonCore
      * Sets the marketplace to search in. (Optional)
      * Setting this option tells Amazon to only return products from the given marketplace.
      * If this option is not set, the current store's marketplace will be used.
-     * @param string $m <p>Marketplace ID</p>
-     * @return boolean <b>FALSE</b> if improper input
+     * @param string $m Marketplace ID
+     * @return boolean FALSE if improper input
      */
     public function setMarketplace($m)
     {
@@ -86,8 +90,8 @@ abstract class AmazonProductsCore extends AmazonCore
      * Parses XML response into array.
      *
      * This is what reads the response XML and converts it into an array.
-     * @param \SimpleXMLElement $xml <p>The XML response from Amazon.</p>
-     * @return boolean <b>FALSE</b> if no XML data is found
+     * @param \SimpleXMLElement $xml The XML response from Amazon.
+     * @return boolean FALSE if no XML data is found
      */
     protected function parseXML($xml)
     {
@@ -136,8 +140,8 @@ abstract class AmazonProductsCore extends AmazonCore
     /**
      * Returns product specified or array of products.
      *
-     * See the <i>AmazonProduct</i> class for more information on the returned objects.
-     * @param int $num [optional] <p>List index to retrieve the value from. Defaults to 0.</p>
+     * See the `AmazonProduct` class for more information on the returned objects.
+     * @param int $num [optional] List index to retrieve the value from. Defaults to 0.
      * @return AmazonProduct|array Product (or list of Products)
      */
     public function getProduct($num = null)
