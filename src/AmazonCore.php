@@ -779,14 +779,15 @@ abstract class AmazonCore
      *               $return['error'] - error, if "ok" is not 1
      *               $return['head']  - http header
      */
-    function fetchURL($url, $param)
+    public function fetchURL($url, $param)
     {
         $return = array();
 
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);   // TODO: to make this option definable by user
+        curl_setopt($ch, CURLOPT_TIMEOUT, 180);         // TODO: to make this option definable by user
         curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
