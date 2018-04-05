@@ -787,7 +787,7 @@ abstract class AmazonCore
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);   // TODO: to make this option definable by user
-        curl_setopt($ch, CURLOPT_TIMEOUT, 180);         // TODO: to make this option definable by user
+        curl_setopt($ch, CURLOPT_TIMEOUT, 600);         // TODO: to make this option definable by user
         curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
